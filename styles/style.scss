@@ -36,16 +36,18 @@ h1, h2, h3, h4, h5 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 80vh;
 }
 
 .part-one {
     flex: 1;
+    flex-basis: 57%;
 }
 
 .part-two {
     flex: 1;
     text-align: center;
+    flex-basis: 43%;
 }
 
 .hero-svg {
@@ -55,10 +57,21 @@ h1, h2, h3, h4, h5 {
 
 .hero-text {
     font-size: 36px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .sub-text {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 20px;
-    margin-left: 66px;
+    font-weight: 400;
+}
+
+.wave {
+    display: inline-block;
+}
+
+.wave:hover {
+    transform: rotate(20deg);
+    cursor: pointer;
 }
