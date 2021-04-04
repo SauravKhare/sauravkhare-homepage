@@ -81,6 +81,9 @@ h1, h2, h3, h4, h5 {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
 }
 
 .sub-text {
@@ -97,5 +100,32 @@ h1, h2, h3, h4, h5 {
   -webkit-transform: rotate(20deg);
           transform: rotate(20deg);
   cursor: pointer;
+}
+
+.hey {
+  -ms-flex-preferred-size: 10%;
+      flex-basis: 10%;
+}
+
+.me {
+  -ms-flex-preferred-size: 90%;
+      flex-basis: 90%;
+}
+
+@media screen and (max-width: 600px) {
+  .hero {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  .part-two {
+    display: -ms-grid;
+    display: grid;
+    justify-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
 }
 /*# sourceMappingURL=style.css.map */
