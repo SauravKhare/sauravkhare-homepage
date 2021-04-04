@@ -17,6 +17,10 @@ h1, h2, h3, h4, h5 {
     font-family: 'IBM Plex Mono', monospace;
 }
 
+p {
+    margin: 0;
+}
+
 .container {
     margin: 0 5vw;
 }
@@ -25,11 +29,15 @@ h1, h2, h3, h4, h5 {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 20px 0 20px 0;
+    padding: 2% 0 2% 0;
 }
 
 .nav-link {
-    margin-right: 20px;
+    margin-right: 2%;
+}
+
+.nav-link:last-child {
+    margin-right: 0%;
 }
 
 .hero {
@@ -56,7 +64,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .hero-text {
-    font-size: 36px;
+    font-size: 3vw;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -64,7 +72,7 @@ h1, h2, h3, h4, h5 {
 
 .sub-text {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 20px;
+    font-size: 1.5vw;
     font-weight: 400;
 }
 
@@ -85,15 +93,28 @@ h1, h2, h3, h4, h5 {
     flex-basis: 90%;
 }
 
+.whoami {
+    margin-bottom: 2%;
+}
+
 // Media Queries
 
 @media screen and (max-width: 600px) {
     .hero {
         flex-direction: column-reverse;
     }
+    .hero-text {
+        font-size: 6vw;
+    }
+    .sub-text {
+        font-size: 1.5*2vw;
+    }
     .part-two {
         display: grid;
         justify-items: center;
         align-items: center;
+    }
+    .nav-bar {
+        justify-content: center;
     }
 }
