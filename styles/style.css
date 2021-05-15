@@ -78,7 +78,8 @@ p {
 
 .hero-svg {
   width: 50%;
-  height: 50%;
+  height: auto;
+  border-radius: 50%;
 }
 
 .hero-text {
