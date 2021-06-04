@@ -105,12 +105,12 @@ p {
     .hero {
         flex-direction: column-reverse;
     }
-    // .hero-text {
-    //     font-size: 6vh;
-    // }
-    // .sub-text {
-    //     font-size: 1.5*2vh;
-    // }
+    .hero-text {
+        font-size: 3rem;
+    }
+    .sub-text {
+        font-size: 1.5rem;
+    }
     .part-two {
         display: grid;
         justify-items: center;

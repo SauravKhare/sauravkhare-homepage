@@ -133,6 +133,12 @@ p {
         -ms-flex-direction: column-reverse;
             flex-direction: column-reverse;
   }
+  .hero-text {
+    font-size: 3rem;
+  }
+  .sub-text {
+    font-size: 1.5rem;
+  }
   .part-two {
     display: -ms-grid;
     display: grid;
