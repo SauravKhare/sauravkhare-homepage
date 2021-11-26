@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+@font-face {
+  font-family: 'Notulen';
+  src: url("../assets/Notulen.ttf");
+}
+
 *, *::before, *::after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -15,7 +20,7 @@ ul, li {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Notulen';
 }
 
 p {
@@ -41,7 +46,7 @@ p {
 
 .nav-link {
   margin-right: 2%;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Notulen';
   font-size: 1.7rem;
 }
 
@@ -91,7 +96,8 @@ p {
 }
 
 .hero-text {
-  font-size: 5rem;
+  font-family: 'Notulen';
+  font-size: 6rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -104,8 +110,8 @@ p {
 }
 
 .sub-text {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 2rem;
+  font-family: 'Notulen';
+  font-size: 3rem;
   font-weight: 400;
 }
 
