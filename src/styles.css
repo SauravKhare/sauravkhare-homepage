@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
 @font-face {
   font-family: 'Notulen';
-  src: url("../assets/Notulen.ttf");
+  src: url("../public/assets/Notulen.ttf");
 }
 
 *, *::before, *::after {
@@ -166,4 +166,3 @@ p {
             justify-content: center;
   }
 }
-/*# sourceMappingURL=style.css.map */
