@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
 @font-face {
   font-family: 'Notulen';
-  src: url("../assets/Notulen.ttf");
+  src: url("../public/assets/Notulen.ttf");
 }
 
 *, *::before, *::after {
@@ -25,6 +25,10 @@ h1, h2, h3, h4, h5 {
 
 p {
   margin: 0;
+}
+
+.mb-4rem {
+  margin-bottom: 4rem;
 }
 
 .container {
@@ -57,6 +61,11 @@ p {
 
 .nav-link:last-child {
   margin-right: 0%;
+}
+
+.letterboxd img {
+  width: 24px;
+  height: 24px;
 }
 
 .hero {
@@ -166,4 +175,3 @@ p {
             justify-content: center;
   }
 }
-/*# sourceMappingURL=style.css.map */
