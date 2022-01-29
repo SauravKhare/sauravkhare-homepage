@@ -59,6 +59,11 @@ p {
   margin-right: 0%;
 }
 
+.letterboxd img {
+  width: 24px;
+  height: 24px;
+}
+
 .hero {
   display: -webkit-box;
   display: -ms-flexbox;
