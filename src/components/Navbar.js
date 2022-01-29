@@ -1,5 +1,4 @@
 import '../styles.css';
-import { Link } from "react-router-dom";
 
 function Navbar() {
     return (
@@ -42,7 +41,7 @@ function Navbar() {
             </svg>
              </a>
             </li>
-            <li className="nav-link"><Link to="/resume">Resume</Link></li>
+            <li className="nav-link"><a href="./assets/Resume 04-07-2021.pdf">Resume</a></li>
         </nav>
     </header>
     );
