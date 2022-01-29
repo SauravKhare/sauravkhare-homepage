@@ -1,4 +1,5 @@
 import '../styles.css';
+import { Link } from "react-router-dom";
 
 function Navbar() {
     return (
@@ -14,7 +15,7 @@ function Navbar() {
                     <rect id="path-1" x="0" y="0" width="129.847328" height="141.389313"></rect>
                     <rect id="path-3" x="0" y="0" width="129.847328" height="141.389313"></rect>
                 </defs>
-                <g id="letterboxd-decal-dots-pos-rgb" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="letterboxd-decal-dots-pos-rgb" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                     <circle id="Circle" fill="#202830" cx="250" cy="250" r="250"></circle>
                     <g id="dots-neg" transform="translate(61.000000, 180.000000)">
                         <g id="Dots">
@@ -41,7 +42,7 @@ function Navbar() {
             </svg>
              </a>
             </li>
-            <li className="nav-link"><a href="./assets/Resume 04-07-2021.pdf">Resume</a></li>
+            <li className="nav-link"><Link to="/resume">Resume</Link></li>
         </nav>
     </header>
     );
