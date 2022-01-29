@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import './styles.css';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
+import UsesPage from "./components/UsesPage";
+import './styles.css';
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Navbar />
       <main className="main container">
         <Switch>
-          <Route path="/" component={Home} exact />
+          <Route path="/" component={Home} exact title="Saurav Khare"/>
+          <Route path="/uses" component={UsesPage} title="Uses"/>
         </Switch>
     </main>
     </BrowserRouter>

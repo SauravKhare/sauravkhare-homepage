@@ -27,6 +27,10 @@ p {
   margin: 0;
 }
 
+.mb-4rem {
+  margin-bottom: 4rem;
+}
+
 .container {
   margin: 0 5vw;
 }

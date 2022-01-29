@@ -10,7 +10,7 @@ function Home() {
                 <img src="./assets/me_grayscale.jpg" className="hero-svg" alt=""/>
             </div>
         </section>
-    )
+    );
 }
 
 export default Home;

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../styles.css';
 
 function Navbar() {
@@ -42,6 +43,7 @@ function Navbar() {
              </a>
             </li>
             <li className="nav-link"><a href="./assets/Resume 04-07-2021.pdf">Resume</a></li>
+            <li className="nav-link"><Link to={{ pathname: '/uses', state: { title: 'Uses'} }}>Uses</Link></li>
         </nav>
     </header>
     );
