@@ -1,11 +1,6 @@
-import { useEffect } from 'react';
 import '../styles.css';
 
-function UsesPage(props) {
-    useEffect(() => {
-        document.title = props.location.state.title;
-    });
-
+function UsesPage() {
     return (
         <section>
         <h1 className="hero-text">Uses.</h1>

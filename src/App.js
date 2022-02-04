@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import UsesPage from "./components/UsesPage";
@@ -9,11 +9,19 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <main className="main container">
-        <Switch>
-          <Route path="/" component={Home} exact title="Saurav Khare"/>
-          <Route path="/uses" component={UsesPage} title="Uses"/>
-        </Switch>
-    </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="uses" element={<UsesPage />} />
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p className="hero-text">Go Back! Nothing Here.</p>
+            </main>
+          }
+        />
+      </Routes>
+      </main>
     </BrowserRouter>
   );
 }
