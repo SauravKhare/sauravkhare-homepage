@@ -42,7 +42,7 @@ function Navbar() {
             </svg>
              </a>
             </li>
-            <li className="nav-link"><a href="./assets/Resume 04-07-2021.pdf">Resume</a></li>
+            <li className="nav-link"><a href="./assets/Resume 14-02-2022.pdf">Resume</a></li>
             <li className="nav-link"><Link to='/uses'>Uses</Link></li>
         </nav>
     </header>
