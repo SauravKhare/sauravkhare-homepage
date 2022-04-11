@@ -1,8 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
-@font-face {
-  font-family: 'Notulen';
-  src: url("../public/assets/Notulen.ttf");
-}
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap');
+
 
 *, *::before, *::after {
   -webkit-box-sizing: border-box;
@@ -20,7 +17,7 @@ ul, li {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: 'Notulen';
+  font-family: 'Inter', sans-serif;
 }
 
 p {
@@ -50,7 +47,7 @@ p {
 
 .nav-link {
   margin-right: 2%;
-  font-family: 'Notulen';
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 1.7rem;
 }
 
@@ -105,7 +102,7 @@ p {
 }
 
 .hero-text {
-  font-family: 'Notulen';
+  font-family: 'Inter', sans-serif;
   font-size: 6rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -119,7 +116,7 @@ p {
 }
 
 .sub-text {
-  font-family: 'Notulen';
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 3rem;
   font-weight: 400;
 }
