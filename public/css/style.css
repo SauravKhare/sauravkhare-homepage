@@ -1,0 +1,350 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap");
+:root {
+  --darkBg: hsl(200, 7.0%, 8.8%);
+  --lightText: hsl(0, 0%, 100%);
+  --lightGrey: hsl(0, 0%, 60%);
+  --themeSwitchBg: hsl(197, 6.8%, 13.6%);
+  --sansSerif: 'Inter', sans-serif;
+  --serif: 'Cormorant', serif;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  background-color: var(--darkBg);
+  color: var(--lightText);
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    -webkit-animation-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+            animation-iteration-count: 1 !important;
+    -webkit-transition-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 780px;
+}
+
+.header {
+  padding: 3rem 0rem;
+}
+
+.main-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.brand {
+  font-family: var(--sansSerif);
+  color: var(--lightText);
+}
+
+.brand a {
+  color: var(--lightText);
+  text-decoration: none;
+}
+
+.theme-switch {
+  background-color: var(--themeSwitchBg);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  padding: 0.5rem 0rem;
+  border-radius: 25px;
+  width: 5rem;
+}
+
+.theme-switch svg {
+  fill: var(--lightText);
+}
+
+.intro__section {
+  padding-bottom: 5rem;
+}
+
+.intro__name {
+  margin-bottom: 1.5rem;
+}
+
+.name {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1rem, 1.25rem);
+  color: var(--lightText);
+}
+
+.description {
+  font-family: var(--sansSerif);
+  font-size: 1.25rem;
+  color: var(--lightText);
+  width: 55ch;
+}
+
+.now__section {
+  padding-bottom: 5rem;
+}
+
+.now {
+  font-family: var(--sansSerif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--lightGrey);
+}
+
+.now__heading {
+  margin-bottom: 1rem;
+}
+
+.connect__description {
+  margin-bottom: 3rem;
+}
+
+.now__description-copy {
+  font-family: var(--sansSerif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--lightText);
+  width: 55ch;
+}
+
+.now__description-copy a {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+}
+
+.now__description-copy a:hover {
+  color: #ffd900;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+.now__description-copy a::after {
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+.now__description-copy a:hover::after {
+  color: #ffd900;
+  border-color: #ffd900;
+  content: '';
+  height: 2px;
+  background-color: #ffd900;
+  position: absolute;
+  bottom: -2px;
+  width: 100%;
+  left: 0;
+}
+
+/**/
+.connect__section {
+  padding-bottom: 5rem;
+}
+
+.connect {
+  font-family: var(--sansSerif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--lightText);
+}
+
+.connect__heading {
+  margin-bottom: 1rem;
+}
+
+.connect__description-copy {
+  font-family: var(--sansSerif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--lightText);
+  width: 55ch;
+}
+
+.connect__description-copy a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.connect__description-copy a:hover {
+  color: gold;
+  text-decoration: underline;
+  border-color: gold;
+}
+
+.connect__social {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 45%;
+}
+
+.connect__social-service {
+  font-family: var(--sansSerif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--lightText);
+  margin-bottom: 0.8rem;
+}
+
+.connect__social-value {
+  font-family: var(--sansSerif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--lightText);
+  margin-bottom: 0.8rem;
+  text-decoration: none;
+}
+
+.connect__social-value a {
+  color: var(--lightGrey);
+  text-decoration: none;
+}
+
+.separator__container {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-bottom: 5rem;
+}
+
+.separator-dot {
+  background-color: var(--lightGrey);
+  width: 2px;
+  height: 2px;
+  margin-right: 0.3rem;
+}
+
+.footer__columns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-bottom: 5rem;
+}
+
+.footer_BTC {
+  font-family: var(--sansSerif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--lightText);
+}
+
+.footer__quote {
+  font-family: var(--sansSerif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--lightGrey);
+}
+
+.footer__city {
+  font-family: var(--sansSerif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--lightText);
+}
+
+@media all and (max-width: 800px) {
+  .container {
+    margin: 0 5%;
+  }
+  .connect__social {
+    width: 100%;
+  }
+  .description {
+    width: 100%;
+  }
+  .now__description-copy {
+    width: 100%;
+  }
+  .connect__description-copy {
+    width: 100%;
+  }
+}
