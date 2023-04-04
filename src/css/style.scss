@@ -135,12 +135,8 @@ select {
     font-family: var(--serif);
     font-weight: 300;
     font-style: italic;
-    font-size: clamp(1rem, 1.25rem);
+    font-size: clamp(1rem, 1rem, 1.25rem);
     color: var(--lightText);
-}
-
-.intro__description {
-
 }
 
 .description {
@@ -148,6 +144,7 @@ select {
     font-size: 1.25rem;
     color: var(--lightText);
     width: 55ch;
+    margin-bottom: 1rem;
 }
 
 .now__section {
@@ -183,11 +180,22 @@ select {
   position: relative;
 }
 
+.key-link {
+  color: var(--lightText);
+}
+
+.key-link:hover {
+  color: hsl(51, 100%, 50%);
+  transition: 0.5s ease-in-out;
+}
+
 .now__description-copy a:hover {
   color: hsl(51, 100%, 50%);
-  // text-decoration: underline;
-  // border-color: gold;
   transition: 0.5s ease-in-out;
+}
+
+.blur {
+  filter: blur(0.5rem);
 }
 
 
@@ -245,8 +253,7 @@ select {
 
 .connect__social {
   display: flex;
-  justify-content: space-between;
-  width: 45%;
+  gap: 10rem;
 }
 
 .connect__social-service {
