@@ -1,6 +1,7 @@
-import Header from '@/components/Header'
-import Heading from '@/components/Heading'
-import Paragraph from '@/components/Paragraph'
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import Heading from "@/components/Heading";
+import Paragraph from "@/components/Paragraph";
 
 export default function Home() {
   return (
@@ -50,32 +51,32 @@ export default function Home() {
       </section>
       <section className="connect__section container">
         <div className="connect__heading">
-          <h3 className="connect">Connect</h3>
+          <Heading headingType="h3">Connect</Heading>
         </div>
         <div className="connect__description">
-          <p className="connect__description-copy">
+          <Paragraph classname="connect__description-copy">
             Hey, if you want to chat, have a project or just curious about
-            something I'm just a ping away.
-          </p>
+            something I&apos;m just a ping away.
+          </Paragraph>
         </div>
         <div className="connect__social">
           <div className="connect__social-services">
-            <p className="connect__social-service">Email</p>
-            <p className="connect__social-service">Twitter</p>
-            <p className="connect__social-service">Github</p>
+            <Paragraph classname="connect__social-service">Email</Paragraph>
+            <Paragraph classname="connect__social-service">Twitter</Paragraph>
+            <Paragraph classname="connect__social-service">Github</Paragraph>
           </div>
           <div className="connect__social-values">
-            <p className="connect__social-value">
+            <Paragraph classname="connect__social-value">
               <a href="#" className="blur" id="email">
                 No bots please!
               </a>
-            </p>
-            <p className="connect__social-value">
+            </Paragraph>
+            <Paragraph classname="connect__social-value">
               <a href="https://twitter.com/ErahkSaurav">@ErahkSaurav</a>
-            </p>
-            <p className="connect__social-value">
+            </Paragraph>
+            <Paragraph classname="connect__social-value">
               <a href="https://github.com/SauravKhare">SauravKhare</a>
-            </p>
+            </Paragraph>
           </div>
         </div>
       </section>
@@ -86,21 +87,7 @@ export default function Home() {
           <div className="separator-dot"></div>
         </div>
       </section>
-      <footer className="footer container">
-        <div className="footer__columns">
-          <div className="footer__column-1">
-            <p className="footer_BTC">
-              1 BTC is <span id="local-currency"></span>
-            </p>
-          </div>
-          <div className="footer__column-2">
-            <p className="footer__quote">Code is Poetry.</p>
-          </div>
-          <div className="footer__column-3">
-            <p className="footer__quote"></p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
-  )
+  );
 }

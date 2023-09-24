@@ -322,6 +322,7 @@ select {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding-bottom: 5rem;
+  justify-content: center;
 }
 
 .footer_BTC {
