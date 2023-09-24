@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap");
 :root {
   --darkBg: hsl(200, 7.0%, 8.8%);
   --lightText: hsl(0, 0%, 100%);
   --lightGrey: hsl(0, 0%, 60%);
   --themeSwitchBg: hsl(197, 6.8%, 13.6%);
-  --sansSerif: 'Inter', sans-serif;
-  --serif: 'Cormorant', serif;
+  --sansSerif: "Inter", sans-serif;
+  --serif: "Cormorant", serif;
 }
 
 /* Box sizing rules */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 /* Remove default margin */
@@ -31,8 +31,8 @@ dd {
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role='list'],
-ol[role='list'] {
+ul[role=list],
+ol[role=list] {
   list-style: none;
 }
 
@@ -48,11 +48,13 @@ body {
   line-height: 1.5;
   background-color: var(--darkBg);
   color: var(--lightText);
+  font-family: var(--sansSerif);
 }
 
 /* A elements that don't have a class get default styles */
 a:not([class]) {
-  text-decoration-skip-ink: auto;
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
 }
 
 /* Make images easier to work with */
@@ -73,47 +75,56 @@ select {
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
-   scroll-behavior: auto;
+    scroll-behavior: auto;
   }
-  
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    -webkit-animation-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+            animation-iteration-count: 1 !important;
+    -webkit-transition-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }
-
 .container {
-    margin: 0 auto;
-    max-width: 780px;
+  margin: 0 auto;
+  max-width: 780px;
 }
 
 .header {
-    padding: 3rem 0rem;
+  padding: 3rem 0rem;
 }
 
 .main-header {
-    display: flex;
-    justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .brand {
-    font-family: var(--sansSerif);
-    color: var(--lightText);
+  font-family: var(--sansSerif);
+  color: var(--lightText);
 }
 
 .brand a {
-    color: var(--lightText);
-    text-decoration: none;
+  color: var(--lightText);
+  text-decoration: none;
 }
 
 .theme-switch {
   background-color: var(--themeSwitchBg);
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-evenly;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   padding: 0.5rem 0rem;
   border-radius: 25px;
   width: 5rem;
@@ -124,27 +135,27 @@ select {
 }
 
 .intro__section {
-    padding-bottom: 5rem;
+  padding-bottom: 5rem;
 }
 
 .intro__name {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .name {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-style: italic;
-    font-size: clamp(1rem, 1.5rem, 1.5rem);
-    color: var(--lightText);
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--lightText);
 }
 
 .description {
-    font-family: var(--sansSerif);
-    font-size: 1.25rem;
-    color: var(--lightText);
-    width: 55ch;
-    margin-bottom: 1rem;
+  font-family: var(--sansSerif);
+  font-size: 1.25rem;
+  color: var(--lightText);
+  width: 55ch;
+  margin-bottom: 1rem;
 }
 
 .now__section {
@@ -152,10 +163,10 @@ select {
 }
 
 .now {
-    font-family: var(--sansSerif);
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--lightGrey);
+  font-family: var(--sansSerif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--lightGrey);
 }
 
 .now__heading {
@@ -186,27 +197,30 @@ select {
 
 .key-link:hover {
   color: hsl(51, 100%, 50%);
+  -webkit-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
 }
 
 .now__description-copy a:hover {
   color: hsl(51, 100%, 50%);
+  -webkit-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
 }
 
 .blur {
-  filter: blur(0.5rem);
+  -webkit-filter: blur(0.5rem);
+          filter: blur(0.5rem);
 }
 
-
 .now__description-copy a::after {
+  -webkit-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
 }
 
 .now__description-copy a:hover::after {
   color: hsl(51, 100%, 50%);
   border-color: hsl(51, 100%, 50%);
-  content: '';
+  content: "";
   height: 2px;
   background-color: hsl(51, 100%, 50%);
   position: absolute;
@@ -216,16 +230,15 @@ select {
 }
 
 /**/
-
 .connect__section {
   padding-bottom: 5rem;
 }
 
 .connect {
-    font-family: var(--sansSerif);
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--lightText);
+  font-family: var(--sansSerif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--lightText);
 }
 
 .connect__heading {
@@ -252,6 +265,8 @@ select {
 }
 
 .connect__social {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 6rem;
 }
@@ -280,9 +295,15 @@ select {
 
 .separator__container {
   text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-bottom: 5rem;
 }
 
@@ -294,8 +315,12 @@ select {
 }
 
 .footer__columns {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   padding-bottom: 5rem;
 }
 
@@ -322,23 +347,18 @@ select {
 
 @media all and (max-width: 800px) {
   .container {
-      margin: 0 5%;
+    margin: 0 5%;
   }
-
   .connect__social {
     width: 100%;
   }
-
-    .description {
-      width: 100%;
+  .description {
+    width: 100%;
   }
-
   .now__description-copy {
     width: 100%;
   }
-
   .connect__description-copy {
     width: 100%;
   }
 }
-
