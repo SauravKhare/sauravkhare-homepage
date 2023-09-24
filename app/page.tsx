@@ -2,92 +2,88 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Heading from "@/components/Heading";
 import Paragraph from "@/components/Paragraph";
+import Socials from "@/components/Socials";
 
 export default function Home() {
   return (
-    <>
+    <div className="bg-zinc-900 text-white font-inter">
       <Header />
-      <section className="intro__section container">
-        <div className="intro__name">
-          <Heading classname="name" headingType="h1">
+      <section className="max-w-2xl mx-8 md:mx-auto pb-20">
+        <div className="pb-6">
+          <Heading
+            classname="font-light italic text-2xl font-cormorant text-white"
+            headingType="h1"
+          >
             Saurav Khare
           </Heading>
         </div>
         <div className="intro__deskcription">
-          <Paragraph classname="description">
+          <Paragraph classname="text-xl mb-4 md:w-55ch font-inter text-white">
             Computer Engineer/Frontend Developer. Primary tools are Javascript,
             ReactJS, and the React ecosystem.
           </Paragraph>
-          <Paragraph classname="description">
+          <Paragraph classname="text-xl mb-4 md:w-55ch font-inter text-white">
             Also a cinephile who enjoys watching and analyzing films. Have a
             keen interest in cinema and love exploring the creative aspects of
             storytelling and visual art.
           </Paragraph>
-          <Paragraph classname="description">
+          <Paragraph classname="text-xl mb-4 md:w-55ch font-inter text-white">
             Here is my{" "}
-            <a href="#" className="key-link">
+            <a
+              href="/Saurav_Khare.pdf"
+              className="text-yellow-100 duration-500 underline hover:text-yellow-400"
+            >
               resume
             </a>{" "}
-            if you want to read more .
+            if you want to read more.
           </Paragraph>
         </div>
       </section>
 
-      <section className="now__section container">
-        <div className="now__heading">
-          <Heading headingType="h3" classname="now">
+      <section className="pb-20 max-w-2xl mx-8 md:mx-auto">
+        <div className="mb-4">
+          <Heading
+            headingType="h3"
+            classname="font-normal text-base font-inter text-gray-500"
+          >
             Now
           </Heading>
         </div>
-        <div className="now__description">
-          <Paragraph classname="now__description-copy">
-            Currently working as a System Engineer at{" "}
-            <a href="https://www.infosys.com" className="key-link">
+        <div className="">
+          <Paragraph classname="text-xl font-inter font-normal md:width-55ch text-white">
+            Currently working as a Senior Systems Engineer at{" "}
+            <a
+              href="https://www.infosys.com"
+              className="text-yellow-100 hover:text-yellow-400 underline"
+            >
               Infosys
             </a>
             .
           </Paragraph>
         </div>
       </section>
-      <section className="connect__section container">
-        <div className="connect__heading">
-          <Heading headingType="h3">Connect</Heading>
+      <section className="pb-20 max-w-2xl mx-8 md:mx-auto">
+        <div className="mb-4">
+          <Heading headingType="h3" classname="font-inter text-gray-500">
+            Connect
+          </Heading>
         </div>
-        <div className="connect__description">
-          <Paragraph classname="connect__description-copy">
+        <div className="mb-12">
+          <Paragraph classname="text-xl font-inter font-normal md:w-55ch text-white">
             Hey, if you want to chat, have a project or just curious about
             something I&apos;m just a ping away.
           </Paragraph>
         </div>
-        <div className="connect__social">
-          <div className="connect__social-services">
-            <Paragraph classname="connect__social-service">Email</Paragraph>
-            <Paragraph classname="connect__social-service">Twitter</Paragraph>
-            <Paragraph classname="connect__social-service">Github</Paragraph>
-          </div>
-          <div className="connect__social-values">
-            <Paragraph classname="connect__social-value">
-              <a href="#" className="blur" id="email">
-                No bots please!
-              </a>
-            </Paragraph>
-            <Paragraph classname="connect__social-value">
-              <a href="https://twitter.com/ErahkSaurav">@ErahkSaurav</a>
-            </Paragraph>
-            <Paragraph classname="connect__social-value">
-              <a href="https://github.com/SauravKhare">SauravKhare</a>
-            </Paragraph>
-          </div>
-        </div>
+        <Socials />
       </section>
-      <section className="separator container">
-        <div className="separator__container">
-          <div className="separator-dot"></div>
-          <div className="separator-dot"></div>
-          <div className="separator-dot"></div>
+      <section className="max-w-2xl mx-8 md:mx-auto">
+        <div className="flex justify-center items-center text-center pb-20">
+          <div className="w-0.5 h-0.5 mr-1.5 bg-gray-500"></div>
+          <div className="w-0.5 h-0.5 mr-1.5 bg-gray-500"></div>
+          <div className="w-0.5 h-0.5 mr-1.5 bg-gray-500"></div>
         </div>
       </section>
       <Footer />
-    </>
+    </div>
   );
 }
