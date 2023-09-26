@@ -1,6 +1,7 @@
 import "./globals.css";
 import "../styles/style.css";
 import type { Metadata } from "next";
+import QueryProvider from "../context/query-context";
 
 export const metadata: Metadata = {
   title: "Saurav Khare",
@@ -15,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }
