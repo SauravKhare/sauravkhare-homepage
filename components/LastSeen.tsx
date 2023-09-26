@@ -5,30 +5,40 @@ import Paragraph from "./Paragraph";
 import axios from "axios";
 
 type MovieIDS = {
-    "trakt": number;
-    "slug": string;
-    "imdb": string;
-    "tmdb": number;
-}
+  trakt: number;
+  slug: string;
+  imdb: string;
+  tmdb: number;
+};
 
 type Movie = {
-    "title": string;
-    "year": number;
-    "ids": MovieIDS;
-}
+  title: string;
+  year: number;
+  ids: MovieIDS;
+};
 
 type MovieData = {
-    "id": string;
-    "watched_at": string;
-    "action": string;
-    "type": string;
-    "movie": Movie;
-}
+  id: string;
+  watched_at: string;
+  action: string;
+  type: string;
+  movie: Movie;
+};
 
-export default function LastSeen() {
+const endpoint = "https://api.trakt.tv/users";
+
+export default function LastSeen({
+  user,
+  type,
+  limit,
+}: {
+  user: string;
+  type: string;
+  limit: number;
+}) {
   async function fetchMovies() {
     const res = await axios.get(
-      "https://api.trakt.tv/users/sauravkhare/history/movies?limit=3",
+      `${endpoint}/${user}/history/${type}?limit=${limit}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -66,16 +76,15 @@ export default function LastSeen() {
 
   return (
     <>
-      <div className="flex gap-4">
+      <div className="flex gap-4 overflow-x-scroll md:overflow-hidden md:flex-wrap">
         {data.map((movie: MovieData) => (
           <a
+            className="text-xl font-inter font-normal text-white duration-500  hover:text-yellow-400 shrink-0"
             key={movie.id}
             href={`https://www.imdb.com/title/${movie.movie.ids.imdb}`}
             target="_blank"
           >
-            <p className="text-xl font-inter font-normal text-white">
-              {movie.movie.title} {movie.movie.year}
-            </p>
+            <p className="">{`${movie.movie.title} (${movie.movie.year})`}</p>
           </a>
         ))}
       </div>
