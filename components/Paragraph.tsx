@@ -5,7 +5,7 @@ const Paragraph = ({
   children,
 }: {
   classname: string;
-  children?: ReactNode;
+  children?: ReactNode | any;
 }) => {
   return <p className={classname}>{children}</p>;
 };
