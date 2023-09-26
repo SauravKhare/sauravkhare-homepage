@@ -27,12 +27,12 @@ export default function Socials() {
           </span>
         </Paragraph>
         <Paragraph classname="mb-3 text-base font-normal font-inter text-gray-500">
-          <a href="https://twitter.com/ErahkSaurav" target="_blank">
+          <a href="https://twitter.com/ErahkSaurav" className="duration-500 hover:text-yellow-400" target="_blank">
             @ErahkSaurav
           </a>
         </Paragraph>
         <Paragraph classname="mb-3 text-base font-normal font-inter text-gray-500">
-          <a href="https://github.com/SauravKhare" target="_blank">
+          <a href="https://github.com/SauravKhare" className="duration-500 hover:text-yellow-400" target="_blank">
             SauravKhare
           </a>
         </Paragraph>

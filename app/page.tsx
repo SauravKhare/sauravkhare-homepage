@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Heading from "@/components/Heading";
+import LastSeen from "@/components/LastSeen";
 import Paragraph from "@/components/Paragraph";
 import Socials from "@/components/Socials";
 
@@ -60,6 +61,19 @@ export default function Home() {
             </a>
             .
           </Paragraph>
+        </div>
+      </section>
+      <section className="pb-20 max-w-2xl mx-8 md:mx-auto">
+        <div className="mb-4">
+          <Heading
+            headingType="h3"
+            classname="font-normal text-base font-inter text-gray-500"
+          >
+            Last Seen
+          </Heading>
+        </div>
+        <div className="">
+          <LastSeen user="sauravkhare" type="movies" limit={3} />
         </div>
       </section>
       <section className="pb-20 max-w-2xl mx-8 md:mx-auto">
