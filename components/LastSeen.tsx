@@ -60,9 +60,11 @@ export default function LastSeen({
 
   if (isLoading) {
     return (
-      <Paragraph classname="text-xl font-inter font-normal md:w-55ch text-white">
-        Loading......
-      </Paragraph>
+      <div className="flex gap-6 overflow-x-scroll no-scrollbar">
+        <div className="rounded-md bg-gray-700 h-7 w-80 animate-pulse"></div>
+        <div className="rounded-md bg-gray-700 h-7 w-64 animate-pulse"></div>
+        <div className="rounded-md bg-gray-700 h-7 w-72 animate-pulse"></div>
+      </div>
     );
   }
 
@@ -76,7 +78,7 @@ export default function LastSeen({
 
   return (
     <>
-      <div className="flex gap-4 overflow-x-scroll md:overflow-hidden md:flex-wrap">
+      <div className="flex gap-4 overflow-x-scroll no-scrollbar">
         {data.map((movie: MovieData) => (
           <a
             className="text-xl font-inter font-normal text-white duration-500  hover:text-yellow-400 shrink-0"
