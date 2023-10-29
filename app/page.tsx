@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Heading from "@/components/Heading";
 import LastSeen from "@/components/LastSeen";
 import Paragraph from "@/components/Paragraph";
+import Showcase from "@/components/Showcase";
 import Socials from "@/components/Socials";
 
 export default function Home() {
@@ -55,12 +56,25 @@ export default function Home() {
             Currently working as a Senior Systems Engineer at{" "}
             <a
               href="https://www.infosys.com"
-              className="text-yellow-100 hover:text-yellow-400 underline"
+              className="text-yellow-100 duration-500 hover:text-yellow-400 underline"
             >
               Infosys
             </a>
             .
           </Paragraph>
+        </div>
+      </section>
+      <section className="pb-20 max-w-2xl mx-8 md:mx-auto">
+        <div className="mb-4">
+          <Heading
+            headingType="h3"
+            classname="font-normal text-base font-inter text-gray-500"
+          >
+            Showcase
+          </Heading>
+        </div>
+        <div className="">
+          <Showcase />
         </div>
       </section>
       <section className="pb-20 max-w-2xl mx-8 md:mx-auto">
