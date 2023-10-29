@@ -61,9 +61,9 @@ export default function LastSeen({
   if (isLoading) {
     return (
       <div className="flex gap-6 overflow-x-scroll no-scrollbar">
-        <div className="rounded-md bg-gray-700 h-7 w-80 animate-pulse"></div>
-        <div className="rounded-md bg-gray-700 h-7 w-64 animate-pulse"></div>
-        <div className="rounded-md bg-gray-700 h-7 w-72 animate-pulse"></div>
+        <div className="rounded-md bg-zinc-800 h-7 w-80 animate-pulse"></div>
+        <div className="rounded-md bg-zinc-800 h-7 w-64 animate-pulse"></div>
+        <div className="rounded-md bg-zinc-800 h-7 w-72 animate-pulse"></div>
       </div>
     );
   }
