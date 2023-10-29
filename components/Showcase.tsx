@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Projects } from "@/constants";
 
 export default function Showcase() {
-  const containerDiv = useRef(null);
+  const containerDiv = useRef<HTMLDivElement>(null);
 
   const [isDown, setIsDown] = useState(false);
   const mouseCords = useRef({
