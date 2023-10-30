@@ -60,6 +60,35 @@ export const ExperienceItems = [
     isCurrent: false,
     description:
       "Built responsive websites from scratch with provided designs. Integrated Salesforce customer acquisition pipeline with an existing website. Handled email automation with Pardot. Moved large-scale blog from WordPress to new modern CraftCMS. Built highly authorable websites with CraftCMS. Made device and service-agnostic email templates. Customized WordPress themes with custom requirements and functionalities.",
-    tech: ["React", "JavaScript (ES6)", "TypeScript", "SSR", "WordPress", "HTML5" , "CSS3", "Tailwind", "CraftCMS", "twig"],
+    tech: [
+      "React",
+      "JavaScript (ES6)",
+      "TypeScript",
+      "SSR",
+      "WordPress",
+      "HTML5",
+      "CSS3",
+      "Tailwind",
+      "CraftCMS",
+      "twig",
+    ],
+  },
+];
+
+export const Connect = [
+  {
+    name: "Github",
+    value: "https://github.com/SauravKhare",
+    image: "/github.svg",
+  },
+  {
+    name: "X",
+    value: "https://twitter.com/ErahkSaurav",
+    image: "./x.svg",
+  },
+  {
+    name: "Linkedin",
+    value: "https://www.linkedin.com/in/sauravkhare",
+    image: "/linkedin.svg",
   },
 ];

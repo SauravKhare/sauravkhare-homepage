@@ -25,15 +25,15 @@ export default function Home() {
             Computer Engineer/Frontend Developer.
           </Paragraph>
           <Paragraph classname="text-xl mb-4 md:w-55ch font-inter text-white">
-            A seasoned frontend developer specializing in the React framework
-            and its extensive ecosystem. With a keen eye for design and a knack
-            for crafting seamless user experiences, I effortlessly bring
+            I&apos;m an experienced frontend developer with a specialization in
+            React and its broad ecosystem. Possessing a sharp eye for design and
+            a talent for creating smooth user experiences, I excel at bringing
             concepts to life.
           </Paragraph>
           <Paragraph classname="text-xl mb-4 md:w-55ch font-inter text-white">
-            Also a cinema enthusiast who likes to see and discuss movies as
-            well. enjoy studying the artistic elements of visual art and
-            storytelling, and I have a deep passion for movies.
+            Beyond my professional interests, I&apos;m a passionate movie buff.
+            Discussing and dissecting films is a real joy for me, especially
+            when it comes to exploring the artistry of visual storytelling.
           </Paragraph>
         </div>
       </section>
@@ -105,10 +105,11 @@ export default function Home() {
             Connect
           </Heading>
         </div>
-        <div className="mb-12">
+        <div className="mb-8">
           <Paragraph classname="text-xl font-inter font-normal md:w-55ch text-white">
-            Hey, if you want to chat, have a project or just curious about
-            something I&apos;m just a ping away.
+            Feel free to reach out if you&apos;d like to chat, have a project in
+            mind, or if you&apos;re simply curious about something. I&apos;m
+            just a message away!
           </Paragraph>
         </div>
         <Socials />
