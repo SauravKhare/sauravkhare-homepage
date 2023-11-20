@@ -45,7 +45,7 @@ export default function Showcase() {
 		>
 			{Projects.map((item) => (
 				<div
-					className="flex flex-col w-2/4 h-60 bg-zinc-800 rounded-xl p-5 shrink-0 shadow-xl"
+					className="flex flex-col w-3/4 h-60 bg-zinc-800 rounded-xl p-5 shrink-0 shadow-xl"
 					key={item.name}
 				>
 					<Link
@@ -58,16 +58,16 @@ export default function Showcase() {
 					<Paragraph classname="font-geist-sans font-normal text-zinc-500 mt-5">
 						{item.description}
 					</Paragraph>
-					<Paragraph classname="font-geist-sans font-normal text-xs mt-auto">
+					<div className="font-geist-sans mt-auto flex flex-wrap">
 						{item.tech.map((a) => (
 							<span
 								key={a}
-								className="rounded-full bg-zinc-700 px-3 mx-1 border-gray-600 border"
+								className="rounded-full bg-zinc-700 px-3 mx-1 border-gray-600 border font-normal text-xs"
 							>
 								{a}
 							</span>
 						))}
-					</Paragraph>
+					</div>
 				</div>
 			))}
 		</div>
