@@ -94,7 +94,7 @@ export default function Home() {
 						Connect
 					</Heading>
 				</div>
-				<div className="">
+				<div className="mb-8">
 					<Paragraph classname="text-xl font-geist-sans font-normal text-white">
 						Feel free to reach out if you&apos;d like to chat, have a project in
 						mind, or if you&apos;re simply curious about something. I&apos;m

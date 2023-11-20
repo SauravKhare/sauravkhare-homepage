@@ -59,7 +59,14 @@ export default function Showcase() {
 						{item.description}
 					</Paragraph>
 					<Paragraph classname="font-geist-sans font-normal text-xs mt-auto">
-						{item.tech}
+						{item.tech.map((a) => (
+							<span
+								key={a}
+								className="rounded-full bg-zinc-700 px-3 mx-1 border-gray-600 border"
+							>
+								{a}
+							</span>
+						))}
 					</Paragraph>
 				</div>
 			))}
