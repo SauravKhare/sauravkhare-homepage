@@ -62,7 +62,7 @@ export default function Showcase() {
 						{item.tech.map((a) => (
 							<span
 								key={a}
-								className="rounded-full bg-zinc-700 px-3 mx-1 border-gray-600 border font-normal text-xs"
+								className="text-white/40 bg-zinc-800 border-zinc-900 border-2 rounded-full px-3 mr-1 max-md:mb-1 font-geist-mono  font-normal text-xs"
 							>
 								{a}
 							</span>

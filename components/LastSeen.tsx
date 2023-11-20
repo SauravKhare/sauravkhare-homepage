@@ -70,7 +70,7 @@ export default function LastSeen({
 
 	if (isError) {
 		return (
-			<Paragraph classname="text-xl font-geist-sans font-normal md:w-55ch text-white">
+			<Paragraph classname="text-xl font-geist-sans font-normal md:w-55ch text-white/80">
 				{{ error }}
 			</Paragraph>
 		);
@@ -81,7 +81,7 @@ export default function LastSeen({
 			<div className="flex gap-4 overflow-x-scroll no-scrollbar">
 				{data.map((movie: MovieData) => (
 					<a
-						className="text-xl font-geist-sans font-normal text-white duration-500  hover:text-yellow-400 shrink-0"
+						className="text-xl font-geist-sans font-normal text-white/80 duration-500  hover:text-yellow-400 shrink-0"
 						key={movie.id}
 						href={`https://www.imdb.com/title/${movie.movie.ids.imdb}`}
 						target="_blank"

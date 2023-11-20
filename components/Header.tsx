@@ -8,7 +8,7 @@ const Header = (): React.ReactElement => {
 			<header className="py-11 max-md:mx-6">
 				<div className="flex justify-between items-center">
 					<div className="">
-						<Link href="/" className="text-white">
+						<Link href="/">
 							<div className="">
 								<Heading
 									classname="font-light italic text-4xl font-cormorant text-white mb-2"
@@ -18,7 +18,7 @@ const Header = (): React.ReactElement => {
 								</Heading>
 							</div>
 						</Link>
-						<Paragraph classname="text-base font-geist-sans text-white">
+						<Paragraph classname="text-base font-geist-sans text-white/80">
 							Computer Engineer/Frontend Developer.
 						</Paragraph>
 					</div>
