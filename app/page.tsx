@@ -1,6 +1,4 @@
 import Experience from "@/components/Experience";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import Heading from "@/components/Heading";
 import LastSeen from "@/components/LastSeen";
 import Paragraph from "@/components/Paragraph";
@@ -10,7 +8,6 @@ import Socials from "@/components/Socials";
 export default function Home() {
 	return (
 		<div className="">
-			<Header />
 			<section className="pb-20 max-md:mx-6">
 				<div className="intro__deskcription">
 					<Paragraph classname="text-xl mb-4 font-geist-sans text-white/80">
@@ -85,7 +82,7 @@ export default function Home() {
 					</Heading>
 				</div>
 				<div className="">
-					<LastSeen user="sauravkhare" type="movies" limit={3} />
+					{/* <LastSeen user="sauravkhare" type="movies" limit={3} /> */}
 				</div>
 			</section>
 			<section className="pb-20 max-md:mx-6">
@@ -110,7 +107,6 @@ export default function Home() {
 					<div className="w-0.5 h-0.5 mr-1.5 bg-gray-500"></div>
 				</div>
 			</section>
-			<Footer />
 		</div>
 	);
 }

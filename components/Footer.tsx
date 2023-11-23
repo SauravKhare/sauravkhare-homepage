@@ -3,7 +3,7 @@ import Paragraph from "./Paragraph";
 
 export default function Footer() {
 	return (
-		<footer className="max-md:mx-6">
+		<footer className="max-md:mx-6 mt-auto">
 			<div className="flex justify-center pb-20">
 				<div className="flex flex-col gap-4">
 					<Paragraph classname="font-geist-sans text-base font-normal text-gray-500 text-center">

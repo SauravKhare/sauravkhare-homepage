@@ -22,6 +22,14 @@ const Header = (): React.ReactElement => {
 							Computer Engineer/Frontend Developer.
 						</Paragraph>
 					</div>
+					<nav className="font-geist-sans text-base text-white/80">
+						<Link
+							href="/blog"
+							className="duration-500 hover:text-yellow-400 border-b-2 border-white hover:border-yellow-400"
+						>
+							/Blog
+						</Link>
+					</nav>
 				</div>
 			</header>
 		</>
