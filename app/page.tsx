@@ -82,7 +82,7 @@ export default function Home() {
 					</Heading>
 				</div>
 				<div className="">
-					{/* <LastSeen user="sauravkhare" type="movies" limit={3} /> */}
+					<LastSeen user="sauravkhare" type="movies" limit={3} />
 				</div>
 			</section>
 			<section className="pb-20 max-md:mx-6">
