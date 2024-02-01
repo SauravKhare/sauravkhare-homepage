@@ -40,7 +40,7 @@ export default function Experience() {
 				</div>
 			))}
 			<Link
-				href="/Saurav_Khare_Resume.pdf"
+				href="/Saurav_Khare_Resume_2024.pdf"
 				className="text-base mb-4 font-geist-sans text-white/80 duration-500 hover:underline hover:text-yellow-400 flex hover:gap-2 items-center"
 			>
 				View full Résumé.
