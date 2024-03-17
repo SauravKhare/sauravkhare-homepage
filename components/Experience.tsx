@@ -12,11 +12,11 @@ export default function Experience() {
 					className="flex flex-col w-full min-h-60 bg-zinc-800/50 rounded-xl p-5 shrink-0 shadow-xl mb-4"
 				>
 					<div className="flex flex-col">
-						<h4 className="text-lg font-semibold duration-500 flex items-center gap-2">
+						<h4 className="text-lg font-OPTI duration-500 flex items-center gap-2">
 							{item.position} <span className="text-xs">•</span>{" "}
 							<Link
 								href={item.company_link}
-								className="hover:text-yellow-400 duration-500"
+								className="font-OPTI hover:text-yellow-500 duration-500"
 								target="_blank"
 							>
 								{item.company}
@@ -40,7 +40,7 @@ export default function Experience() {
 				</div>
 			))}
 			<Link
-				href="/Saurav_Khare_Resume_2024.pdf"
+				href="/Saurav_Khare_Resume_A.pdf"
 				className="text-base mb-4 font-geist-sans text-white/80 duration-500 hover:underline hover:text-yellow-400 flex hover:gap-2 items-center"
 			>
 				View full Résumé.

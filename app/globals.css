@@ -1,7 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;1,300;1,400&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+    font-family: "OPTI";
+    src: url("../public/OPTI.otf");
+}
+
+
 
 :root {
   --foreground-rgb: 0, 0, 0;

@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-			<body className="max-w-2xl md:mx-auto bg-zinc-900 text-white">
+			<body className="max-w-2xl md:mx-auto bg-black text-white">
 				<QueryProvider>{children}</QueryProvider>
 			</body>
 		</html>

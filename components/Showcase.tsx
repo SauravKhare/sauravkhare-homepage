@@ -45,13 +45,13 @@ export default function Showcase() {
 		>
 			{Projects.map((item) => (
 				<div
-					className="flex flex-col w-3/4 h-60 bg-zinc-800 rounded-xl p-5 shrink-0 shadow-xl"
+					className="flex flex-col w-3/4 h-60 bg-zinc-800/50 rounded-xl p-5 shrink-0 shadow-xl"
 					key={item.name}
 				>
 					<Link
 						href={item.link}
 						target="_blank"
-						className="font-semibold duration-500 hover:text-yellow-400"
+						className="font-OPTI duration-500 hover:text-yellow-500"
 					>
 						{item.name}
 					</Link>

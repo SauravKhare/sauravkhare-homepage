@@ -10,9 +10,9 @@ const config: Config = {
     extend: {
       fontFamily: {
         'inter': ['Inter', 'sans-serif'],
-        'cormorant': ['Cormorant', 'serif'],
         'geist-sans': ['var(--font-geist-sans)'],
-        'geist-mono': ['var(--font-geist-mono)']
+        'geist-mono': ['var(--font-geist-mono)'],
+        'OPTI': ['OPTI', 'sans-serif']
       },
       width: {
         '55ch': '55ch'

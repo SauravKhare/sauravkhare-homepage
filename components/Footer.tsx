@@ -6,7 +6,7 @@ export default function Footer() {
 		<footer className="max-md:mx-6">
 			<div className="flex justify-center pb-20">
 				<div className="flex flex-col gap-4">
-					<Paragraph classname="font-geist-sans text-base font-normal text-gray-500 text-center">
+					<Paragraph classname="font-OPTI text-base font-normal text-gray-500 text-center">
 						Code is Poetry.
 					</Paragraph>
 					<Paragraph classname="text-xs text-gray-700 text-center">
