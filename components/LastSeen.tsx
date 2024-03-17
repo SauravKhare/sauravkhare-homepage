@@ -2,7 +2,7 @@
 
 import { useQuery } from "react-query";
 import Paragraph from "./Paragraph";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 type MovieIDS = {
 	trakt: number;
@@ -68,10 +68,10 @@ export default function LastSeen({
 		);
 	}
 
-	if (isError) {
+	if (axios.isAxiosError(error)) {
 		return (
 			<Paragraph classname="text-xl font-geist-sans font-normal md:w-55ch text-white/80">
-				{{ error }}
+				{error.message}
 			</Paragraph>
 		);
 	}
@@ -79,7 +79,7 @@ export default function LastSeen({
 	return (
 		<>
 			<div className="flex gap-4 overflow-x-scroll no-scrollbar">
-				{data.map((movie: MovieData) => (
+				{data?.map((movie: MovieData) => (
 					<a
 						className="text-xl font-geist-sans font-normal text-white/80 duration-500  hover:text-yellow-400 shrink-0"
 						key={movie.id}

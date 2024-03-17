@@ -6,10 +6,10 @@ export const Projects = [
     tech: ["React", "React Query", "Tailwind"],
   },
   {
-    name: "Travel UI/UX",
-    link: "https://github.com/SauravKhare/next-101-travel-site",
-    description: "UI Page/Site for a Travel/Camping webapp.",
-    tech: ["Next.js", "Tailwind"],
+    name: "React Weather",
+    link: "https://weatherapp-two-lemon.vercel.app/",
+    description: "Yet another weather app.",
+    tech: ["React", "React Query","React Context", "Tailwind"],
   },
   {
     name: "WhatsApp Without Saving",
@@ -23,6 +23,12 @@ export const Projects = [
     description: "A Simple JavaScript Event Keycode Finder.",
     tech: ["JavaScript", "CSS", "HTML"],
   },
+  {
+    name: "Travel UI/UX",
+    link: "https://github.com/SauravKhare/next-101-travel-site",
+    description: "UI Page/Site for a Travel/Camping webapp.",
+    tech: ["Next.js", "Tailwind"],
+  },
 ];
 
 export const ExperienceItems = [
@@ -35,8 +41,10 @@ export const ExperienceItems = [
     end_date: "",
     isCurrent: true,
     description:
-      "Wrote UI Components with React for AEM. Modeled data coming from AEM to React Props. Converted existing React SPA into SSR according to AEM architecture. Integrated Coveo Cloud Search into existing React App.",
-    tech: ["React", "JavaScript (ES6)", "TypeScript", "Coveo", "HTML5", "CSS3"],
+      `Led development of high-performance, server-rendered React apps with SSR architecture.
+      Spearheaded legacy SPA migration to SSR, achieving 20% performance boost.
+      Collaborated to seamlessly integrate Coveo Cloud Search into React app.`,
+    tech: ["React", "Redux", "Jest", "JavaScript (ES6)", "TypeScript", "Coveo", "HTML5", "CSS3"],
   },
   {
     id: 2,
@@ -47,8 +55,11 @@ export const ExperienceItems = [
     end_date: "July 2023",
     isCurrent: false,
     description:
-      "Wrote UI Components with React for AEM. Added standardization in CSS for existing Pega Solution. Helped Pega developers with CSS layouts and styling.",
-    tech: ["HTML5", "CSS3", "JavaScript (ES6)", "React", "TypeScript"],
+      `Proficient in high-performance web development with React,
+      Redux, TypeScript, modern JS, and CSS frameworks.
+      Designs dynamic UIs, employing Redux for efficient data management.
+      Boosted team productivity by 30% with reusable React components.`,
+    tech: ["React", "TypeScript", "JavaScript (ES6)", "SSR", "HTML5", "CSS3"],
   },
   {
     id: 3,
@@ -59,7 +70,11 @@ export const ExperienceItems = [
     end_date: "Jul 2022",
     isCurrent: false,
     description:
-      "Built responsive websites from scratch with provided designs. Integrated Salesforce customer acquisition pipeline with an existing website. Handled email automation with Pardot. Moved large-scale blog from WordPress to new modern CraftCMS. Built highly authorable websites with CraftCMS. Made device and service-agnostic email templates. Customized WordPress themes with custom requirements and functionalities.",
+      `Led development of performant web apps using React, GraphQL, Tailwind, and TypeScript.
+      Integrated Salesforce pipelines, boosting conversions by 25%.
+      Achieved 30% faster page loads and 10% higher engagement with CraftCMS migration from WordPress.
+      Empowered content creators with custom workflows and dynamic CraftCMS landing pages.
+      Tailored WordPress themes with e-commerce and user management functionalities.`,
     tech: [
       "React",
       "JavaScript (ES6)",
@@ -90,5 +105,10 @@ export const Connect = [
     name: "Linkedin",
     value: "https://www.linkedin.com/in/sauravkhare",
     image: "/linkedin.svg",
+  },
+  {
+    name: "Mastodon",
+    value: "https://mastodon.social/@sauravkhare",
+    image: "/mastodon.svg",
   },
 ];

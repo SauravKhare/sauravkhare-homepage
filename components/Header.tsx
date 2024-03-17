@@ -11,7 +11,7 @@ const Header = (): React.ReactElement => {
 						<Link href="/">
 							<div className="">
 								<Heading
-									classname="font-light italic text-4xl font-cormorant text-white mb-2"
+									classname="font-OPTI text-4xl mb-2 text-red-800"
 									headingType="h1"
 								>
 									Saurav Khare
