@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import QueryProvider from "../context/query-context";
+import TickerBar from "@/components/TickerBar";
 
 export const metadata: Metadata = {
 	title: "Saurav Khare",
@@ -18,8 +19,11 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-			<body className="max-w-2xl md:mx-auto bg-black text-white">
-				<QueryProvider>{children}</QueryProvider>
+			<body className="bg-black">
+				<TickerBar />
+				<div className="max-w-2xl md:mx-auto text-white">
+					<QueryProvider>{children}</QueryProvider>
+				</div>
 			</body>
 		</html>
 	);
