@@ -2,7 +2,7 @@ import Link from "next/link";
 import Heading from "./Heading";
 import Paragraph from "./Paragraph";
 
-const Header = (): React.ReactElement => {
+export default function Header() {
 	return (
 		<>
 			<header className="py-11 max-md:mx-6">
@@ -26,6 +26,4 @@ const Header = (): React.ReactElement => {
 			</header>
 		</>
 	);
-};
-
-export default Header;
+}
