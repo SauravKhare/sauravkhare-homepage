@@ -112,3 +112,31 @@ export const Connect = [
     image: "/mastodon.svg",
   },
 ];
+
+export const BooksData = [
+  {
+    name: "The Silmarillion",
+    image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1610045590i/7332.jpg",
+    affiliateLink: "https://amzn.to/3xS5WoX",
+  },
+  {
+    name: "The Almanack of Naval Ravikant: A Guide to Wealth and Happiness",
+    image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1598011736i/54898389.jpg",
+    affiliateLink: "https://amzn.to/3Sc0V1s",
+  },
+  {
+    name: "The Psychology of Money",
+    image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1581527774i/41881472.jpg",
+    affiliateLink: "https://amzn.to/3WrFQ5u",
+  },
+  {
+    name: "How to Win Friends and Influence People",
+    image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1442726934i/4865.jpg",
+    affiliateLink: "https://amzn.to/46h6kdm",
+  },
+  {
+    name: "Rich Dad, Poor Dad",
+    image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1388211242i/69571.jpg",
+    affiliateLink: "https://amzn.to/4d3lMfh",
+  }
+]
