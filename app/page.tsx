@@ -10,7 +10,6 @@ import Socials from "@/components/Socials";
 export default function Home() {
 	return (
 		<div className="">
-			<Header />
 			<section className="pb-20 max-md:mx-6">
 				<div className="intro__deskcription">
 					<Paragraph classname="text-lg mb-4 font-inter text-white/60">
@@ -103,14 +102,6 @@ export default function Home() {
 				</div>
 				<Socials />
 			</section>
-			<section className="">
-				<div className="flex justify-center items-center text-center pb-20">
-					<div className="w-0.5 h-0.5 mr-1.5 bg-gray-500"></div>
-					<div className="w-0.5 h-0.5 mr-1.5 bg-gray-500"></div>
-					<div className="w-0.5 h-0.5 mr-1.5 bg-gray-500"></div>
-				</div>
-			</section>
-			<Footer />
 		</div>
 	);
 }
