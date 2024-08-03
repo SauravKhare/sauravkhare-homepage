@@ -37,12 +37,12 @@ export default function Home() {
 				</div>
 				<div className="">
 					<Paragraph classname="text-lg font-inter font-normal text-white/60">
-						Currently working as a Senior Systems Engineer at{" "}
+						Currently working as a Senior Experience Engineer at{" "}
 						<a
-							href="https://www.infosys.com"
+							href="https://www.publicissapient.com/"
 							className="duration-500 hover:text-yellow-500 underline"
 						>
-							Infosys
+							Publicis Sapient
 						</a>
 						.
 					</Paragraph>

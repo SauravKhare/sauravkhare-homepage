@@ -34,12 +34,23 @@ export const Projects = [
 export const ExperienceItems = [
   {
     id: 1,
+    company: "Publicis Sapient",
+    company_link: "https://www.publicissapient.com/",
+    position: "Senior Experience Engineer",
+    start_date: "August 2024",
+    end_date: "",
+    isCurrent: true,
+    description: ``,
+    tech: ["React", "Redux", "Jest", "JavaScript (ES6)", "TypeScript", "HTML5", "CSS3"],
+  },
+  {
+    id: 2,
     company: "Infosys",
     company_link: "https://www.infosys.com/",
     position: "Senior Systems Engineer",
     start_date: "July 2023",
-    end_date: "",
-    isCurrent: true,
+    end_date: "August 2024",
+    isCurrent: false,
     description:
       `Led development of high-performance, server-rendered React apps with SSR architecture.
       Spearheaded legacy SPA migration to SSR, achieving 20% performance boost.
@@ -47,7 +58,7 @@ export const ExperienceItems = [
     tech: ["React", "Redux", "Jest", "JavaScript (ES6)", "TypeScript", "Coveo", "HTML5", "CSS3"],
   },
   {
-    id: 2,
+    id: 3,
     company: "Infosys",
     company_link: "https://www.infosys.com/",
     position: "Systems Engineer",
@@ -62,7 +73,7 @@ export const ExperienceItems = [
     tech: ["React", "TypeScript", "JavaScript (ES6)", "SSR", "HTML5", "CSS3"],
   },
   {
-    id: 3,
+    id: 4,
     company: "Voraco",
     company_link: "https://voraco.com/",
     position: "UI/Frontend Developer",
