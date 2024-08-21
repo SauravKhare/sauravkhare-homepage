@@ -14,6 +14,9 @@ const config: Config = {
         'geist-mono': ['var(--font-geist-mono)'],
         'OPTI': ['OPTI', 'sans-serif']
       },
+      colors: {
+        'dark': 'hsla(0, 0%, 100%, .125)',
+      },
       width: {
         '55ch': '55ch'
       }

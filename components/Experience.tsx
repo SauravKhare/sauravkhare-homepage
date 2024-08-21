@@ -9,7 +9,7 @@ export default function Experience() {
 			{ExperienceItems.map((item) => (
 				<div
 					key={item.id}
-					className="flex flex-col w-full min-h-60 bg-zinc-800/50 rounded-xl p-5 shrink-0 shadow-xl mb-4"
+					className="flex flex-col w-full min-h-60 pr-5 pb-5 shrink-0 shadow-xl mb-12"
 				>
 					<div className="flex flex-col">
 						<h4 className="text-lg font-OPTI duration-500 flex items-center gap-2">
@@ -41,7 +41,7 @@ export default function Experience() {
 			))}
 			<Link
 				href="/Saurav_Khare_Resume_A.pdf"
-				className="text-base mb-4 font-geist-sans text-white/80 duration-500 hover:underline hover:text-yellow-400 flex hover:gap-2 items-center"
+				className="text-base font-geist-sans text-white/80 duration-500 hover:underline hover:text-yellow-400 flex hover:gap-2 items-center"
 			>
 				View full Résumé.
 				<Image src="./arrow.svg" alt="arrow" width={20} height={20} />

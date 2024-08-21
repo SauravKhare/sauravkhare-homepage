@@ -23,7 +23,7 @@ export default function RootLayout({
 		<html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
 			<body className="bg-black">
 				{/* <TickerBar /> */}
-				<div className="max-w-2xl md:mx-auto text-white">
+				<div className="text-white">
 					<Header />
 					<QueryProvider>{children}</QueryProvider>
 					<Footer />
