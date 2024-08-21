@@ -88,7 +88,7 @@ export default function Home() {
 				<div className="mb-4">
 					<Heading
 						headingType="h3"
-						classname="font-normal text-base font-OPTI text-yellow-500 mb-12"
+						classname="font-normal text-base font-OPTI text-yellow-500"
 					>
 						Experience
 					</Heading>
@@ -113,7 +113,7 @@ export default function Home() {
 				<div className="mb-4">
 					<Heading
 						headingType="h3"
-						classname="font-normal text-base font-OPTI text-yellow-500 mb-12"
+						classname="font-normal text-base font-OPTI text-yellow-500"
 					>
 						Showcase
 					</Heading>

@@ -9,7 +9,7 @@ export default function Experience() {
 			{ExperienceItems.map((item) => (
 				<div
 					key={item.id}
-					className="flex flex-col w-full min-h-60 pr-5 pl-5 pb-5 shrink-0 shadow-xl mb-12 border-b border-r border-dark"
+					className="flex flex-col w-full min-h-60 pr-5 pb-5 shrink-0 shadow-xl mb-12"
 				>
 					<div className="flex flex-col">
 						<h4 className="text-lg font-OPTI duration-500 flex items-center gap-2">
