@@ -17,9 +17,8 @@ export default function Experience() {
 			{ExperienceItems.map((item, i) => (
 				<Card key={item.id} className="mb-12 bg-transparent border-none">
 					<CardHeader className={`pl-0 ${i === 0 ? `pt-0` : ``} mb-3`}>
-						<CardTitle className="flex items-center font-OPTI text-white">
-							<p>{item.position}</p>
-							<p className="mx-2">•</p>
+						<CardTitle className="font-OPTI text-white">
+							{item.position} <p className="inline-block mx-1">•</p>
 							<Link
 								href={item.company_link}
 								className=" hover:text-yellow-500 duration-500"

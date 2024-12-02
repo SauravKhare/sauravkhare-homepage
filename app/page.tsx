@@ -9,7 +9,7 @@ import Showcase from "@/components/Showcase";
 export default function Home() {
 	return (
 		<div className="flex justify-between flex-col md:flex-row">
-			<div className="md:sticky md:top-0 md:flex md:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between pt-16">
+			<div className="md:sticky md:top-0 md:max-h-screen lg:w-1/2 md:flex-col pt-16">
 				<Header />
 			</div>
 			<div className="md:w-1/2 pt-16 md:pl-8">
