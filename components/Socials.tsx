@@ -13,7 +13,13 @@ export default function Socials() {
 		<div className="flex gap-5 align-middle flex-wrap">
 			{Connect.map((item) => (
 				<Link key={item.name} href={item.value}>
-					<Image src={item.image} width={28} height={28} alt={item.name} />
+					<Image
+						src={item.image}
+						width={28}
+						height={28}
+						alt={item.name}
+						className="hover:bg-black"
+					/>
 				</Link>
 			))}
 			<Paragraph classname="mb-3 text-base font-normal font-geist-sans text-gray-500">
