@@ -2,7 +2,7 @@ import React from "react";
 
 type HeadingProps = {
 	headingType: string;
-	classname: string;
+	classname?: string;
 	children: React.ReactNode;
 };
 

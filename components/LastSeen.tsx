@@ -1,8 +1,10 @@
 "use client";
 
 import { useQuery } from "react-query";
-import Paragraph from "./Paragraph";
-import axios, { AxiosError } from "axios";
+import Paragraph from "@/components/Paragraph";
+import axios from "axios";
+import Image from "next/image";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/carousel";
 
 type MovieIDS = {
 	trakt: number;
@@ -15,6 +17,7 @@ type Movie = {
 	title: string;
 	year: number;
 	ids: MovieIDS;
+	posterUrl?: string;
 };
 
 type MovieData = {
@@ -37,7 +40,7 @@ export default function LastSeen({
 	limit: number;
 }) {
 	async function fetchMovies() {
-		const res = await axios.get(
+		const traktRes = await axios.get(
 			`${endpoint}/${user}/history/${type}?limit=${limit}`,
 			{
 				headers: {
@@ -47,7 +50,34 @@ export default function LastSeen({
 				},
 			}
 		);
-		return res.data;
+
+		const configRes = await axios.get(
+			`https://api.themoviedb.org/3/configuration?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
+		);
+		const baseUrl = configRes.data.images.secure_base_url;
+
+		const moviesWithPosters = await Promise.all(
+			traktRes.data.map(async (item: MovieData) => {
+				try {
+					const tmdbRes = await axios.get(
+						`https://api.themoviedb.org/3/movie/${item.movie.ids.tmdb}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
+					);
+					return {
+						...item,
+						movie: {
+							...item.movie,
+							posterUrl: tmdbRes.data.poster_path
+								? `${baseUrl}w342${tmdbRes.data.poster_path}`
+								: null,
+						},
+					};
+				} catch {
+					return item;
+				}
+			})
+		);
+
+		return moviesWithPosters;
 	}
 
 	const { isLoading, isError, data, error } = useQuery(
@@ -60,36 +90,62 @@ export default function LastSeen({
 
 	if (isLoading) {
 		return (
-			<div className="flex gap-6 overflow-x-scroll no-scrollbar">
-				<div className="rounded-md bg-zinc-800 h-7 w-80 animate-pulse"></div>
-				<div className="rounded-md bg-zinc-800 h-7 w-64 animate-pulse"></div>
-				<div className="rounded-md bg-zinc-800 h-7 w-72 animate-pulse"></div>
-			</div>
+			<Carousel className="mt-6">
+				<CarouselContent>
+					{[...Array(limit)].map((_, i) => (
+						<CarouselItem key={i} className="basis-36">
+							<div key={i} className="shrink-0 space-y-2">
+								<div className="rounded-md bg-zinc-800 h-48 w-32 animate-pulse" />
+								<div className="rounded-md bg-zinc-800 h-4 w-32 animate-pulse" />
+							</div>
+						</CarouselItem>
+					))}
+				</CarouselContent>
+			</Carousel>
 		);
 	}
 
 	if (axios.isAxiosError(error)) {
 		return (
-			<Paragraph classname="text-xl font-geist-sans font-normal md:w-55ch text-white/80">
+			<Paragraph classname="text-xl font-geist-sans font-normal md:w-55ch text-white/80 mt-6">
 				{error.message}
 			</Paragraph>
 		);
 	}
 
 	return (
-		<>
-			<div className="flex gap-4 overflow-x-scroll no-scrollbar">
+		<Carousel opts={{ align: "start" }} className="mt-6">
+			<CarouselContent>
 				{data?.map((movie: MovieData) => (
-					<a
-						className="text-xl font-geist-sans font-normal text-white/80 duration-500  hover:text-yellow-400 shrink-0"
-						key={movie.id}
-						href={`https://www.imdb.com/title/${movie.movie.ids.imdb}`}
-						target="_blank"
-					>
-						<p className="">{`${movie.movie.title} (${movie.movie.year})`}</p>
-					</a>
+					<CarouselItem key={movie.id} className="basis-36">
+						<a
+							key={movie.id}
+							href={`https://www.imdb.com/title/${movie.movie.ids.imdb}`}
+							target="_blank"
+							className="shrink-0 space-y-2"
+						>
+							<div className="w-32 h-48 rounded-md overflow-hidden">
+								{movie.movie.posterUrl ? (
+									<Image
+										src={movie.movie.posterUrl}
+										alt={movie.movie.title}
+										className="w-full h-full object-cover duration-500 hover:scale-105"
+										width={128}
+										height={192}
+									/>
+								) : (
+									<div className="w-full h-full bg-zinc-800 flex items-center justify-center">
+										<span className="text-white/40 text-sm">No Poster</span>
+									</div>
+								)}
+							</div>
+							<p className="text-sm font-geist-sans text-white/80 hover:text-yellow-400 w-32">
+								{`${movie.movie.title} (${movie.movie.year})`}
+							</p>
+						</a>
+					</CarouselItem>
 				))}
-			</div>
-		</>
+			</CarouselContent>
+		</Carousel>
 	);
 }

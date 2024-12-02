@@ -1,5 +1,4 @@
 import { ExperienceItems } from "@/constants";
-import Paragraph from "./Paragraph";
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/badge";
@@ -14,14 +13,13 @@ import {
 
 export default function Experience() {
 	return (
-		<div className="flex flex-col">
+		<div className="flex flex-col mt-6">
 			{ExperienceItems.map((item, i) => (
-				<Card key={item.id} className="mb-5 bg-transparent border-none">
-					<CardHeader className={`pl-0 ${i === 0 ? `pt-0` : ``}`}>
-						<CardTitle className="font-OPTI text-white">
-							{item.position}
-						</CardTitle>
-						<CardDescription className="flex gap-2 items-center pl-0 text-zinc-500">
+				<Card key={item.id} className="mb-12 bg-transparent border-none">
+					<CardHeader className={`pl-0 ${i === 0 ? `pt-0` : ``} mb-3`}>
+						<CardTitle className="flex items-center font-OPTI text-white">
+							<p>{item.position}</p>
+							<p className="mx-2">•</p>
 							<Link
 								href={item.company_link}
 								className=" hover:text-yellow-500 duration-500"
@@ -29,14 +27,18 @@ export default function Experience() {
 							>
 								{item.company}
 							</Link>
-							<span className="text-xs">•</span>
+						</CardTitle>
+						<CardDescription className="flex gap-2 items-center text-zinc-500">
 							{item.start_date} – {item.isCurrent ? `Present` : item.end_date}
 						</CardDescription>
 					</CardHeader>
-					<CardContent className="pl-0 text-zinc-500">
-						<p>{item.description}</p>
-					</CardContent>
-					<CardFooter className="pl-0 flex flex-wrap gap-1">
+					{item.description && (
+						<CardContent className="text-zinc-500">
+							<p>{item.description}</p>
+						</CardContent>
+					)}
+
+					<CardFooter className="flex flex-wrap gap-1 mt-3">
 						{item.tech.map((techItem) => (
 							<Badge
 								key={techItem}
