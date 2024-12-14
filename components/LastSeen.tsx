@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import Paragraph from "@/components/Paragraph";
 import axios from "axios";
 import Image from "next/image";
@@ -80,13 +80,11 @@ export default function LastSeen({
 		return moviesWithPosters;
 	}
 
-	const { isLoading, isError, data, error } = useQuery(
-		"movies-query",
-		fetchMovies,
-		{
-			staleTime: 86400,
-		}
-	);
+	const { isLoading, isError, data, error } = useQuery({
+		queryKey: ["movies-query"],
+		queryFn: fetchMovies,
+		staleTime: 86400,
+	});
 
 	if (isLoading) {
 		return (
