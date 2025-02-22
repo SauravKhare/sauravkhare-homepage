@@ -21,7 +21,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
 			<body className="bg-[#111111] bg-[radial-gradient(circle,#222,#111)]">
-				<div className="text-white mx-auto md:max-w-screen-xl px-8 lg:px-24">
+				<div className="text-white mx-auto md:max-w-(--breakpoint-xl) px-8 lg:px-24">
 					<QueryProvider>{children}</QueryProvider>
 				</div>
 			</body>
