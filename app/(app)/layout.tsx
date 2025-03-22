@@ -3,7 +3,7 @@ import "../styles/style.css";
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import QueryProvider from "../context/query-context";
+import QueryProvider from "../../context/query-context";
 
 export const metadata: Metadata = {
     title: "Saurav Khare",
