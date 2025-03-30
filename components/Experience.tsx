@@ -57,7 +57,7 @@ export default function Experience() {
         </Card>
       ))}
       <Link
-        href="/Saurav_Khare_Resume_A.pdf"
+        href="https://0ave63j0lg.ufs.sh/f/j0oNiZlcJDrCoGern95Pz8evH41ZBQUacqbTl5f37noxYLRF"
         className="text-base text-white/80 duration-500 hover:underline hover:text-yellow-400 flex hover:gap-2 items-center"
       >
         View full Résumé.
