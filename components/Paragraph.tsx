@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export default function Paragraph({
-	classname,
-	children,
+  classname,
+  children,
 }: {
-	classname?: string;
-	children?: ReactNode | any;
+  classname?: string;
+  children?: ReactNode | any;
 }) {
-	return <p className={classname}>{children}</p>;
+  return <p className={classname}>{children}</p>;
 }

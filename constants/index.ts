@@ -9,7 +9,7 @@ export const Projects = [
     name: "React Weather",
     link: "https://weatherapp-two-lemon.vercel.app/",
     description: "Yet another weather app.",
-    tech: ["React", "React Query","React Context", "Tailwind"],
+    tech: ["React", "React Query", "React Context", "Tailwind"],
   },
   {
     name: "WhatsApp Without Saving",
@@ -40,7 +40,9 @@ export const ExperienceItems = [
     start_date: "August 2024",
     end_date: "",
     isCurrent: true,
-    description: ``,
+    description: `Leading the development of scalable, high-performance web applications using Next.js, React 19, TypeScript, and Tailwind CSS.
+    Driving the adoption of design systems, server components, and progressive hydration, improving efficiency and maintainability.
+    Implementing Edge Functions, ISR (Incremental Static Regeneration), and streaming SSR for enhanced performance and SEO`,
     tech: ["React", "Redux", "Jest", "JavaScript (ES6)", "TypeScript", "HTML5", "CSS3"],
   },
   {
@@ -48,32 +50,17 @@ export const ExperienceItems = [
     company: "Infosys",
     company_link: "https://www.infosys.com/",
     position: "Senior Systems Engineer",
-    start_date: "July 2023",
+    start_date: "July 2022",
     end_date: "August 2024",
     isCurrent: false,
     description:
-      `Led development of high-performance, server-rendered React apps with SSR architecture.
-      Spearheaded legacy SPA migration to SSR, achieving 20% performance boost.
-      Collaborated to seamlessly integrate Coveo Cloud Search into React app.`,
-    tech: ["React", "Redux", "Jest", "JavaScript (ES6)", "TypeScript", "Coveo", "HTML5", "CSS3"],
+      `Spearheaded the migration of legacy SPAs to Next.js with hybrid rendering, improving performance by 20%.
+      Integrated Coveo Cloud Search and AI-powered search enhancements, improving usability and accessibility.
+      Led code reviews and performance audits, ensuring compliance with modern development standards.`,
+    tech: ["React", "Redux", "Jest", "JavaScript (ES6)", "TypeScript", "Coveo", "HTML5", "CSS3", "SSR"],
   },
   {
     id: 3,
-    company: "Infosys",
-    company_link: "https://www.infosys.com/",
-    position: "Systems Engineer",
-    start_date: "July 2022",
-    end_date: "July 2023",
-    isCurrent: false,
-    description:
-      `Proficient in high-performance web development with React,
-      Redux, TypeScript, modern JS, and CSS frameworks.
-      Designs dynamic UIs, employing Redux for efficient data management.
-      Boosted team productivity by 30% with reusable React components.`,
-    tech: ["React", "TypeScript", "JavaScript (ES6)", "SSR", "HTML5", "CSS3"],
-  },
-  {
-    id: 4,
     company: "Voraco",
     company_link: "https://voraco.com/",
     position: "UI/Frontend Developer",
@@ -81,11 +68,9 @@ export const ExperienceItems = [
     end_date: "Jul 2022",
     isCurrent: false,
     description:
-      `Led development of performant web apps using React, GraphQL, Tailwind, and TypeScript.
-      Integrated Salesforce pipelines, boosting conversions by 25%.
-      Achieved 30% faster page loads and 10% higher engagement with CraftCMS migration from WordPress.
-      Empowered content creators with custom workflows and dynamic CraftCMS landing pages.
-      Tailored WordPress themes with e-commerce and user management functionalities.`,
+      `Developed responsive, accessible, and high-performance React applications using TypeScript, GraphQL, and Tailwind CSS.
+      Built and maintained reusable UI libraries and componentdriven architecture, streamlining development workflows.
+      Migrated from WordPress to CraftCMS, achieving 30% faster page loads and 10% higher engagement.`,
     tech: [
       "React",
       "JavaScript (ES6)",
@@ -149,5 +134,5 @@ export const BooksData = [
     name: "Rich Dad, Poor Dad",
     image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1388211242i/69571.jpg",
     affiliateLink: "https://amzn.to/4d3lMfh",
-  }
-]
+  },
+];
