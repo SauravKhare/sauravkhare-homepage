@@ -82,7 +82,7 @@ export default function LastSeen({
     return moviesWithPosters;
   }
 
-  const { isLoading, isError, data, error } = useQuery({
+  const { isLoading, data, error } = useQuery({
     queryKey: ["movies-query"],
     queryFn: fetchMovies,
     staleTime: 86400,

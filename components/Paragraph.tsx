@@ -5,7 +5,7 @@ export default function Paragraph({
   children,
 }: {
   classname?: string;
-  children?: ReactNode | any;
+  children?: ReactNode;
 }) {
   return <p className={classname}>{children}</p>;
 }
