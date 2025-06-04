@@ -113,7 +113,7 @@ export default function LastSeen({
   }
 
   return (
-    <Carousel opts={{ align: 'start' }} className="mt-6">
+    <Carousel opts={{ align: 'start' }} className="mt-6 font-inter">
       <CarouselContent>
         {data?.map((movie: MovieData) => (
           <CarouselItem key={movie.id} className="basis-36">

@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="w-0.5 h-0.5 mr-1.5 bg-gray-500"></div>
         </div>
       </section>
-      <footer className="max-md:mx-6">
+      <footer className="max-md:mx-6 font-inter">
         <div className="flex justify-center pb-20">
           <div className="flex flex-col gap-4">
             <Paragraph classname="font-space-grotesk text-base font-normal text-gray-500 text-center">

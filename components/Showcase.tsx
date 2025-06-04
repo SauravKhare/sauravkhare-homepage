@@ -31,7 +31,7 @@ export default function Showcase() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <Paragraph classname="font-geist-sans font-normal text-zinc-500 mt-3">
+            <Paragraph classname="font-inter font-normal text-zinc-500 mt-3">
               {item.description}
             </Paragraph>
           </CardContent>

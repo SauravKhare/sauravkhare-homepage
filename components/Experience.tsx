@@ -34,7 +34,7 @@ export default function Experience() {
             </CardDescription>
           </CardHeader>
           {item.description && (
-            <CardContent className="text-zinc-500">
+            <CardContent className="text-zinc-500 font-inter">
               <p>{item.description}</p>
             </CardContent>
           )}
