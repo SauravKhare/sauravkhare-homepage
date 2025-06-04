@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import Paragraph from './Paragraph';
+import Paragraph from "./Paragraph";
 
 export default function Footer() {
   return (
@@ -19,7 +19,7 @@ export default function Footer() {
               Code is Poetry.
             </Paragraph>
             <Paragraph classname="text-xs text-gray-700 text-center">
-              Coded in{' '}
+              Coded in{" "}
               <Link
                 href="https://code.visualstudio.com/"
                 className="hover:text-gray-400 duration-500"
@@ -27,15 +27,15 @@ export default function Footer() {
               >
                 Visual Studio Code
               </Link>
-              . Built with{' '}
+              . Built with{" "}
               <Link
                 href="https://nextjs.org/"
                 className="hover:text-gray-400 duration-500"
                 target="_blank"
               >
                 Next.js
-              </Link>{' '}
-              and{' '}
+              </Link>{" "}
+              and{" "}
               <Link
                 href="https://tailwindcss.com/"
                 className="hover:text-gray-400 duration-500"
@@ -43,7 +43,7 @@ export default function Footer() {
               >
                 Tailwind CSS
               </Link>
-              , deployed on{' '}
+              , deployed on{" "}
               <Link
                 href="https://vercel.com/"
                 className="hover:text-gray-400 duration-500"

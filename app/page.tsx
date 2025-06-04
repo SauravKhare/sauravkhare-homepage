@@ -1,10 +1,10 @@
-import Experience from '@/components/Experience';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import LastSeen from '@/components/LastSeen';
-import Paragraph from '@/components/Paragraph';
-import SectionContainer from '@/components/SectionContainer';
-import Showcase from '@/components/Showcase';
+import Experience from "@/components/Experience";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import LastSeen from "@/components/LastSeen";
+import Paragraph from "@/components/Paragraph";
+import SectionContainer from "@/components/SectionContainer";
+import Showcase from "@/components/Showcase";
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
       <div className="md:w-1/2 pt-16">
         <SectionContainer title="Now">
           <Paragraph classname="font-inter font-normal text-primary-text">
-            Currently working as a Senior Experience Engineer at{' '}
+            Currently working as a Senior Experience Engineer at{" "}
             <a
               href="https://www.publicissapient.com/"
               className="duration-500 hover:text-yellow-500 underline"

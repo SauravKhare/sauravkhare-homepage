@@ -1,15 +1,15 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import { Badge } from '@/components/badge';
+import { Badge } from "@/components/badge";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/card';
-import Paragraph from '@/components/Paragraph';
-import { Projects } from '@/constants';
+} from "@/components/card";
+import Paragraph from "@/components/Paragraph";
+import { Projects } from "@/constants";
 
 export default function Showcase() {
   return (

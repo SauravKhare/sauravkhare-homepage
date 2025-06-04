@@ -1,28 +1,28 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import { Inter, Space_Grotesk } from 'next/font/google';
+import { Inter, Space_Grotesk } from "next/font/google";
 
-import QueryProvider from '../context/query-context';
-import './globals.css';
-import '../styles/style.css';
+import QueryProvider from "../context/query-context";
+import "./globals.css";
+import "../styles/style.css";
 
 const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-space-grotesk',
-  display: 'swap',
-  weight: ['500', '600'],
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+  weight: ["500", "600"],
 });
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-  weight: ['400', '500'],
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: 'Saurav Khare',
-  description: 'Frontend Engineer',
+  title: "Saurav Khare",
+  description: "Frontend Engineer",
 
   icons:
     "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✌</text></svg>",

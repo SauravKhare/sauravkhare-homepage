@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
-import { Connect } from '@/constants';
+import { Connect } from "@/constants";
 
 export default function Socials() {
   return (

@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
 function Card({
   ref,
@@ -13,14 +13,14 @@ function Card({
     <div
       ref={ref}
       className={cn(
-        'rounded-lg border bg-card text-card-foreground shadow-xs',
+        "rounded-lg border bg-card text-card-foreground shadow-xs",
         className
       )}
       {...props}
     />
   );
 }
-Card.displayName = 'Card';
+Card.displayName = "Card";
 
 function CardHeader({
   ref,
@@ -32,12 +32,12 @@ function CardHeader({
   return (
     <div
       ref={ref}
-      className={cn('flex flex-col space-y-1.5', className)}
+      className={cn("flex flex-col space-y-1.5", className)}
       {...props}
     />
   );
 }
-CardHeader.displayName = 'CardHeader';
+CardHeader.displayName = "CardHeader";
 
 function CardTitle({
   ref,
@@ -50,14 +50,14 @@ function CardTitle({
     <h3
       ref={ref}
       className={cn(
-        'text-xl font-semibold leading-none tracking-tight',
+        "text-xl font-semibold leading-none tracking-tight",
         className
       )}
       {...props}
     />
   );
 }
-CardTitle.displayName = 'CardTitle';
+CardTitle.displayName = "CardTitle";
 
 function CardDescription({
   ref,
@@ -69,12 +69,12 @@ function CardDescription({
   return (
     <p
       ref={ref}
-      className={cn('text-sm text-muted-foreground', className)}
+      className={cn("text-sm text-muted-foreground", className)}
       {...props}
     />
   );
 }
-CardDescription.displayName = 'CardDescription';
+CardDescription.displayName = "CardDescription";
 
 function CardContent({
   ref,
@@ -83,9 +83,9 @@ function CardContent({
 }: React.HTMLAttributes<HTMLDivElement> & {
   ref?: React.RefObject<HTMLDivElement | null>;
 }) {
-  return <div ref={ref} className={cn('pt-0', className)} {...props} />;
+  return <div ref={ref} className={cn("pt-0", className)} {...props} />;
 }
-CardContent.displayName = 'CardContent';
+CardContent.displayName = "CardContent";
 
 function CardFooter({
   ref,
@@ -97,12 +97,12 @@ function CardFooter({
   return (
     <div
       ref={ref}
-      className={cn('flex items-center pt-0', className)}
+      className={cn("flex items-center pt-0", className)}
       {...props}
     />
   );
 }
-CardFooter.displayName = 'CardFooter';
+CardFooter.displayName = "CardFooter";
 
 export {
   Card,

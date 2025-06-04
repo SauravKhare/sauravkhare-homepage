@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
-import { Badge } from '@/components/badge';
+import { Badge } from "@/components/badge";
 import {
   Card,
   CardContent,
@@ -9,8 +9,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/card';
-import { ExperienceItems } from '@/constants';
+} from "@/components/card";
+import { ExperienceItems } from "@/constants";
 
 export default function Experience() {
   return (

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import Image from 'next/image';
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import Image from "next/image";
 
-import { Carousel, CarouselContent, CarouselItem } from '@/components/carousel';
-import Paragraph from '@/components/Paragraph';
+import { Carousel, CarouselContent, CarouselItem } from "@/components/carousel";
+import Paragraph from "@/components/Paragraph";
 
 type MovieIDS = {
   trakt: number;
@@ -29,7 +29,7 @@ type MovieData = {
   movie: Movie;
 };
 
-const endpoint = 'https://api.trakt.tv/users';
+const endpoint = "https://api.trakt.tv/users";
 
 export default function LastSeen({
   user,
@@ -45,9 +45,9 @@ export default function LastSeen({
       `${endpoint}/${user}/history/${type}?limit=${limit}`,
       {
         headers: {
-          'Content-Type': 'application/json',
-          'trakt-api-version': 2,
-          'trakt-api-key': process.env.NEXT_PUBLIC_TRAKT_ID,
+          "Content-Type": "application/json",
+          "trakt-api-version": 2,
+          "trakt-api-key": process.env.NEXT_PUBLIC_TRAKT_ID,
         },
       }
     );
@@ -82,7 +82,7 @@ export default function LastSeen({
   }
 
   const { isLoading, data, error } = useQuery({
-    queryKey: ['movies-query'],
+    queryKey: ["movies-query"],
     queryFn: fetchMovies,
     staleTime: 86400,
   });
@@ -113,7 +113,7 @@ export default function LastSeen({
   }
 
   return (
-    <Carousel opts={{ align: 'start' }} className="mt-6 font-inter">
+    <Carousel opts={{ align: "start" }} className="mt-6 font-inter">
       <CarouselContent>
         {data?.map((movie: MovieData) => (
           <CarouselItem key={movie.id} className="basis-36">

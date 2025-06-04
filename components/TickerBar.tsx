@@ -1,4 +1,4 @@
-import Marquee from 'react-fast-marquee';
+import Marquee from "react-fast-marquee";
 
 export default function TickerBar() {
   return (
