@@ -40,7 +40,7 @@ export default function Showcase() {
               <Badge
                 key={a}
                 variant="outline"
-                className="text-white/40 font-geist-mono bg-zinc-800 px-3 border-zinc-900 border-2 mr-1"
+                className="text-white/40 font-inter bg-zinc-800 px-3 border-zinc-900 border-2 mr-1"
               >
                 {a}
               </Badge>

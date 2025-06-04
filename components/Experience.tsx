@@ -28,7 +28,7 @@ export default function Experience() {
                 {item.company}
               </Link>
             </CardTitle>
-            <CardDescription className="flex gap-2 items-center text-zinc-500">
+            <CardDescription className="flex gap-2 items-center text-zinc-500 font-inter">
               {item.start_date} <span>–</span>
               {item.isCurrent ? `Present` : item.end_date}
             </CardDescription>
@@ -44,7 +44,7 @@ export default function Experience() {
               <Badge
                 key={techItem}
                 variant="outline"
-                className="text-accent-yellow bg-accent-yellow/15 px-3 border-accent-yellow/50 border-2"
+                className="text-accent-yellow bg-accent-yellow/15 px-3 border-accent-yellow/50 border-2 font-inter"
               >
                 {techItem}
               </Badge>
@@ -54,7 +54,7 @@ export default function Experience() {
       ))}
       <Link
         href="https://0ave63j0lg.ufs.sh/f/j0oNiZlcJDrCoGern95Pz8evH41ZBQUacqbTl5f37noxYLRF"
-        className="text-base text-white/80 duration-500 hover:underline hover:text-yellow-400 flex hover:gap-2 items-center"
+        className="text-base text-white/80 duration-500 hover:underline hover:text-yellow-400 flex hover:gap-2 items-center font-inter"
       >
         View full Résumé.
         <Image src="./arrow.svg" alt="arrow" width={20} height={20} />
