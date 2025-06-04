@@ -1,13 +1,13 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { calculateExperience } from "@/lib/utils";
+import { calculateExperience } from '@/lib/utils';
 
-import Heading from "./Heading";
-import Paragraph from "./Paragraph";
-import Socials from "./Socials";
+import Heading from './Heading';
+import Paragraph from './Paragraph';
+import Socials from './Socials';
 
 export default function Header() {
-  const startDate = new Date("2021-01-15");
+  const startDate = new Date('2021-01-15');
   const { years, months } = calculateExperience(startDate);
 
   return (
@@ -27,14 +27,11 @@ export default function Header() {
       </header>
       <Paragraph classname="text-lg mb-4 font-inter text-primary-text">
         I&apos;m an experienced frontend developer with a specialization in
-        React and its broad ecosystem, with a professional experience of
-        {" "}
+        React and its broad ecosystem, with a professional experience of{' '}
         <span>
           {years}
-          {months <= 0 ? `+` : ``}
-          {" "}
-          {years === 1 ? `year` : `years`}
-          {months > 0 && ` and ${months} ${months === 1 ? "month" : "months"}`}
+          {months <= 0 ? `+` : ``} {years === 1 ? `year` : `years`}
+          {months > 0 && ` and ${months} ${months === 1 ? 'month' : 'months'}`}
         </span>
         . Possessing a sharp eye for design and a talent for creating smooth
         user experiences, I excel at bringing concepts to life.
@@ -50,7 +47,7 @@ export default function Header() {
 }
 
 export async function getServerSideProps() {
-  const startDate = new Date("2021-01-15");
+  const startDate = new Date('2021-01-15');
   const { years, months } = calculateExperience(startDate);
 
   return {

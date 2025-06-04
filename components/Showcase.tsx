@@ -1,20 +1,20 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { Badge } from "@/components/badge";
+import { Badge } from '@/components/badge';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/card";
-import Paragraph from "@/components/Paragraph";
-import { Projects } from "@/constants";
+} from '@/components/card';
+import Paragraph from '@/components/Paragraph';
+import { Projects } from '@/constants';
 
 export default function Showcase() {
   return (
     <div className="mt-6">
-      {Projects.map(item => (
+      {Projects.map((item) => (
         <Card
           key={item.name}
           className="bg-transparent h-full border-none mb-12"
@@ -36,7 +36,7 @@ export default function Showcase() {
             </Paragraph>
           </CardContent>
           <CardFooter className="flex flex-wrap mt-3">
-            {item.tech.map(a => (
+            {item.tech.map((a) => (
               <Badge
                 key={a}
                 variant="outline"
