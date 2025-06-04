@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import Image from "next/image";
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import Image from 'next/image';
 
-import { Carousel, CarouselContent, CarouselItem } from "@/components/carousel";
-import Paragraph from "@/components/Paragraph";
+import { Carousel, CarouselContent, CarouselItem } from '@/components/carousel';
+import Paragraph from '@/components/Paragraph';
 
 type MovieIDS = {
   trakt: number;
@@ -29,7 +29,7 @@ type MovieData = {
   movie: Movie;
 };
 
-const endpoint = "https://api.trakt.tv/users";
+const endpoint = 'https://api.trakt.tv/users';
 
 export default function LastSeen({
   user,
@@ -45,15 +45,15 @@ export default function LastSeen({
       `${endpoint}/${user}/history/${type}?limit=${limit}`,
       {
         headers: {
-          "Content-Type": "application/json",
-          "trakt-api-version": 2,
-          "trakt-api-key": process.env.NEXT_PUBLIC_TRAKT_ID,
+          'Content-Type': 'application/json',
+          'trakt-api-version': 2,
+          'trakt-api-key': process.env.NEXT_PUBLIC_TRAKT_ID,
         },
-      },
+      }
     );
 
     const configRes = await axios.get(
-      `https://api.themoviedb.org/3/configuration?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
+      `https://api.themoviedb.org/3/configuration?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
     );
     const baseUrl = configRes.data.images.secure_base_url;
 
@@ -61,7 +61,7 @@ export default function LastSeen({
       traktRes.data.map(async (item: MovieData) => {
         try {
           const tmdbRes = await axios.get(
-            `https://api.themoviedb.org/3/movie/${item.movie.ids.tmdb}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
+            `https://api.themoviedb.org/3/movie/${item.movie.ids.tmdb}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
           );
           return {
             ...item,
@@ -72,18 +72,17 @@ export default function LastSeen({
                 : null,
             },
           };
-        }
-        catch {
+        } catch {
           return item;
         }
-      }),
+      })
     );
 
     return moviesWithPosters;
   }
 
   const { isLoading, data, error } = useQuery({
-    queryKey: ["movies-query"],
+    queryKey: ['movies-query'],
     queryFn: fetchMovies,
     staleTime: 86400,
   });
@@ -114,7 +113,7 @@ export default function LastSeen({
   }
 
   return (
-    <Carousel opts={{ align: "start" }} className="mt-6">
+    <Carousel opts={{ align: 'start' }} className="mt-6">
       <CarouselContent>
         {data?.map((movie: MovieData) => (
           <CarouselItem key={movie.id} className="basis-36">
@@ -125,21 +124,19 @@ export default function LastSeen({
               className="shrink-0 space-y-2"
             >
               <div className="w-32 h-48 rounded-md overflow-hidden">
-                {movie.movie.posterUrl
-                  ? (
-                      <Image
-                        src={movie.movie.posterUrl}
-                        alt={movie.movie.title}
-                        className="w-full h-full object-cover duration-500 hover:scale-105"
-                        width={128}
-                        height={192}
-                      />
-                    )
-                  : (
-                      <div className="w-full h-full bg-zinc-800 flex items-center justify-center">
-                        <span className="text-white/40 text-sm">No Poster</span>
-                      </div>
-                    )}
+                {movie.movie.posterUrl ? (
+                  <Image
+                    src={movie.movie.posterUrl}
+                    alt={movie.movie.title}
+                    className="w-full h-full object-cover duration-500 hover:scale-105"
+                    width={128}
+                    height={192}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-zinc-800 flex items-center justify-center">
+                    <span className="text-white/40 text-sm">No Poster</span>
+                  </div>
+                )}
               </div>
               <p className="text-sm font-geist-sans text-white/80 hover:text-yellow-400 w-32">
                 {`${movie.movie.title} (${movie.movie.year})`}

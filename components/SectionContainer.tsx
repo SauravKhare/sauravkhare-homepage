@@ -1,8 +1,8 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
-import Heading from "./Heading";
-import Paragraph from "./Paragraph";
-import { ReactNode } from "react";
+import Heading from './Heading';
+import Paragraph from './Paragraph';
+import { ReactNode } from 'react';
 
 interface SectionContainerProps {
   children: ReactNode;

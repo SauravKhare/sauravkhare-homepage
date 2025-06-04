@@ -1,5 +1,5 @@
 type HeadingProps = {
-  headingLevel: "h1" | "h2" | "h3" | "h4" | "h5";
+  headingLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
   classname?: string;
   children: React.ReactNode;
   id?: string;
