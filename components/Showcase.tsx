@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/card";
 import Paragraph from "@/components/Paragraph";
-import { Projects } from "@/constants";
 import configPromise from "@payload-config";
 import { getPayload } from "payload";
 
