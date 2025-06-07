@@ -90,8 +90,12 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    siteglobal: Siteglobal;
+  };
+  globalsSelect: {
+    siteglobal: SiteglobalSelect<false> | SiteglobalSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -365,6 +369,70 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "siteglobal".
+ */
+export interface Siteglobal {
+  id: number;
+  socialPlatforms?:
+    | {
+        platform: string;
+        platformUrl: string;
+        platformImage: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  header?:
+    | {
+        heading: string;
+        subHeading: string;
+        id?: string | null;
+      }[]
+    | null;
+  now?:
+    | {
+        nowCompanyName: string;
+        nowCompanyLink: string;
+        nowCompnayDescription: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "siteglobal_select".
+ */
+export interface SiteglobalSelect<T extends boolean = true> {
+  socialPlatforms?:
+    | T
+    | {
+        platform?: T;
+        platformUrl?: T;
+        platformImage?: T;
+        id?: T;
+      };
+  header?:
+    | T
+    | {
+        heading?: T;
+        subHeading?: T;
+        id?: T;
+      };
+  now?:
+    | T
+    | {
+        nowCompanyName?: T;
+        nowCompanyLink?: T;
+        nowCompnayDescription?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
