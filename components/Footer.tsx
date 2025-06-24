@@ -1,8 +1,14 @@
-import Link from "next/link";
-
 import Paragraph from "./Paragraph";
+import { getPayload } from "payload";
+import configPromise from "@payload-config";
+import { RichText } from "./RichText/RichText";
+import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
-export default function Footer() {
+export default async function Footer() {
+  const payload = await getPayload({ config: configPromise });
+  const footer = (await payload.findGlobal({ slug: "siteglobal" })).footer;
+  const footerHeading = footer && footer[0].footerHeading;
+  const footerDescription = footer && footer[0].footerDescription;
   return (
     <>
       <section className="">
@@ -16,43 +22,9 @@ export default function Footer() {
         <div className="flex justify-center pb-20">
           <div className="flex flex-col gap-4">
             <Paragraph classname="font-space-grotesk text-base font-normal text-gray-500 text-center">
-              Code is Poetry.
+              {footerHeading}
             </Paragraph>
-            <Paragraph classname="text-xs text-gray-700 text-center">
-              Coded in{" "}
-              <Link
-                href="https://code.visualstudio.com/"
-                className="hover:text-gray-400 duration-500"
-                target="_blank"
-              >
-                Visual Studio Code
-              </Link>
-              . Built with{" "}
-              <Link
-                href="https://nextjs.org/"
-                className="hover:text-gray-400 duration-500"
-                target="_blank"
-              >
-                Next.js
-              </Link>{" "}
-              and{" "}
-              <Link
-                href="https://tailwindcss.com/"
-                className="hover:text-gray-400 duration-500"
-                target="_blank"
-              >
-                Tailwind CSS
-              </Link>
-              , deployed on{" "}
-              <Link
-                href="https://vercel.com/"
-                className="hover:text-gray-400 duration-500"
-                target="_blank"
-              >
-                Vercel
-              </Link>
-              .
-            </Paragraph>
+            <RichText data={footerDescription as SerializedEditorState} className="prose text-xs text-gray-700 text-center prose-a:no-underline prose-a:text-gray-700 prose-a:hover:text-gray-400 prose-a:duration-500" />
           </div>
         </div>
       </footer>

@@ -27,7 +27,6 @@ export const SiteGlobal: GlobalConfig = {
               name: "platformImage",
               type: "upload",
               relationTo: "media",
-              required: true
             }
           ]
 
@@ -75,6 +74,20 @@ export const SiteGlobal: GlobalConfig = {
           name: "nowCompnayDescription",
           type: "text",
           required: true
+        }
+      ]
+    },
+    {
+      name: "footer",
+      type: "array",
+      fields: [
+        {
+          name: "footerHeading",
+          type: "text"
+        },
+        {
+          name: "footerDescription",
+          type: "richText"
         }
       ]
     }

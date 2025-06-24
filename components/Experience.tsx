@@ -10,14 +10,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/card";
-import { getPayload } from "payload";
-import configPromise from "@payload-config";
 import { formatDate } from "@/lib/utils";
+import { type Experience } from "@/payload-types";
 
-export default async function Experience() {
-  const payload = await getPayload({ config: configPromise });
-  const data = await payload.find({ collection: "experiences", depth: 2, pagination: false, sort: "-startingDate", });
+interface ExperiencesSectionProps {
+  data: {
+    docs: Experience[];
+  }
+}
 
+export default async function Experience({ data }: ExperiencesSectionProps) {
   return (
     <div className="flex flex-col mt-6">
       {

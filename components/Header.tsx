@@ -5,14 +5,13 @@ import { calculateExperience } from "@/lib/utils";
 import Heading from "./Heading";
 import Paragraph from "./Paragraph";
 import Socials from "./Socials";
-import { getPayload } from "payload";
-import configPromise from "@payload-config";
+import { type Siteglobal } from "@/payload-types";
 
-export default async function Header() {
-  const payload = await getPayload({ config: configPromise });
-  const headerData = (await payload.findGlobal({ slug: "siteglobal" })).header;
+interface HeaderSectionProps {
+  data: Siteglobal["header"];
+}
 
-
+export default async function Header({ data }: HeaderSectionProps) {
   const startDate = new Date("2021-01-15");
   const { years, months } = calculateExperience(startDate);
 
@@ -24,11 +23,11 @@ export default async function Header() {
             headingLevel="h1"
             classname="font-space-grotesk font-bold text-5xl text-accent-red"
           >
-            {headerData && headerData[0].heading}
+            {data && data[0].heading}
           </Heading>
         </Link>
-        <Paragraph classname="font-space-grotesk text-xl text-accent-orange mb-3">
-          {headerData && headerData[0].subHeading}
+        <Paragraph classname="font-space-grotesk text-xl text-accent-yellow mb-3">
+          {data && data[0].subHeading}
         </Paragraph>
       </header>
       <Paragraph classname="text-lg mb-4 font-inter text-primary-text">

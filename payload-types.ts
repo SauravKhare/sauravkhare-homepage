@@ -147,6 +147,7 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
+  _key?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -289,6 +290,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  _key?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -380,7 +382,7 @@ export interface Siteglobal {
     | {
         platform: string;
         platformUrl: string;
-        platformImage: number | Media;
+        platformImage?: (number | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -396,6 +398,27 @@ export interface Siteglobal {
         nowCompanyName: string;
         nowCompanyLink: string;
         nowCompnayDescription: string;
+        id?: string | null;
+      }[]
+    | null;
+  footer?:
+    | {
+        footerHeading?: string | null;
+        footerDescription?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         id?: string | null;
       }[]
     | null;
@@ -428,6 +451,13 @@ export interface SiteglobalSelect<T extends boolean = true> {
         nowCompanyName?: T;
         nowCompanyLink?: T;
         nowCompnayDescription?: T;
+        id?: T;
+      };
+  footer?:
+    | T
+    | {
+        footerHeading?: T;
+        footerDescription?: T;
         id?: T;
       };
   updatedAt?: T;

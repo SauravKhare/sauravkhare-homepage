@@ -9,18 +9,15 @@ import {
   CardTitle,
 } from "@/components/card";
 import Paragraph from "@/components/Paragraph";
-import configPromise from "@payload-config";
-import { getPayload } from "payload";
+import { Project } from "@/payload-types";
 
-export default async function Showcase() {
-  const payload = await getPayload({ config: configPromise });
-  const data = await payload.find({
-    collection: "projects",
-    depth: 2,
-    pagination: false,
-    sort: "createdAt"
-  });
+interface ProjectsSectionProps {
+  data: {
+    docs: Project[];
+  }
+}
 
+export default async function Showcase({ data }: ProjectsSectionProps) {
   return (
     <div className="mt-6">
       {
