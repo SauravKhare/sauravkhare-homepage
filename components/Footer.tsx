@@ -1,14 +1,13 @@
 import Paragraph from "./Paragraph";
-import { getPayload } from "payload";
-import configPromise from "@payload-config";
 import { RichText } from "./RichText/RichText";
 import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
+import { getFooter } from "@/fetchers/globals";
 
 export default async function Footer() {
-  const payload = await getPayload({ config: configPromise });
-  const footer = (await payload.findGlobal({ slug: "siteglobal" })).footer;
+  const footer = await getFooter();
   const footerHeading = footer && footer[0].footerHeading;
   const footerDescription = footer && footer[0].footerDescription;
+
   return (
     <>
       <section className="">

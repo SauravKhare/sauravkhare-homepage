@@ -1,5 +1,5 @@
+import { revalidateTag } from "next/cache";
 import { GlobalConfig } from "payload";
-import { text } from "stream/consumers";
 
 export const SiteGlobal: GlobalConfig = {
   slug: "siteglobal",
@@ -7,6 +7,13 @@ export const SiteGlobal: GlobalConfig = {
     {
       name: "socialPlatforms",
       type: "array",
+      hooks: {
+        afterChange: [
+          async () => {
+            revalidateTag("social");
+          },
+        ]
+      },
       fields: [
         {
           type: "row",
@@ -36,6 +43,13 @@ export const SiteGlobal: GlobalConfig = {
     {
       name: "header",
       type: "array",
+      hooks: {
+        afterChange: [
+          async () => {
+            revalidateTag("header");
+          },
+        ]
+      },
       fields: [
         {
           type: "row",
@@ -59,6 +73,13 @@ export const SiteGlobal: GlobalConfig = {
     {
       name: "now",
       type: "array",
+      hooks: {
+        afterChange: [
+          async () => {
+            revalidateTag("now");
+          },
+        ]
+      },
       fields: [
         {
           name: "nowCompanyName",
@@ -80,6 +101,13 @@ export const SiteGlobal: GlobalConfig = {
     {
       name: "footer",
       type: "array",
+      hooks: {
+        afterChange: [
+          async () => {
+            revalidateTag("footer");
+          },
+        ]
+      },
       fields: [
         {
           name: "footerHeading",
