@@ -4,15 +4,17 @@ import { SerializedHeadingNode } from '@payloadcms/richtext-lexical'
 
 export const headingConverter: JSXConverters<SerializedHeadingNode> = {
   heading: ({ node, nodesToJSX }) => {
+    const text = nodesToJSX({ nodes: node.children })
+    const Tag = node.tag
     if (node.tag === 'h2') {
-      const text = nodesToJSX({ nodes: node.children })
-
-      const id = text.join("").toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+      const id = text.join("").toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]/g, '')
+        .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
+        + '-' + Math.random().toString(36).substring(2, 5) // Add uniqueness
       return <h2 id={id}>{text}</h2>
     }
     else {
-      const text = nodesToJSX({ nodes: node.children }).join("")
-      const Tag = node.tag
       return <Tag>{text}</Tag>
     }
   }

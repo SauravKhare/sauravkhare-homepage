@@ -22,7 +22,10 @@ export function calculateExperience(startDate: Date): {
   return { years, months };
 }
 
-export function formatDate(dateString: string) {
+export function formatDate(dateString: string, locale: string = "en-US") {
   const date = new Date(dateString);
-  return new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(date);
+  if (isNaN(date.getTime())) {
+    throw new Error(`Invalid date string ${dateString}`);
+  }
+  return new Intl.DateTimeFormat(locale, { month: "long", year: "numeric" }).format(date);
 }

@@ -397,7 +397,7 @@ export interface Siteglobal {
     | {
         nowCompanyName: string;
         nowCompanyLink: string;
-        nowCompnayDescription: string;
+        nowCompanyDescription: string;
         id?: string | null;
       }[]
     | null;
@@ -450,7 +450,7 @@ export interface SiteglobalSelect<T extends boolean = true> {
     | {
         nowCompanyName?: T;
         nowCompanyLink?: T;
-        nowCompnayDescription?: T;
+        nowCompanyDescription?: T;
         id?: T;
       };
   footer?:

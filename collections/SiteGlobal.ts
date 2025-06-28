@@ -71,7 +71,7 @@ export const SiteGlobal: GlobalConfig = {
           required: true
         },
         {
-          name: "nowCompnayDescription",
+          name: "nowCompanyDescription",
           type: "text",
           required: true
         }

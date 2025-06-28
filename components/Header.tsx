@@ -23,11 +23,11 @@ export default async function Header({ data }: HeaderSectionProps) {
             headingLevel="h1"
             classname="font-space-grotesk font-bold text-5xl text-accent-red"
           >
-            {data && data[0].heading}
+            {data?.[0]?.heading}
           </Heading>
         </Link>
         <Paragraph classname="font-space-grotesk text-xl text-accent-yellow mb-3">
-          {data && data[0].subHeading}
+          {data?.[0]?.subHeading}
         </Paragraph>
       </header>
       <Paragraph classname="text-lg mb-4 font-inter text-primary-text">

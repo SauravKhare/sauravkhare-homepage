@@ -1,16 +1,17 @@
 import { SerializedLinkNode } from "@payloadcms/richtext-lexical";
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
-  const { value, relationTo } = linkNode.fields.doc!;
-
-  let slug: string | undefined = undefined;
-  if (
-    typeof value === "object" &&
-    value !== null &&
-    "slug" in value
-  ) {
-    slug = String((value as unknown as { slug: unknown }).slug);
+  const doc = linkNode.fields.doc;
+  if (!doc) {
+    console.warn('Internal link missing doc field');
+    return '/';
   }
+
+  const { value, relationTo } = doc;
+
+  const slug = (value && typeof value === "object" && "slug" in value)
+    ? String(value.slug)
+    : undefined;
 
   if (relationTo === "posts") {
     return `/posts/${slug ?? ""}`;

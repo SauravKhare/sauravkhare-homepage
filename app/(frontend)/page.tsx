@@ -26,8 +26,8 @@ export default async function Home() {
       <div className="md:w-1/2 pt-16">
         <SectionContainer title="Now">
           <Paragraph classname="font-inter font-normal text-primary-text">
-            {now && now[0].nowCompnayDescription}{" "}
-            <Link href={now ? now[0].nowCompanyLink : ""} className="duration-500 hover:text-yellow-500 underline">{now && now[0].nowCompanyName}</Link>
+            {now?.[0]?.nowCompanyDescription}{" "}
+            <Link href={now?.[0]?.nowCompanyLink ?? ""} className="duration-500 hover:text-yellow-500 underline">{now?.[0]?.nowCompanyName}</Link>
           </Paragraph>
         </SectionContainer>
         <SectionContainer title="Experience">

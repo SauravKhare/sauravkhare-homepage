@@ -1,12 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { getPayload } from "payload";
-import configPromise from "@payload-config";
+import { getSocials } from "@/fetchers/globals";
 
 export default async function Socials() {
-  const payload = await getPayload({ config: configPromise });
-  const socialPlatforms = (await payload.findGlobal({ slug: "siteglobal" })).socialPlatforms;
+  const socialPlatforms = await getSocials();
 
   return (
     <div className="flex gap-5 align-middle flex-wrap">

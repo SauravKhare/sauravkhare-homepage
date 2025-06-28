@@ -14,14 +14,14 @@ import { Project } from "@/payload-types";
 interface ProjectsSectionProps {
   data: {
     docs: Project[];
-  }
+  } | undefined;
 }
 
 export default async function Showcase({ data }: ProjectsSectionProps) {
   return (
     <div className="mt-6">
       {
-        data.docs.map((project) => (
+        data?.docs.map((project) => (
           <Card
             key={project.id}
             className="bg-transparent h-full border-none mb-12"
