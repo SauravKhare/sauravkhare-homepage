@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import type { CollectionConfig } from "payload";
 
 export const Media: CollectionConfig = {
@@ -7,6 +8,13 @@ export const Media: CollectionConfig = {
     create: ({ req: { user } }) => !!user,
     update: ({ req: { user } }) => !!user,
     delete: ({ req: { user } }) => !!user,
+  },
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidateTag("media");
+      }
+    ]
   },
   fields: [
     {
