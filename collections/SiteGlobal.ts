@@ -10,7 +10,7 @@ export const SiteGlobal: GlobalConfig = {
       hooks: {
         afterChange: [
           async () => {
-            revalidateTag("social");
+            revalidateTag("socials");
           },
         ]
       },

@@ -5,8 +5,8 @@ import { getFooter } from "@/fetchers/globals";
 
 export default async function Footer() {
   const footer = await getFooter();
-  const footerHeading = footer && footer[0].footerHeading;
-  const footerDescription = footer && footer[0].footerDescription;
+  const footerHeading = footer?.[0].footerHeading;
+  const footerDescription = footer?.[0].footerDescription;
 
   return (
     <>

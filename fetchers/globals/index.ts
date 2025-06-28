@@ -5,11 +5,11 @@ import { unstable_cache } from "next/cache";
 export async function getGlobalData() {
   try {
     const payload = await getPayload({ config: configPromise });
-    const getGlobalData = unstable_cache(async () => {
+    const getCachedGlobalData = unstable_cache(async () => {
       const data = await payload.findGlobal({ slug: "siteglobal" });
       return data
     }, ["getGlobalData"], { tags: ["footer", "socials", "header", "now"] });
-    const data = getGlobalData();
+    const data = await getCachedGlobalData();
     return data;
   } catch (error) {
     console.error("Failed to fetch global data", error);
