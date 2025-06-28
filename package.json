@@ -8,10 +8,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "ci": "payload migrate && pnpm build",
     "lint:fix": "next lint --fix",
     "format:all": "pnpm exec prettier . --write",
     "generate:types": "payload generate:types",
-    "generate:importmap": "payload generate:importmap"
+    "generate:importmap": "payload generate:importmap",
+    "migrate": "doppler run payload migrate",
+    "migrate:create": "doppler run payload migrate:create",
+    "migrate:status": "doppler run payload migrate:status",
+    "migrate:down": "doppler run payload migrate:down",
+    "migrate:refresh": "doppler run payload migrate:refresh",
+    "migrate:reset": "doppler run payload migrate:reset",
+    "migrate:fresh": "doppler run payload migrate:fresh"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.40.0",
