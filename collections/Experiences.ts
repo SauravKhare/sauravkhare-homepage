@@ -1,9 +1,17 @@
+import { revalidatePath, revalidateTag } from "next/cache";
 import { CollectionConfig } from "payload";
 
 export const Experiences: CollectionConfig = {
   slug: "experiences",
   admin: {
     useAsTitle: "companyName"
+  },
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidateTag("experiences");
+      }
+    ]
   },
   fields: [
     {

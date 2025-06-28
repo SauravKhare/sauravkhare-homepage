@@ -9,13 +9,14 @@ import Link from "next/link";
 import { getExperiences } from "@/fetchers/experiences";
 import { getProjects } from "@/fetchers/projects";
 import { getHeader, getNow } from "@/fetchers/globals";
+import { unstable_cache } from "next/cache";
 
 export default async function Home() {
   const [header, experience, projects, now] = await Promise.all([
-    getHeader(),
-    getExperiences(),
-    getProjects(),
-    getNow()
+    unstable_cache(getHeader, ["getHeader"], { tags: ["header"] })(),
+    unstable_cache(getExperiences, ["getExperiences"], { tags: ["experiences"] })(),
+    unstable_cache(getProjects, ["getProjects"], { tags: ["projects"] })(),
+    unstable_cache(getNow, ["getNow"], { tags: ["now"] })(),
   ]);
 
   return (
