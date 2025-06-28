@@ -9,45 +9,57 @@ import {
   CardTitle,
 } from "@/components/card";
 import Paragraph from "@/components/Paragraph";
-import { Projects } from "@/constants";
+import { Project } from "@/payload-types";
 
-export default function Showcase() {
+interface ProjectsSectionProps {
+  data: {
+    docs: Project[];
+  } | undefined;
+}
+
+export default async function Showcase({ data }: ProjectsSectionProps) {
   return (
     <div className="mt-6">
-      {Projects.map((item) => (
-        <Card
-          key={item.name}
-          className="bg-transparent h-full border-none mb-12"
-        >
-          <CardHeader>
-            <CardTitle>
-              <Link
-                href={item.link}
-                target="_blank"
-                className="font-space-grotesk text-white duration-500 hover:text-yellow-500"
-              >
-                {item.name}
-              </Link>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Paragraph classname="font-inter font-normal text-zinc-500 mt-3">
-              {item.description}
-            </Paragraph>
-          </CardContent>
-          <CardFooter className="flex flex-wrap mt-3">
-            {item.tech.map((a) => (
-              <Badge
-                key={a}
-                variant="outline"
-                className="text-white/40 font-inter bg-zinc-800 px-3 border-zinc-900 border-2 mr-1"
-              >
-                {a}
-              </Badge>
-            ))}
-          </CardFooter>
-        </Card>
-      ))}
+      {
+        data?.docs.map((project) => (
+          <Card
+            key={project.id}
+            className="bg-transparent h-full border-none mb-12"
+          >
+            <CardHeader>
+              <CardTitle>
+                <Link
+                  href={project.projectLink}
+                  target="_blank"
+                  className="font-space-grotesk text-white duration-500 hover:text-yellow-500"
+                >
+                  {project.projectName}
+                </Link>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Paragraph classname="font-inter font-normal text-zinc-500 mt-3">
+                {project.description}
+              </Paragraph>
+            </CardContent>
+            <CardFooter className="flex flex-wrap mt-3">
+              {project.technologies && project.technologies.map((technology) => {
+                if (typeof technology === "object" && technology !== null) {
+                  return (
+                    <Badge
+                      key={technology.id}
+                      variant="outline"
+                      className="text-white/40 font-inter bg-zinc-800 px-3 border-zinc-900 border-2 mr-1"
+                    >
+                      {technology.technology}
+                    </Badge>
+                  );
+                }
+              })}
+            </CardFooter>
+          </Card>
+        ))
+      }
     </div>
   );
 }

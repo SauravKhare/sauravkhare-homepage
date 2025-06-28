@@ -5,8 +5,13 @@ import { calculateExperience } from "@/lib/utils";
 import Heading from "./Heading";
 import Paragraph from "./Paragraph";
 import Socials from "./Socials";
+import { type Siteglobal } from "@/payload-types";
 
-export default function Header() {
+interface HeaderSectionProps {
+  data: Siteglobal["header"];
+}
+
+export default async function Header({ data }: HeaderSectionProps) {
   const startDate = new Date("2021-01-15");
   const { years, months } = calculateExperience(startDate);
 
@@ -18,11 +23,11 @@ export default function Header() {
             headingLevel="h1"
             classname="font-space-grotesk font-bold text-5xl text-accent-red"
           >
-            Saurav Khare
+            {data?.[0]?.heading}
           </Heading>
         </Link>
-        <Paragraph classname="font-space-grotesk text-xl text-accent-orange mb-3">
-          Frontend Engineer
+        <Paragraph classname="font-space-grotesk text-xl text-accent-yellow mb-3">
+          {data?.[0]?.subHeading}
         </Paragraph>
       </header>
       <Paragraph classname="text-lg mb-4 font-inter text-primary-text">

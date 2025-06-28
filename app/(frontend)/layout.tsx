@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 import { Inter, Space_Grotesk } from "next/font/google";
 
-import QueryProvider from "../context/query-context";
+import QueryProvider from "@/context/query-context";
 import "./globals.css";
-import "../styles/style.css";
+import "@/styles/style.css";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],

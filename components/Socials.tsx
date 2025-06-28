@@ -1,16 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Connect } from "@/constants";
+import { getSocials } from "@/fetchers/globals";
 
-export default function Socials() {
+export default async function Socials() {
+  const socialPlatforms = await getSocials();
+
   return (
     <div className="flex gap-5 align-middle flex-wrap">
-      {Connect.map((item) => (
-        <Link key={item.name} href={item.value} target="_blank">
-          <Image src={item.image} width={28} height={28} alt={item.name} />
-        </Link>
-      ))}
+      {
+        socialPlatforms?.map((item) => (
+          <Link key={item.id} href={item.platformUrl} target="_blank">
+            {typeof item.platformImage === "object" && item.platformImage !== null ? (
+              <Image
+                src={item.platformImage.url ?? ""}
+                width={28}
+                height={28}
+                alt={item.platformImage.alt}
+              />
+            ) : null}
+          </Link>
+        ))
+      }
     </div>
   );
 }
