@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "ci": "NODE_ENV=production PAYLOAD_DISABLE_PROMPT=true payload migrate && pnpm build",
+    "ci": "payload migrate && pnpm build",
     "lint:fix": "next lint --fix",
     "format:all": "pnpm exec prettier . --write",
     "generate:types": "payload generate:types",
