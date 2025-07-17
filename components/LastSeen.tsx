@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
 
-import { Carousel, CarouselContent, CarouselItem } from "@/components/carousel";
 import Paragraph from "@/components/Paragraph";
 
 type MovieIDS = {
@@ -89,18 +88,18 @@ export default function LastSeen({
 
   if (isLoading) {
     return (
-      <Carousel className="mt-6">
-        <CarouselContent>
+      <div className="mt-6">
+        <div className="flex gap-4 overflow-x-scroll no-scrollbar">
           {[...new Array(limit)].map((_, i) => (
-            <CarouselItem key={i} className="basis-36">
+            <div key={i} className="basis-36">
               <div key={i} className="shrink-0 space-y-2">
                 <div className="rounded-md bg-zinc-800 h-48 w-32 animate-pulse" />
                 <div className="rounded-md bg-zinc-800 h-4 w-32 animate-pulse" />
               </div>
-            </CarouselItem>
+            </div>
           ))}
-        </CarouselContent>
-      </Carousel>
+        </div>
+      </div>
     );
   }
 
@@ -113,10 +112,10 @@ export default function LastSeen({
   }
 
   return (
-    <Carousel opts={{ align: "start" }} className="mt-6 font-inter">
-      <CarouselContent>
+    <div className="mt-6 font-inter">
+      <div className="flex gap-4 overflow-x-scroll no-scrollbar">
         {data?.map((movie: MovieData) => (
-          <CarouselItem key={movie.id} className="basis-36">
+          <div key={movie.id} className="basis-36">
             <a
               key={movie.id}
               href={`https://www.imdb.com/title/${movie.movie.ids.imdb}`}
@@ -142,9 +141,9 @@ export default function LastSeen({
                 {`${movie.movie.title} (${movie.movie.year})`}
               </p>
             </a>
-          </CarouselItem>
+          </div>
         ))}
-      </CarouselContent>
-    </Carousel>
+      </div>
+    </div>
   );
 }

@@ -38,7 +38,7 @@ export default async function Home() {
           <Showcase data={projects} />
         </SectionContainer>
         <SectionContainer title="Last Seen">
-          <LastSeen user="sauravkhare" type="movies" limit={3} />
+          <LastSeen user="sauravkhare" type="movies" limit={4} />
         </SectionContainer>
         <Footer />
       </div>
