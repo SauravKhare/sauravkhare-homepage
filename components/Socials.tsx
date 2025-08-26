@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { getSocials } from "@/fetchers/globals";
+import SocialIcon from "./SocialIcon";
 
 export default async function Socials() {
   const socialPlatforms = await getSocials();
@@ -9,16 +9,14 @@ export default async function Socials() {
   return (
     <div className="flex gap-5 align-middle flex-wrap">
       {
-        socialPlatforms?.map((item) => (
+        socialPlatforms?.map((item: any) => (
           <Link key={item.id} href={item.platformUrl} target="_blank">
-            {typeof item.platformImage === "object" && item.platformImage !== null ? (
-              <Image
-                src={item.platformImage.url ?? ""}
-                width={28}
-                height={28}
-                alt={item.platformImage.alt}
-              />
-            ) : null}
+            <SocialIcon
+              iconName={item.platformIcon || undefined}
+              color={item.platformIconColor || undefined}
+              size={20}
+              weight="fill"
+            />
           </Link>
         ))
       }

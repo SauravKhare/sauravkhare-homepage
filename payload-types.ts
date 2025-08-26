@@ -396,7 +396,11 @@ export interface Siteglobal {
     | {
         platform: string;
         platformUrl: string;
-        platformImage?: (number | null) | Media;
+        platformIcon: string;
+        /**
+         * Enter hex color code (e.g., #FF5733, #1DA1F2)
+         */
+        platformIconColor?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -449,7 +453,8 @@ export interface SiteglobalSelect<T extends boolean = true> {
     | {
         platform?: T;
         platformUrl?: T;
-        platformImage?: T;
+        platformIcon?: T;
+        platformIconColor?: T;
         id?: T;
       };
   header?:
