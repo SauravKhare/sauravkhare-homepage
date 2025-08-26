@@ -12,7 +12,7 @@ export const SiteGlobal: GlobalConfig = {
           async () => {
             revalidateTag("socials");
           },
-        ]
+        ],
       },
       fields: [
         {
@@ -22,24 +22,43 @@ export const SiteGlobal: GlobalConfig = {
               name: "platform",
               type: "text",
               required: true,
-              label: "Platform name"
+              label: "Platform name",
             },
             {
               name: "platformUrl",
               type: "text",
               required: true,
-              label: "Link"
+              label: "Link",
             },
             {
-              name: "platformImage",
-              type: "upload",
-              relationTo: "media",
-            }
-          ]
-
-        }
-      ]
-    },
+              name: "platformIcon",
+              label: "Platform Icon",
+              type: 'text',
+              defaultValue: "XLogo",
+              required: true,
+              admin: {
+                components: {
+                  Field: {
+                    path: "@/fields/IconPicker#default",
+                  },
+                },
+              },
+            },
+            {
+              name: "platformIconColor",
+              type: "text",
+              label: "Icon Color",
+              defaultValue: "#000000",
+              admin: {
+                description: "Enter hex color code (e.g., #FF5733, #1DA1F2)",
+                placeholder: "#000000"
+              },
+            },
+          ],
+        },
+      ],
+    }
+    ,
     {
       name: "header",
       type: "array",
