@@ -2,13 +2,14 @@
 
 import React from 'react';
 import * as PhosphorIcons from '@phosphor-icons/react';
+import type { IconProps } from "@phosphor-icons/react";
 
 interface SocialIconProps {
   iconName?: string;
   size?: number;
   weight?: 'thin' | 'light' | 'regular' | 'bold' | 'fill';
   className?: string;
-  color: string;
+  color?: string;
 }
 
 const SocialIcon: React.FC<SocialIconProps> = ({
@@ -25,7 +26,7 @@ const SocialIcon: React.FC<SocialIconProps> = ({
     return null;
   }
 
-  const IconComponent = PhosphorIcons[icon as keyof typeof PhosphorIcons] as any;
+  const IconComponent = PhosphorIcons[icon as keyof typeof PhosphorIcons] as React.FC<IconProps>;
 
   if (!IconComponent) {
     console.warn(`SocialIcon: Icon "${icon}" not found in PhosphorIcons`);

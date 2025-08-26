@@ -9,7 +9,7 @@ export default async function Socials() {
   return (
     <div className="flex gap-5 align-middle flex-wrap">
       {
-        socialPlatforms?.map((item: any) => (
+        socialPlatforms?.map((item) => (
           <Link key={item.id} href={item.platformUrl} target="_blank">
             <SocialIcon
               iconName={item.platformIcon || undefined}
