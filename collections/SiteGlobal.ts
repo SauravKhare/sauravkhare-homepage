@@ -34,8 +34,8 @@ export const SiteGlobal: GlobalConfig = {
               name: "platformIcon",
               label: "Platform Icon",
               type: 'text',
-              required: false,
               defaultValue: "XLogo",
+              required: true,
               admin: {
                 components: {
                   Field: {

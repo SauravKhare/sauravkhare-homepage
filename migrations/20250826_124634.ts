@@ -5,7 +5,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
    ALTER TABLE "siteglobal_social_platforms" DROP CONSTRAINT "siteglobal_social_platforms_platform_image_id_media_id_fk";
   
   DROP INDEX "siteglobal_social_platforms_platform_image_idx";
-  ALTER TABLE "siteglobal_social_platforms" ADD COLUMN "platform_icon" varchar NOT NULL;
+  ALTER TABLE "siteglobal_social_platforms" ADD COLUMN "platform_icon" varchar DEFAULT 'XLogo' NOT NULL;
   ALTER TABLE "siteglobal_social_platforms" ADD COLUMN "platform_icon_color" varchar DEFAULT '#000000';
   ALTER TABLE "siteglobal_social_platforms" DROP COLUMN "platform_image_id";`)
 }

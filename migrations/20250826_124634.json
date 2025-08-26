@@ -1,5 +1,5 @@
 {
-  "id": "68a1b5a3-24d3-4d2c-aecc-e32ae3fa364b",
+  "id": "aca552bb-faa7-4b40-9d22-d8965ff0ae90",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -1567,7 +1567,7 @@
           "name": "platform_icon",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "'XLogo'"
         },
         "platform_icon_color": {
