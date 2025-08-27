@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.53.0",
+    "@payloadcms/email-resend": "^3.53.0",
     "@payloadcms/next": "^3.53.0",
     "@payloadcms/payload-cloud": "^3.53.0",
     "@payloadcms/richtext-lexical": "^3.53.0",
