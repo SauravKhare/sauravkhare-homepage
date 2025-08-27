@@ -14,6 +14,9 @@ importers:
       '@payloadcms/db-postgres':
         specifier: ^3.53.0
         version: 3.53.0(@opentelemetry/api@1.9.0)(payload@3.53.0(graphql@16.11.0)(typescript@5.9.2))
+      '@payloadcms/email-resend':
+        specifier: ^3.53.0
+        version: 3.53.0(payload@3.53.0(graphql@16.11.0)(typescript@5.9.2))
       '@payloadcms/next':
         specifier: ^3.53.0
         version: 3.53.0(@types/react@19.1.11)(graphql@16.11.0)(monaco-editor@0.52.2)(next@15.2.3(@babel/core@7.28.3)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.53.0(graphql@16.11.0)(typescript@5.9.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.9.2)
@@ -1662,6 +1665,12 @@ packages:
 
   '@payloadcms/email-nodemailer@3.53.0':
     resolution: {integrity: sha512-XAefI5fNO4w75gZSDm1k3bo7VHjtHaIMD1ynLd7Zz8NSvOsxH0w3xcGMIehnhrQUnE3ijpIoRaRrqTi1pI1biQ==}
+    engines: {node: ^18.20.2 || >=20.9.0}
+    peerDependencies:
+      payload: 3.53.0
+
+  '@payloadcms/email-resend@3.53.0':
+    resolution: {integrity: sha512-EC5IcjC2lAWBJf44/H7ZzJCgfUcaUtMDntEJIEXrG/hWiFUNQ7Fj2ImjwBeKN8sokB11XnqD13+cViPyTuJEWQ==}
     engines: {node: ^18.20.2 || >=20.9.0}
     peerDependencies:
       payload: 3.53.0
@@ -7182,6 +7191,10 @@ snapshots:
   '@payloadcms/email-nodemailer@3.53.0(payload@3.53.0(graphql@16.11.0)(typescript@5.9.2))':
     dependencies:
       nodemailer: 6.9.16
+      payload: 3.53.0(graphql@16.11.0)(typescript@5.9.2)
+
+  '@payloadcms/email-resend@3.53.0(payload@3.53.0(graphql@16.11.0)(typescript@5.9.2))':
+    dependencies:
       payload: 3.53.0(graphql@16.11.0)(typescript@5.9.2)
 
   '@payloadcms/graphql@3.53.0(graphql@16.11.0)(payload@3.53.0(graphql@16.11.0)(typescript@5.9.2))(typescript@5.9.2)':

@@ -6,6 +6,7 @@ import path from "path";
 import { buildConfig, SharpDependency } from "payload";
 import { fileURLToPath } from "url";
 import sharp from "sharp";
+import { resendAdapter } from '@payloadcms/email-resend';
 
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
@@ -35,6 +36,11 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || "",
     },
+  }),
+  email: resendAdapter({
+    defaultFromAddress: 'hello@sauravkhare.com',
+    defaultFromName: 'Saurav',
+    apiKey: process.env.RESEND_API_KEY || '',
   }),
   sharp: sharp as SharpDependency,
   plugins: [
