@@ -5,7 +5,7 @@ import Paragraph from "./Paragraph";
 import Socials from "./Socials";
 import { type Siteglobal } from "@/payload-types";
 import HeaderBio from "./HeaderBio";
-import { SerializedEditorState, SerializedLexicalNode } from "@payloadcms/richtext-lexical/lexical";
+import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
 interface HeaderSectionProps {
   data: Siteglobal["header"];

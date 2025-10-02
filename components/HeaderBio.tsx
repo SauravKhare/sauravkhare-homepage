@@ -14,9 +14,9 @@ interface ExtendedSerializedEditorState extends SerializedEditorState<Serialized
       children?: Array<{
         type: string;
         text?: string;
-        [key: string]: any;
+        [key: string]: unknown;
       }>;
-      [key: string]: any;
+      [key: string]: unknown;
     }>;
   };
 }
@@ -34,9 +34,9 @@ function replaceExperienceInRichText(
 
   const updatedData = { ...newData };
   updatedData.root.children = newData.root.children.map(paragraph => {
-    const newParagraph: any = { ...paragraph };
+    const newParagraph = { ...paragraph };
     if ('children' in newParagraph && Array.isArray(newParagraph.children)) {
-      newParagraph.children = newParagraph.children.map((child: any) => {
+      newParagraph.children = newParagraph.children.map(child => {
         const newChild = { ...child };
         if ('text' in newChild && typeof newChild.text === "string") {
           newChild.text = newChild.text.replace("{{experience}}", experienceText);
