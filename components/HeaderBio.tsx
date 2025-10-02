@@ -26,6 +26,11 @@ function replaceExperienceInRichText(
   data: SerializedEditorState<SerializedLexicalNode>,
   experienceText: string
 ): SerializedEditorState<SerializedLexicalNode> {
+  // Early return if data is null or doesn't have root
+  if (!data || !data.root) {
+    return data;
+  }
+
   const newData = data as ExtendedSerializedEditorState;
 
   if (!newData.root?.children) {
@@ -51,6 +56,11 @@ function replaceExperienceInRichText(
 }
 
 export default async function HeaderBio({ bio }: HeaderBioProps) {
+  // Early return if bio is null or undefined
+  if (!bio) {
+    return null;
+  }
+
   const startDate = new Date("2021-01-15");
   const { years, months } = calculateExperience(startDate);
   // Convert to decimal years
