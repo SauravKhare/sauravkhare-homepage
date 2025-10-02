@@ -86,6 +86,10 @@ export const SiteGlobal: GlobalConfig = {
               label: "Site sub heading"
             }
           ]
+        },
+        {
+          name: "bio",
+          type: "richText"
         }
       ],
     },

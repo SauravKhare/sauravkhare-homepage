@@ -408,6 +408,21 @@ export interface Siteglobal {
     | {
         heading: string;
         subHeading: string;
+        bio?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         id?: string | null;
       }[]
     | null;
@@ -462,6 +477,7 @@ export interface SiteglobalSelect<T extends boolean = true> {
     | {
         heading?: T;
         subHeading?: T;
+        bio?: T;
         id?: T;
       };
   now?:
