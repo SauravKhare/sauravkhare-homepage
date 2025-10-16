@@ -10,12 +10,14 @@ import { getExperiences } from "@/fetchers/experiences";
 import { getProjects } from "@/fetchers/projects";
 import { getHeader, getNow } from "@/fetchers/globals";
 import { unstable_cache } from "next/cache";
+import { cookies } from 'next/headers';
 import PostHogClient from "./posthog";
 
 export default async function Home() {
+  const CK = await cookies();
   const posthog = PostHogClient();
-  const distinctId = 'anonymous'
-  const isProjectsVisible = await posthog.isFeatureEnabled('show-projects', distinctId);
+  const anonymousId = CK.get('posthog_anonymous_id')?.value || crypto.randomUUID();
+  const isProjectsVisible = await posthog.isFeatureEnabled('show-projects', anonymousId);
   await posthog.shutdown();
 
   const [header, experience, projects, now] = await Promise.all([
