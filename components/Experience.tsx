@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@/components/badge";
@@ -12,6 +11,7 @@ import {
 } from "@/components/card";
 import { formatDate } from "@/lib/utils";
 import { type Experience } from "@/payload-types";
+import ResumeButton from "./ResumeButton";
 
 interface ExperiencesSectionProps {
   data: {
@@ -63,13 +63,7 @@ export default async function Experience({ data }: ExperiencesSectionProps) {
           </Card>
         ))
       }
-      <Link
-        href="https://0ave63j0lg.ufs.sh/f/j0oNiZlcJDrCoGern95Pz8evH41ZBQUacqbTl5f37noxYLRF"
-        className="text-base text-white/80 duration-500 hover:underline hover:text-yellow-400 flex hover:gap-2 items-center font-inter"
-      >
-        View full Résumé.
-        <Image src="./arrow.svg" alt="arrow" width={20} height={20} />
-      </Link>
+      <ResumeButton />
     </div>
   );
 }
