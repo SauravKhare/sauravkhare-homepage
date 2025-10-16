@@ -14,7 +14,8 @@ import PostHogClient from "./posthog";
 
 export default async function Home() {
   const posthog = PostHogClient();
-  const isProjectsVisible = await posthog.isFeatureEnabled('show-projects', "");
+  const distinctId = 'anonymous'
+  const isProjectsVisible = await posthog.isFeatureEnabled('show-projects', distinctId);
   await posthog.shutdown();
 
   const [header, experience, projects, now] = await Promise.all([
