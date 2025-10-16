@@ -10,8 +10,13 @@ import { getExperiences } from "@/fetchers/experiences";
 import { getProjects } from "@/fetchers/projects";
 import { getHeader, getNow } from "@/fetchers/globals";
 import { unstable_cache } from "next/cache";
+import PostHogClient from "./posthog";
 
 export default async function Home() {
+  const posthog = PostHogClient();
+  const isProjectsVisible = await posthog.isFeatureEnabled('show-projects', "");
+  await posthog.shutdown();
+
   const [header, experience, projects, now] = await Promise.all([
     unstable_cache(getHeader, ["getHeader"], { tags: ["header"] })(),
     unstable_cache(getExperiences, ["getExperiences"], { tags: ["experiences"] })(),
@@ -34,9 +39,11 @@ export default async function Home() {
         <SectionContainer title="Experience">
           <Experience data={experience} />
         </SectionContainer>
-        <SectionContainer title="Showcase">
-          <Showcase data={projects} />
-        </SectionContainer>
+        {
+          isProjectsVisible ? (<SectionContainer title="Showcase">
+            <Showcase data={projects} />
+          </SectionContainer>) : <></>
+        }
         <SectionContainer title="Last Seen">
           <LastSeen user="sauravkhare" type="movies" limit={4} />
         </SectionContainer>

@@ -47,6 +47,8 @@
     "next": "15.2.3",
     "payload": "3.53.0",
     "postcss": "8.5.3",
+    "posthog-js": "^1.276.0",
+    "posthog-node": "^5.10.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-fast-marquee": "^1.6.5",
