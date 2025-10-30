@@ -1,5 +1,5 @@
 {
-  "id": "aca552bb-faa7-4b40-9d22-d8965ff0ae90",
+  "id": "ec990e0b-1aba-4679-8365-707f98145a31",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -1664,6 +1664,12 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": true
+        },
+        "bio": {
+          "name": "bio",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {

@@ -134,7 +134,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"id" varchar PRIMARY KEY NOT NULL,
   	"platform" varchar NOT NULL,
   	"platform_url" varchar NOT NULL,
-  	"platform_image_id" integer
+  	"platform_icon" varchar DEFAULT 'XLogo' NOT NULL,
+  	"platform_icon_color" varchar DEFAULT '#000000'
   );
   
   CREATE TABLE "siteglobal_header" (
@@ -142,7 +143,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"_parent_id" integer NOT NULL,
   	"id" varchar PRIMARY KEY NOT NULL,
   	"heading" varchar NOT NULL,
-  	"sub_heading" varchar NOT NULL
+  	"sub_heading" varchar NOT NULL,
+  	"bio" jsonb
   );
   
   CREATE TABLE "siteglobal_now" (
@@ -181,7 +183,6 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_projects_fk" FOREIGN KEY ("projects_id") REFERENCES "public"."projects"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_preferences_rels" ADD CONSTRAINT "payload_preferences_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."payload_preferences"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_preferences_rels" ADD CONSTRAINT "payload_preferences_rels_users_fk" FOREIGN KEY ("users_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "siteglobal_social_platforms" ADD CONSTRAINT "siteglobal_social_platforms_platform_image_id_media_id_fk" FOREIGN KEY ("platform_image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "siteglobal_social_platforms" ADD CONSTRAINT "siteglobal_social_platforms_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."siteglobal"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "siteglobal_header" ADD CONSTRAINT "siteglobal_header_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."siteglobal"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "siteglobal_now" ADD CONSTRAINT "siteglobal_now_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."siteglobal"("id") ON DELETE cascade ON UPDATE no action;
@@ -230,7 +231,6 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "payload_migrations_created_at_idx" ON "payload_migrations" USING btree ("created_at");
   CREATE INDEX "siteglobal_social_platforms_order_idx" ON "siteglobal_social_platforms" USING btree ("_order");
   CREATE INDEX "siteglobal_social_platforms_parent_id_idx" ON "siteglobal_social_platforms" USING btree ("_parent_id");
-  CREATE INDEX "siteglobal_social_platforms_platform_image_idx" ON "siteglobal_social_platforms" USING btree ("platform_image_id");
   CREATE INDEX "siteglobal_header_order_idx" ON "siteglobal_header" USING btree ("_order");
   CREATE INDEX "siteglobal_header_parent_id_idx" ON "siteglobal_header" USING btree ("_parent_id");
   CREATE INDEX "siteglobal_now_order_idx" ON "siteglobal_now" USING btree ("_order");
