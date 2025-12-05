@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 import Heading from "./Heading";
-import Paragraph from "./Paragraph";
 import Socials from "./Socials";
 import { type Siteglobal } from "@/payload-types";
 import HeaderBio from "./HeaderBio";
 import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
+import SubHeading from "./SubHeading";
 
 interface HeaderSectionProps {
   data: Siteglobal["header"];
@@ -23,9 +23,7 @@ export default async function Header({ data }: HeaderSectionProps) {
             {data?.[0]?.heading}
           </Heading>
         </Link>
-        <Paragraph classname="font-space-grotesk text-xl text-accent-yellow mb-3">
-          {data?.[0]?.subHeading}
-        </Paragraph>
+        <SubHeading data={data?.[0]?.subHeading} />
       </header>
       <HeaderBio bio={data?.[0].bio as SerializedEditorState} />
       <Socials />

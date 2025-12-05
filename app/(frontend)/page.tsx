@@ -5,13 +5,14 @@ import LastSeen from "@/components/LastSeen";
 import Paragraph from "@/components/Paragraph";
 import SectionContainer from "@/components/SectionContainer";
 import Showcase from "@/components/Showcase";
-import Link from "next/link";
 import { getExperiences } from "@/fetchers/experiences";
 import { getProjects } from "@/fetchers/projects";
 import { getHeader, getNow } from "@/fetchers/globals";
 import { unstable_cache } from "next/cache";
 import { cookies } from 'next/headers';
 import PostHogClient from "./posthog";
+import { Suspense } from "react";
+import LastSeenLoader from "@/components/LastSeenLoader";
 
 export default async function Home() {
   const CK = await cookies();
@@ -36,7 +37,7 @@ export default async function Home() {
         <SectionContainer title="Now">
           <Paragraph classname="font-inter font-normal text-primary-text">
             {now?.[0]?.nowCompanyDescription}{" "}
-            <Link href={now?.[0]?.nowCompanyLink ?? ""} className="duration-500 hover:text-yellow-500 underline">{now?.[0]?.nowCompanyName}</Link>
+            <a href={now?.[0]?.nowCompanyLink ?? ""} className="duration-500 hover:text-yellow-500 underline" target="_blank" rel="noopener noreferrer">{now?.[0]?.nowCompanyName}</a>
           </Paragraph>
         </SectionContainer>
         <SectionContainer title="Experience">
@@ -48,7 +49,9 @@ export default async function Home() {
           </SectionContainer>) : <></>
         }
         <SectionContainer title="Last Seen">
-          <LastSeen user="sauravkhare" type="movies" limit={4} />
+          <Suspense fallback={<LastSeenLoader limit={4} />}>
+            <LastSeen user="sauravkhare" type="movies" limit={4} />
+          </Suspense>
         </SectionContainer>
         <Footer />
       </div>

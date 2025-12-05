@@ -435,7 +435,12 @@ export interface Siteglobal {
   header?:
     | {
         heading: string;
-        subHeading: string;
+        subHeading?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
         bio?: {
           root: {
             type: string;
@@ -504,7 +509,12 @@ export interface SiteglobalSelect<T extends boolean = true> {
     | T
     | {
         heading?: T;
-        subHeading?: T;
+        subHeading?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
         bio?: T;
         id?: T;
       };
