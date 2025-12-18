@@ -15,12 +15,13 @@ export default function SubHeading({ data }: SubHeadingType) {
   const subHeadings = data?.map(subheading => subheading.text) ?? [];
 
   useEffect(() => {
+    if (subHeadings.length === 0) return;
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % subHeadings.length);
     }, 3000);
 
     return () => clearInterval(interval);
-  });
+  }, [subHeadings.length]);
 
 
   return (
