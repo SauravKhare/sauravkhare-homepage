@@ -5,6 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 
 import Paragraph from "@/components/Paragraph";
+import LastSeenLoader from "./LastSeenLoader";
 
 type MovieIDS = {
   trakt: number;
@@ -87,20 +88,7 @@ export default function LastSeen({
   });
 
   if (isLoading) {
-    return (
-      <div className="mt-6">
-        <div className="flex gap-4 overflow-x-scroll no-scrollbar">
-          {[...new Array(limit)].map((_, i) => (
-            <div key={i} className="basis-36">
-              <div key={i} className="shrink-0 space-y-2">
-                <div className="rounded-md bg-zinc-800 h-48 w-32 animate-pulse" />
-                <div className="rounded-md bg-zinc-800 h-4 w-32 animate-pulse" />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
+    return <LastSeenLoader limit={limit} />;
   }
 
   if (axios.isAxiosError(error)) {

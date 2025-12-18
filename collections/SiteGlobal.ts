@@ -71,21 +71,25 @@ export const SiteGlobal: GlobalConfig = {
       },
       fields: [
         {
-          type: "row",
+          name: "heading",
+          type: "text",
+          required: true,
+          label: "Site title"
+        },
+        {
+          name: "subHeading",
+          type: "array",
+          minRows: 1,
+          maxRows: 5,
+          // required: true,
+          label: "Site sub heading",
           fields: [
             {
-              name: "heading",
-              type: "text",
+              name: 'text',
+              type: 'text',
               required: true,
-              label: "Site title"
             },
-            {
-              name: "subHeading",
-              type: "text",
-              required: true,
-              label: "Site sub heading"
-            }
-          ]
+          ],
         },
         {
           name: "bio",
