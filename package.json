@@ -45,13 +45,13 @@
     "graphql": "^16.11.0",
     "lucide-react": "^0.483.0",
     "motion": "^12.23.12",
-    "next": "^15.4.8",
+    "next": "^15.5.9",
     "payload": "^3.66.0",
     "postcss": "8.5.3",
     "posthog-js": "^1.276.0",
     "posthog-node": "^5.10.0",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-fast-marquee": "^1.6.5",
     "sharp": "^0.34.3",
     "tailwind-merge": "^3.3.1",
@@ -71,5 +71,10 @@
   },
   "resolutions": {
     "uploadthing": "^7.7.3"
+  },
+  "overrides": {
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "next": "^15.5.9"
   }
 }
