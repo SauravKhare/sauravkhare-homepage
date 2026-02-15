@@ -8,7 +8,7 @@ export async function getProjects() {
       collection: "projects",
       depth: 2,
       pagination: false,
-      sort: "createdAt"
+      sort: "order",
     });
 
     return data;

@@ -4,7 +4,8 @@ import { CollectionConfig } from "payload";
 export const Projects: CollectionConfig = {
   slug: "projects",
   admin: {
-    useAsTitle: "projectName"
+    useAsTitle: "projectName",
+    defaultColumns: ['projectName', 'order', 'updatedAt'],
   },
   hooks: {
     afterChange: [
@@ -38,6 +39,16 @@ export const Projects: CollectionConfig = {
       type: "relationship",
       relationTo: "technologies",
       hasMany: true,
-    }
+    },
+    {
+      name: 'order',
+      type: 'number',
+      required: true,
+      defaultValue: 0,
+      admin: {
+        position: 'sidebar',
+        description: 'Lower numbers appear first. Set new projects to 1 to show them first.',
+      },
+    },
   ]
 }
