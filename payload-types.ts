@@ -207,6 +207,10 @@ export interface Project {
   description: string;
   projectLink: string;
   technologies?: (number | Technology)[] | null;
+  /**
+   * Lower numbers appear first. Set new projects to 1 to show them first.
+   */
+  order: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -371,6 +375,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   description?: T;
   projectLink?: T;
   technologies?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }
