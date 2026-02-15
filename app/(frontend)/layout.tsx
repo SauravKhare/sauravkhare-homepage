@@ -5,8 +5,6 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import QueryProvider from "@/context/query-context";
 import "./globals.css";
 import "@/styles/style.css";
-import { PostHogPageView } from "@/components/PostHogPageView";
-import { Suspense } from "react";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -37,9 +35,6 @@ export default function RootLayout({
       <body className="bg-primary-bg font-inter">
         <div className="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-16 lg:py-0">
           <QueryProvider>
-            <Suspense fallback={null}>
-              <PostHogPageView />
-            </Suspense>
             {children}
           </QueryProvider>
         </div>

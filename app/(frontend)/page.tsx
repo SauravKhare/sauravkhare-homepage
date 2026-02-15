@@ -9,17 +9,13 @@ import { getExperiences } from "@/fetchers/experiences";
 import { getProjects } from "@/fetchers/projects";
 import { getHeader, getNow } from "@/fetchers/globals";
 import { unstable_cache } from "next/cache";
-import { cookies } from 'next/headers';
-import PostHogClient from "./posthog";
 import { Suspense } from "react";
 import LastSeenLoader from "@/components/LastSeenLoader";
+import { showProjects, showLastSeen } from "@/flags";
 
 export default async function Home() {
-  const CK = await cookies();
-  const posthog = PostHogClient();
-  const anonymousId = CK.get('posthog_anonymous_id')?.value || crypto.randomUUID();
-  const isProjectsVisible = await posthog.isFeatureEnabled('show-projects', anonymousId);
-  await posthog.shutdown();
+  const projectsVisible = await showProjects();
+  const lastSeenVisible = await showLastSeen();
 
   const [header, experience, projects, now] = await Promise.all([
     unstable_cache(getHeader, ["getHeader"], { tags: ["header"] })(),
@@ -44,15 +40,17 @@ export default async function Home() {
           <Experience data={experience} />
         </SectionContainer>
         {
-          isProjectsVisible ? (<SectionContainer title="Showcase">
+          projectsVisible ? (<SectionContainer title="Showcase">
             <Showcase data={projects} />
           </SectionContainer>) : <></>
         }
-        <SectionContainer title="Last Seen">
-          <Suspense fallback={<LastSeenLoader limit={4} />}>
-            <LastSeen user="sauravkhare" type="movies" limit={4} />
-          </Suspense>
-        </SectionContainer>
+        {
+          lastSeenVisible ? (<SectionContainer title="Last Seen">
+            <Suspense fallback={<LastSeenLoader limit={4} />}>
+              <LastSeen user="sauravkhare" type="movies" limit={4} />
+            </Suspense>
+          </SectionContainer>) : <></>
+        }
         <Footer />
       </div>
     </div>
