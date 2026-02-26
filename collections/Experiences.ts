@@ -9,7 +9,7 @@ export const Experiences: CollectionConfig = {
   hooks: {
     afterChange: [
       async () => {
-        revalidateTag("experiences");
+        revalidateTag("experiences", { expire: 0 });
       }
     ]
   },

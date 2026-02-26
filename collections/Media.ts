@@ -12,7 +12,7 @@ export const Media: CollectionConfig = {
   hooks: {
     afterChange: [
       async () => {
-        revalidateTag("media");
+        revalidateTag("media", { expire: 0 });
       }
     ]
   },
