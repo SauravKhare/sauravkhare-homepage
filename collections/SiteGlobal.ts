@@ -10,7 +10,7 @@ export const SiteGlobal: GlobalConfig = {
       hooks: {
         afterChange: [
           async () => {
-            revalidateTag("socials");
+            revalidateTag("socials", { expire: 0 });
           },
         ],
       },
@@ -65,7 +65,7 @@ export const SiteGlobal: GlobalConfig = {
       hooks: {
         afterChange: [
           async () => {
-            revalidateTag("header");
+            revalidateTag("header", { expire: 0 });
           },
         ]
       },
@@ -103,7 +103,7 @@ export const SiteGlobal: GlobalConfig = {
       hooks: {
         afterChange: [
           async () => {
-            revalidateTag("now");
+            revalidateTag("now", { expire: 0 });
           },
         ]
       },
@@ -131,7 +131,7 @@ export const SiteGlobal: GlobalConfig = {
       hooks: {
         afterChange: [
           async () => {
-            revalidateTag("footer");
+            revalidateTag("footer", { expire: 0 });
           },
         ]
       },

@@ -10,7 +10,7 @@ export const Projects: CollectionConfig = {
   hooks: {
     afterChange: [
       async () => {
-        revalidateTag("projects");
+        revalidateTag("projects", { expire: 0 });
       }
     ]
   },
