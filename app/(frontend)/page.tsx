@@ -25,13 +25,13 @@ export default async function Home() {
   ]);
 
   return (
-    <div className="flex justify-between flex-col md:flex-row gap-10">
-      <div className="md:sticky md:top-0 md:max-h-screen lg:w-1/2 md:flex-col md:pt-16">
+    <div className="">
+      <div className="mb-32">
         <Header data={header} />
       </div>
-      <div className="md:w-1/2 pt-16">
+      <div className="">
         <SectionContainer title="Now">
-          <Paragraph classname="font-inter font-normal text-primary-text">
+          <Paragraph classname="font-body text-lg text-ink">
             {now?.[0]?.nowCompanyDescription}{" "}
             <a href={now?.[0]?.nowCompanyLink ?? ""} className="duration-500 hover:text-yellow-500 underline" target="_blank" rel="noopener noreferrer">{now?.[0]?.nowCompanyName}</a>
           </Paragraph>

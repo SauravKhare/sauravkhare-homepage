@@ -18,14 +18,14 @@ export default function SectionContainer({
   className,
 }: SectionContainerProps) {
   return (
-    <section className={cn(`mb-16 ${className}`)}>
+    <section className={cn(`mb-32 ${className ?? className}`)}>
       <Heading
         headingLevel="h4"
-        classname="mb-1 font-normal text-lg font-space-grotesk text-accent-yellow"
+        classname="mb-1 font-heading font-bold text-3xl text-accent"
       >
         {title}
       </Heading>
-      {subtitle && <Paragraph classname="mb-3">{subtitle}</Paragraph>}
+      {subtitle && <Paragraph classname="text-ink">{subtitle}</Paragraph>}
       {children}
     </section>
   );

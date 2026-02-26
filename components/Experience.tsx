@@ -21,39 +21,39 @@ interface ExperiencesSectionProps {
 
 export default async function Experience({ data }: ExperiencesSectionProps) {
   return (
-    <div className="flex flex-col mt-6">
+    <div className="flex flex-col">
       {
         data?.docs.map((item, i) => (
-          <Card key={item.id} className="mb-12 bg-transparent border-none">
+          <Card key={item.id} className="bg-transparent border-none mb-16 shadow-none">
             <CardHeader className={`pl-0 ${i === 0 ? `pt-0` : ``} mb-3`}>
-              <CardTitle className="font-space-grotesk text-white">
+              <CardTitle className="font-heading text-ink text-2xl font-normal">
                 {item.position} <p className="inline-block mx-1">•</p>
                 <Link
                   href={item.link ?? ""}
-                  className=" hover:text-yellow-500 duration-500"
+                  className="text-2xl italic"
                   target="_blank"
                 >
                   {item.companyName}
                 </Link>
               </CardTitle>
-              <CardDescription className="flex gap-2 items-center text-zinc-500 font-inter">
+              <CardDescription className="flex items-center font-mono text-ink text-sm">
                 {formatDate(item.startingDate)} <span>–</span>
                 {item.isCurrent ? `Present` : formatDate(item.endingDate ?? "")}
               </CardDescription>
             </CardHeader>
             {item.description && (
-              <CardContent className="text-zinc-500 font-inter">
+              <CardContent className="font-body text-ink text-lg mb-6">
                 <p>{item.description}</p>
               </CardContent>
             )}
 
-            <CardFooter className="flex flex-wrap gap-1.5 mt-3">
+            <CardFooter className="flex flex-wrap gap-1.5">
               {item.technologies?.map((techItem) =>
                 typeof techItem === "object" && techItem !== null ? (
                   <Badge
                     key={techItem.id}
                     variant="outline"
-                    className="text-accent-yellow bg-accent-yellow/15 px-3 border-accent-yellow/50 border-2 font-inter"
+                    className="border-[6px] border-transparent [border-image:url(/border.svg)_10_stretch] text-ink px-3 py-0 text-center font-mono"
                   >
                     {techItem.technology}
                   </Badge>

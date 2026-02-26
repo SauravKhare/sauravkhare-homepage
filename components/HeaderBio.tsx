@@ -70,6 +70,6 @@ export default async function HeaderBio({ bio }: HeaderBioProps) {
   const updatedBio = replaceExperienceInRichText(bio, experienceText);
 
   return (
-    <RichText data={updatedBio as SerializedEditorState} className="prose text-lg mb-4 font-inter text-primary-text" />
+    <RichText data={updatedBio as SerializedEditorState} className="prose text-lg leading-relaxed font-body text-ink" />
   )
 }

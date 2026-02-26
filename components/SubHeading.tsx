@@ -27,7 +27,7 @@ export default function SubHeading({ data }: SubHeadingType) {
   return (
     <AnimatePresence mode="popLayout">
       <motion.p
-        className="font-space-grotesk text-xl text-accent-yellow mb-3"
+        className="font-heading font-semibold leading-none text-3xl text-ink"
         key={index}
         initial={{ y: -10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

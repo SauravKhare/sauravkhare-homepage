@@ -14,11 +14,11 @@ interface HeaderSectionProps {
 export default async function Header({ data }: HeaderSectionProps) {
   return (
     <>
-      <header className="mb-6 md:mb-11">
+      <header className="mb-16">
         <Link href="/">
           <Heading
             headingLevel="h1"
-            classname="font-space-grotesk font-bold text-5xl text-accent-red"
+            classname="font-heading font-bold leading-none text-6xl text-accent"
           >
             {data?.[0]?.heading}
           </Heading>

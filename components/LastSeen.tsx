@@ -100,7 +100,7 @@ export default function LastSeen({
   }
 
   return (
-    <div className="mt-6 font-inter">
+    <div className="font-inter">
       <div className="flex gap-4 overflow-x-scroll no-scrollbar">
         {data?.map((movie: MovieData) => (
           <div key={movie.id} className="basis-36">
@@ -115,7 +115,7 @@ export default function LastSeen({
                   <Image
                     src={movie.movie.posterUrl}
                     alt={movie.movie.title}
-                    className="w-full h-full object-cover duration-500 hover:scale-105"
+                    className="w-full h-full object-cover sepia duration-500 hover:scale-105 hover:sepia-0"
                     width={128}
                     height={192}
                   />
@@ -125,7 +125,7 @@ export default function LastSeen({
                   </div>
                 )}
               </div>
-              <p className="text-sm font-geist-sans text-white/80 hover:text-yellow-400 w-32">
+              <p className="text-sm font-body text-ink w-32">
                 {`${movie.movie.title} (${movie.movie.year})`}
               </p>
             </a>

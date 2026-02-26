@@ -11,19 +11,19 @@ export default async function Footer() {
   return (
     <>
       <section className="">
-        <div className="flex justify-center items-center text-center pb-20">
-          <div className="w-0.5 h-0.5 mr-1.5 bg-gray-500"></div>
-          <div className="w-0.5 h-0.5 mr-1.5 bg-gray-500"></div>
-          <div className="w-0.5 h-0.5 mr-1.5 bg-gray-500"></div>
+        <div className="flex justify-center items-center text-center pb-6">
+          <div className="text-accent tracking-[1em]">*</div>
+          <div className="text-accent tracking-[1em]">*</div>
+          <div className="text-accent tracking-[1em]">*</div>
         </div>
       </section>
-      <footer className="max-md:mx-6 font-inter">
-        <div className="flex justify-center pb-20">
+      <footer className="max-md:mx-6">
+        <div className="flex justify-center pb-24">
           <div className="flex flex-col gap-4">
-            <Paragraph classname="font-space-grotesk text-base font-normal text-gray-500 text-center">
+            <Paragraph classname="text-sm font-heading text-accent font-bold text-center tracking-[0.2em] mb-16">
               {footerHeading}
             </Paragraph>
-            <RichText data={footerDescription as SerializedEditorState} className="prose text-xs text-gray-700 text-center prose-a:no-underline prose-a:text-gray-700 prose-a:hover:text-gray-400 prose-a:duration-500" />
+            <RichText data={footerDescription as SerializedEditorState} className="prose text-xs font-mono text-ink text-center prose-a:no-underline prose-a:text-gray-700 prose-a:hover:text-gray-400 prose-a:duration-500" />
           </div>
         </div>
       </footer>

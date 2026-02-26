@@ -24,21 +24,21 @@ export default async function Showcase({ data }: ProjectsSectionProps) {
         data?.docs.map((project) => (
           <Card
             key={project.id}
-            className="bg-transparent h-full border-none mb-12"
+            className="bg-transparent border-none mb-16 shadow-none"
           >
             <CardHeader>
               <CardTitle>
                 <Link
                   href={project.projectLink}
                   target="_blank"
-                  className="font-space-grotesk text-white duration-500 hover:text-yellow-500"
+                  className="font-heading text-ink text-2xl font-normal"
                 >
                   {project.projectName}
                 </Link>
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <Paragraph classname="font-inter font-normal text-zinc-500 mt-3">
+              <Paragraph classname="font-body text-ink text-lg mb-6">
                 {project.description}
               </Paragraph>
             </CardContent>
@@ -49,7 +49,7 @@ export default async function Showcase({ data }: ProjectsSectionProps) {
                     <Badge
                       key={technology.id}
                       variant="outline"
-                      className="text-white/40 font-inter bg-zinc-800 px-3 border-zinc-900 border-2 mr-1"
+                      className="border-[6px] border-transparent [border-image:url(/border.svg)_10_stretch] text-ink px-3 py-0 text-center font-mono mr-1.5"
                     >
                       {technology.technology}
                     </Badge>
