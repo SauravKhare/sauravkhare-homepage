@@ -21,7 +21,7 @@ export default function SectionContainer({
     <section className={cn(`mb-32 ${className ?? className}`)}>
       <Heading
         headingLevel="h4"
-        classname="mb-1 font-heading font-bold text-3xl text-accent"
+        classname="mb-6 font-heading font-bold text-3xl text-accent"
       >
         {title}
       </Heading>

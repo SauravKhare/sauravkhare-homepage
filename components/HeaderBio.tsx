@@ -1,62 +1,14 @@
-import { calculateExperience } from "@/lib/utils";
+import { calculateExperience, replaceExperienceInRichText } from "@/lib/utils";
 import { RichText } from "./RichText/RichText";
-import { SerializedEditorState, SerializedLexicalNode, SerializedRootNode } from "@payloadcms/richtext-lexical/lexical";
+import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
 
 interface HeaderBioProps {
   bio: SerializedEditorState;
+  className?: string,
 }
 
-interface ExtendedSerializedEditorState extends SerializedEditorState<SerializedLexicalNode> {
-  root: SerializedRootNode<SerializedLexicalNode> & {
-    children: Array<{
-      type: string;
-      children?: Array<{
-        type: string;
-        text?: string;
-        [key: string]: unknown;
-      }>;
-      [key: string]: unknown;
-    }>;
-  };
-}
-
-// Helper to replace placeholder in RichText JSON
-function replaceExperienceInRichText(
-  data: SerializedEditorState<SerializedLexicalNode>,
-  experienceText: string
-): SerializedEditorState<SerializedLexicalNode> {
-  // Early return if data is null or doesn't have root
-  if (!data || !data.root) {
-    return data;
-  }
-
-  const newData = data as ExtendedSerializedEditorState;
-
-  if (!newData.root?.children) {
-    return data;
-  }
-
-  const updatedData = { ...newData };
-  updatedData.root.children = newData.root.children.map(paragraph => {
-    const newParagraph = { ...paragraph };
-    if ('children' in newParagraph && Array.isArray(newParagraph.children)) {
-      newParagraph.children = newParagraph.children.map(child => {
-        const newChild = { ...child };
-        if ('text' in newChild && typeof newChild.text === "string") {
-          newChild.text = newChild.text.replace("{{experience}}", experienceText);
-        }
-        return newChild;
-      });
-    }
-    return newParagraph;
-  });
-
-  return updatedData;
-}
-
-export default async function HeaderBio({ bio }: HeaderBioProps) {
-  // Early return if bio is null or undefined
+export default async function HeaderBio({ bio, className }: HeaderBioProps) {
   if (!bio) {
     return null;
   }
@@ -70,6 +22,6 @@ export default async function HeaderBio({ bio }: HeaderBioProps) {
   const updatedBio = replaceExperienceInRichText(bio, experienceText);
 
   return (
-    <RichText data={updatedBio as SerializedEditorState} className="prose text-lg leading-relaxed font-body text-ink" />
+    <RichText data={updatedBio as SerializedEditorState} className={`prose text-lg leading-relaxed font-body text-ink ${className}`} />
   )
 }

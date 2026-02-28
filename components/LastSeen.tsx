@@ -1,37 +1,8 @@
-"use client";
-
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Image from "next/image";
+import { getLastSeenMovies } from "@/fetchers/movies";
+import { StaggerGroup, StaggerItem } from "./StaggerGrid";
 
-import Paragraph from "@/components/Paragraph";
-import LastSeenLoader from "./LastSeenLoader";
-
-type MovieIDS = {
-  trakt: number;
-  slug: string;
-  imdb: string;
-  tmdb: number;
-};
-
-type Movie = {
-  title: string;
-  year: number;
-  ids: MovieIDS;
-  posterUrl?: string;
-};
-
-type MovieData = {
-  id: string;
-  watched_at: string;
-  action: string;
-  type: string;
-  movie: Movie;
-};
-
-const endpoint = "https://api.trakt.tv/users";
-
-export default function LastSeen({
+export default async function LastSeen({
   user,
   type,
   limit,
@@ -40,98 +11,44 @@ export default function LastSeen({
   type: string;
   limit: number;
 }) {
-  async function fetchMovies() {
-    const traktRes = await axios.get(
-      `${endpoint}/${user}/history/${type}?limit=${limit}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "trakt-api-version": 2,
-          "trakt-api-key": process.env.NEXT_PUBLIC_TRAKT_ID,
-        },
-      }
-    );
+  const movies = await getLastSeenMovies(user, type, limit);
 
-    const configRes = await axios.get(
-      `https://api.themoviedb.org/3/configuration?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-    );
-    const baseUrl = configRes.data.images.secure_base_url;
-
-    const moviesWithPosters = await Promise.all(
-      traktRes.data.map(async (item: MovieData) => {
-        try {
-          const tmdbRes = await axios.get(
-            `https://api.themoviedb.org/3/movie/${item.movie.ids.tmdb}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-          );
-          return {
-            ...item,
-            movie: {
-              ...item.movie,
-              posterUrl: tmdbRes.data.poster_path
-                ? `${baseUrl}w342${tmdbRes.data.poster_path}`
-                : null,
-            },
-          };
-        } catch {
-          return item;
-        }
-      })
-    );
-
-    return moviesWithPosters;
-  }
-
-  const { isLoading, data, error } = useQuery({
-    queryKey: ["movies-query"],
-    queryFn: fetchMovies,
-    staleTime: 86400,
-  });
-
-  if (isLoading) {
-    return <LastSeenLoader limit={limit} />;
-  }
-
-  if (axios.isAxiosError(error)) {
-    return (
-      <Paragraph classname="text-xl font-geist-sans font-normal md:w-55ch text-white/80 mt-6">
-        {error.message}
-      </Paragraph>
-    );
+  if (!movies || movies.length === 0) {
+    return <p className="text-ink/70">No movies found.</p>;
   }
 
   return (
-    <div className="font-inter">
-      <div className="flex gap-4 overflow-x-scroll no-scrollbar">
-        {data?.map((movie: MovieData) => (
-          <div key={movie.id} className="basis-36">
+    <div className="font-body">
+      <StaggerGroup className="flex gap-4 overflow-x-scroll no-scrollbar py-4">
+        {movies.map((movie: any) => (
+          <StaggerItem key={movie.id} className="basis-36 will-change-transform">
             <a
-              key={movie.id}
               href={`https://www.imdb.com/title/${movie.movie.ids.imdb}`}
               target="_blank"
-              className="shrink-0 space-y-2"
+              className="shrink-0 space-y-2 group block outline-none"
             >
-              <div className="w-32 h-48 rounded-md overflow-hidden">
+              <div className="w-32 h-48 rounded-md overflow-hidden bg-ink/5">
                 {movie.movie.posterUrl ? (
                   <Image
                     src={movie.movie.posterUrl}
                     alt={movie.movie.title}
-                    className="w-full h-full object-cover sepia duration-500 hover:scale-105 hover:sepia-0"
                     width={128}
                     height={192}
+                    className="sepia h-full w-full object-cover transition-all duration-500 ease-out group-hover:scale-105 group-hover:sepia-0 transform-gpu backface-hidden will-change-transform"
                   />
                 ) : (
-                  <div className="w-full h-full bg-zinc-800 flex items-center justify-center">
-                    <span className="text-white/40 text-sm">No Poster</span>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <span className="text-ink/40 text-sm">No Poster</span>
                   </div>
                 )}
               </div>
-              <p className="text-sm font-body text-ink w-32">
+              <p className="font-body text-sm text-ink/80 transition-colors duration-300 group-hover:text-ink">
                 {`${movie.movie.title} (${movie.movie.year})`}
               </p>
             </a>
-          </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerGroup>
     </div>
   );
 }

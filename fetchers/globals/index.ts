@@ -1,15 +1,14 @@
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
-import { unstable_cache } from "next/cache";
+import { cacheTag } from "next/cache";
 
 export async function getGlobalData() {
+  "use cache";
+  cacheTag("siteglobal", "footer", "socials", "header", "now", "resume", "globalSeo");
+
   try {
     const payload = await getPayload({ config: configPromise });
-    const getCachedGlobalData = unstable_cache(async () => {
-      const data = await payload.findGlobal({ slug: "siteglobal" });
-      return data
-    }, ["getGlobalData"], { tags: ["footer", "socials", "header", "now"] });
-    const data = await getCachedGlobalData();
+    const data = await payload.findGlobal({ slug: "siteglobal" });
     return data;
   } catch (error) {
     console.error("Failed to fetch global data", error);
@@ -46,9 +45,33 @@ export async function getSocials() {
 
 export async function getFooter() {
   try {
-    const data = (await getGlobalData());
+    const data = await getGlobalData();
     return data.footer;
   } catch (error) {
     console.error("Failed to fetch footer data", error);
+  }
+}
+
+export async function getResumeLink() {
+  try {
+    const data = await getGlobalData();
+
+    if (data?.resume && typeof data.resume === 'object' && data.resume.url) {
+      return data.resume.url;
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Failed to fetch resume link", error);
+    return null;
+  }
+}
+
+export async function getSeoData() {
+  try {
+    const data = await getGlobalData();
+    return data.seo;
+  } catch (error) {
+    console.error("Failed to fetch seo data", error);
   }
 }

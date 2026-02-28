@@ -12,7 +12,7 @@ export default function Heading({
   id,
 }: HeadingProps) {
   return (
-    <Tag className={classname} id={id}>
+    <Tag className={`text-balance ${classname}`} id={id}>
       {children}
     </Tag>
   );

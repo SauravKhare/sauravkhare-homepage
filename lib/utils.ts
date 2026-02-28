@@ -1,3 +1,4 @@
+import { SerializedEditorState, SerializedLexicalNode } from "@payloadcms/richtext-lexical/lexical";
 import { type ClassValue, clsx } from "clsx";
 
 import { twMerge } from "tailwind-merge";
@@ -28,4 +29,37 @@ export function formatDate(dateString: string, locale: string = "en-US") {
     throw new Error(`Invalid date string ${dateString}`);
   }
   return new Intl.DateTimeFormat(locale, { month: "long", year: "numeric" }).format(date);
+}
+
+// Helper to replace placeholder in header RichText JSON
+export function replaceExperienceInRichText(
+  data: SerializedEditorState<SerializedLexicalNode>,
+  experienceText: string
+): SerializedEditorState<SerializedLexicalNode> {
+  if (!data || !data.root) {
+    return data;
+  }
+
+  const newData = data as SerializedEditorState;
+
+  if (!newData.root?.children) {
+    return data;
+  }
+
+  const updatedData = { ...newData };
+  updatedData.root.children = newData.root.children.map(paragraph => {
+    const newParagraph = { ...paragraph };
+    if ('children' in newParagraph && Array.isArray(newParagraph.children)) {
+      newParagraph.children = newParagraph.children.map(child => {
+        const newChild = { ...child };
+        if ('text' in newChild && typeof newChild.text === "string") {
+          newChild.text = newChild.text.replace("{{experience}}", experienceText);
+        }
+        return newChild;
+      });
+    }
+    return newParagraph;
+  });
+
+  return updatedData;
 }

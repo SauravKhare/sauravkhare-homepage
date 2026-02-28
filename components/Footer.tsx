@@ -23,7 +23,7 @@ export default async function Footer() {
             <Paragraph classname="text-sm font-heading text-accent font-bold text-center tracking-[0.2em] mb-16">
               {footerHeading}
             </Paragraph>
-            <RichText data={footerDescription as SerializedEditorState} className="prose text-xs font-mono text-ink text-center prose-a:no-underline prose-a:text-gray-700 prose-a:hover:text-gray-400 prose-a:duration-500" />
+            <RichText data={footerDescription as SerializedEditorState} className="prose text-xs font-mono text-ink text-center prose-a:no-underline prose-a:text-ink prose-a:px-1 prose-a:-mx-1 prose-a:transition-none prose-a:hover:bg-ink prose-a:hover:text-canvas" />
           </div>
         </div>
       </footer>

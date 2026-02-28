@@ -18,6 +18,10 @@
     --theme-border: oklch(0.82 0.04 92);
   }
 
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+  }
 }
 
 @theme {
@@ -29,6 +33,10 @@
   --font-heading: var(--font-serif-heading), serif;
   --font-body: var(--font-serif-body), serif;
   --font-mono: var(--font-mono), monospace;
+}
+
+@utility link-wet-ink {
+  @apply relative inline-block text-ink no-underline transition-all duration-300 ease-out hover:text-canvas bg-linear-to-r from-ink to-ink bg-size-[0%_100%] bg-no-repeat bg-left hover:bg-size-[100%_100%];
 }
 
 @layer utilities {

@@ -1,15 +1,30 @@
-"use client";
+import { getResumeLink } from "@/fetchers/globals";
 
-import Image from "next/image";
+export default async function ResumeButton() {
+  const resumeUrl = await getResumeLink();
 
-export default function ResumeButton() {
   return (
-    <a href="https://0ave63j0lg.ufs.sh/f/j0oNiZlcJDrCoGern95Pz8evH41ZBQUacqbTl5f37noxYLRF"
-      className="font-body text-base text-ink flex hover:gap-2 items-center"
+    <a
+      href={resumeUrl ?? "#"}
+      className="group inline-flex w-fit items-center gap-1.5 text-base link-wet-ink pr-2"
       target="_blank"
-      rel="noopener noreferrer">
+      rel="noopener noreferrer"
+    >
       View full Résumé.
-      <Image src="./arrow.svg" className="fill-ink" alt="arrow" width={20} height={20} />
+
+      <span
+        className="w-5 h-5 bg-ink transition-all duration-300 ease-out group-hover:translate-x-1.5 group-hover:bg-canvas"
+        style={{
+          WebkitMaskImage: `url(./arrow.svg)`,
+          maskImage: `url(./arrow.svg)`,
+          WebkitMaskSize: "contain",
+          maskSize: "contain",
+          WebkitMaskRepeat: "no-repeat",
+          maskRepeat: "no-repeat",
+          WebkitMaskPosition: "center",
+          maskPosition: "center",
+        }}
+      />
     </a>
   );
 }

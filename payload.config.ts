@@ -14,6 +14,7 @@ import { Experiences } from "./collections/Experiences";
 import { Technologies } from "./collections/Technologies";
 import { Projects } from "./collections/Projects";
 import { SiteGlobal } from "./collections/SiteGlobal";
+import { Documents } from "./collections/Documents";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -26,7 +27,7 @@ export default buildConfig({
     },
   },
   globals: [SiteGlobal],
-  collections: [Users, Media, Experiences, Technologies, Projects],
+  collections: [Users, Media, Documents, Experiences, Technologies, Projects],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
@@ -49,6 +50,7 @@ export default buildConfig({
     uploadthingStorage({
       collections: {
         media: true,
+        documents: true,
       },
       options: {
         token: process.env.UPLOADTHING_TOKEN || "",

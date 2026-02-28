@@ -1,9 +1,24 @@
+import { seoField } from "@/fields/SEO";
 import { revalidateTag } from "next/cache";
 import { GlobalConfig } from "payload";
 
 export const SiteGlobal: GlobalConfig = {
   slug: "siteglobal",
   fields: [
+    {
+      name: "resume",
+      type: "upload",
+      relationTo: "documents",
+      label: "Résumé PDF",
+      hooks: {
+        afterChange: [
+          async () => {
+            revalidateTag("resume", { expire: 0 });
+          },
+        ],
+      }
+    },
+    seoField,
     {
       name: "socialPlatforms",
       type: "array",

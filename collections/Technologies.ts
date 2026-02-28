@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import { CollectionConfig } from "payload";
 
 export const Technologies: CollectionConfig = {
@@ -12,5 +13,12 @@ export const Technologies: CollectionConfig = {
       required: true,
       label: "Technology name"
     }
-  ]
+  ],
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidateTag("technologies", { expire: 0 });
+      },
+    ]
+  }
 }

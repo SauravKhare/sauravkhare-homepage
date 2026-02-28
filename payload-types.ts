@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    documents: Document;
     experiences: Experience;
     technologies: Technology;
     projects: Project;
@@ -81,6 +82,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    documents: DocumentsSelect<false> | DocumentsSelect<true>;
     experiences: ExperiencesSelect<false> | ExperiencesSelect<true>;
     technologies: TechnologiesSelect<false> | TechnologiesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
@@ -171,6 +173,26 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents".
+ */
+export interface Document {
+  id: number;
+  Name: string;
+  _key?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "experiences".
  */
 export interface Experience {
@@ -244,6 +266,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'documents';
+        value: number | Document;
       } | null)
     | ({
         relationTo: 'experiences';
@@ -342,6 +368,25 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents_select".
+ */
+export interface DocumentsSelect<T extends boolean = true> {
+  Name?: T;
+  _key?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "experiences_select".
  */
 export interface ExperiencesSelect<T extends boolean = true> {
@@ -424,6 +469,31 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Siteglobal {
   id: number;
+  resume?: (number | null) | Document;
+  seo: {
+    /**
+     * Browser tab title and search engine title
+     */
+    title: string;
+    /**
+     * Meta description (max 160 characters)
+     */
+    description: string;
+    /**
+     * Comma-separated keywords
+     */
+    keywords?: string | null;
+    /**
+     * 1200x630px recommended
+     */
+    ogImage?: (number | null) | Media;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    twitterHandle?: string | null;
+    noIndex?: boolean | null;
+    noFollow?: boolean | null;
+    canonicalUrl?: string | null;
+  };
   socialPlatforms?:
     | {
         platform: string;
@@ -500,6 +570,21 @@ export interface Siteglobal {
  * via the `definition` "siteglobal_select".
  */
 export interface SiteglobalSelect<T extends boolean = true> {
+  resume?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogImage?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        twitterHandle?: T;
+        noIndex?: T;
+        noFollow?: T;
+        canonicalUrl?: T;
+      };
   socialPlatforms?:
     | T
     | {

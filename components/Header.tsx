@@ -25,7 +25,7 @@ export default async function Header({ data }: HeaderSectionProps) {
         </Link>
         <SubHeading data={data?.[0]?.subHeading} />
       </header>
-      <HeaderBio bio={data?.[0].bio as SerializedEditorState} />
+      <HeaderBio bio={data?.[0].bio as SerializedEditorState} className="mb-4" />
       <Socials />
     </>
   );
