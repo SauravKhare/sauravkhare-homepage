@@ -2,6 +2,7 @@ import { Courier_Prime, Crimson_Text, EB_Garamond } from "next/font/google";
 import QueryProvider from "@/context/query-context";
 import "./globals.css";
 import "@/styles/style.css";
+import { ThemeProvider } from "@/context/theme-provider";
 
 const eBGaramond = EB_Garamond({
   subsets: ["latin"],
@@ -35,13 +36,15 @@ export default function RootLayout({
     <html lang="en" className={`${eBGaramond.variable} ${crimsonText.variable} ${courierPrime.variable}`} suppressHydrationWarning>
       <body className="bg-canvas text-ink font-body antialiased transition-colors duration-300 relative">
         <div
-          className="pointer-events-none absolute inset-0 z-0 h-full w-full bg-canvas bg-[url('/noice.png')] bg-repeat opacity-100"
+          className="pointer-events-none absolute inset-0 z-0 h-full w-full bg-canvas bg-[url('/noice.png')] bg-repeat opacity-100 dark:opacity-35"
           aria-hidden="true"
         />
         <main className="relative z-10 mx-auto min-h-screen max-w-3xl pt-12 md:pt-24 max-xl:px-6">
-          <QueryProvider>
-            {children}
-          </QueryProvider>
+          <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
+            <QueryProvider>
+              {children}
+            </QueryProvider>
+          </ThemeProvider>
         </main>
       </body>
     </html>

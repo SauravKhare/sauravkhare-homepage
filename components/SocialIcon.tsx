@@ -33,7 +33,7 @@ const SocialIcon: React.FC<SocialIconProps> = ({
     return null;
   }
 
-  return <IconComponent size={size} weight={weight} className={className} fill={color} />;
+  return <IconComponent size={size} weight={weight} className={className} color={color || "currentColor"} />;
 };
 
 export default SocialIcon;
