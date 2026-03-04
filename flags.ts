@@ -28,10 +28,8 @@ const hypertuneAdapter = createHypertuneAdapter<
   Context
 >({ createSource, flagFallbacks, flagDefinitions, identify });
 
-export const showProjects = flag(
-  hypertuneAdapter.declarations.showProjects
-);
+export const showProjects = flag(hypertuneAdapter.declarations.showProjects);
 
-export const showLastSeen = flag(
-  hypertuneAdapter.declarations.showLastSeen
-);
+export const showLastSeen = flag(hypertuneAdapter.declarations.showLastSeen);
+
+export const showThemeToggleButton = flag(hypertuneAdapter.declarations.showThemeToggleButton);

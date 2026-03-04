@@ -2,12 +2,14 @@ import Paragraph from "@/components/Paragraph";
 import { RichText } from "@/components/RichText/RichText";
 import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 import { getFooter } from "@/fetchers/globals";
+import { showThemeToggleButton } from "@/flags";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default async function Footer() {
   const footer = await getFooter();
   const footerHeading = footer?.[0].footerHeading;
   const footerDescription = footer?.[0].footerDescription;
+  const themeToggleButtonVisible = await showThemeToggleButton();
 
   return (
     <>
@@ -26,7 +28,9 @@ export default async function Footer() {
             </Paragraph>
             <RichText data={footerDescription as SerializedEditorState} className="prose text-xs font-mono text-ink text-center prose-a:no-underline prose-a:text-ink prose-a:px-1 prose-a:-mx-1 prose-a:transition-none prose-a:hover:bg-ink prose-a:hover:text-canvas" />
           </div>
-          <ThemeToggle />
+          {
+            themeToggleButtonVisible && <ThemeToggle />
+          }
         </div>
       </footer>
     </>
