@@ -11,8 +11,8 @@ import {
 } from "@/components/card";
 import { formatDate } from "@/lib/utils";
 import { type Experience } from "@/payload-types";
-import ResumeButton from "./ResumeButton";
-import ScrollReveal from "./ScrollReveal";
+import ResumeButton from "@/components/ResumeButton";
+import ScrollReveal from "@/components/ScrollReveal";
 
 interface ExperiencesSectionProps {
   data: {
@@ -29,7 +29,7 @@ export default async function Experience({ data }: ExperiencesSectionProps) {
             <Card key={item.id} className="bg-transparent border-none mb-16 shadow-none">
               <CardHeader className={`pl-0 ${i === 0 ? `pt-0` : ``} mb-3`}>
                 <CardTitle className="font-heading text-ink text-2xl font-normal">
-                  {item.position} <p className="inline-block mx-1">•</p>
+                  {item.position} <span className="inline-block mx-1">•</span>
                   <Link
                     href={item.link ?? ""}
                     className="text-2xl italic link-wet-ink"

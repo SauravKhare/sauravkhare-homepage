@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getSocials } from "@/fetchers/globals";
-import SocialIcon from "./SocialIcon";
+import SocialIcon from "@/components/SocialIcon";
 
 export default async function Socials() {
   const socialPlatforms = await getSocials();

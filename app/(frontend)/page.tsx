@@ -87,32 +87,34 @@ export default async function Home() {
 
   return (
     <>
-      <div className="mb-32">
+      <div className="mb-32 max-xl:px-6">
         <Header data={header} />
       </div>
       <>
-        <SectionContainer title="Now">
+        <SectionContainer title="Now" className="max-xl:px-6">
           <Paragraph classname="font-body text-lg text-ink">
             {now?.[0]?.nowCompanyDescription}{" "}
             <a href={now?.[0]?.nowCompanyLink ?? ""} className="font-body italic link-wet-ink" target="_blank" rel="noopener noreferrer">{now?.[0]?.nowCompanyName}</a>
           </Paragraph>
         </SectionContainer>
-        <SectionContainer title="Experience">
+        <SectionContainer title="Experience" className="max-xl:px-6">
           <Experience data={experience ?? undefined} />
         </SectionContainer>
         {projectsVisible && (
-          <SectionContainer title="Showcase">
+          <SectionContainer title="Showcase" className="max-xl:px-6">
             <Showcase data={projects ?? undefined} />
           </SectionContainer>
         )}
         {lastSeenVisible && (
-          <SectionContainer title="Last Seen">
+          <SectionContainer title="Last Seen" className="max-xl:px-6">
             <Suspense fallback={<LastSeenLoader limit={4} />}>
               <LastSeen user="sauravkhare" type="movies" limit={4} />
             </Suspense>
           </SectionContainer>
         )}
-        <Footer />
+        <div className="max-xl:px-6">
+          <Footer />
+        </div>
       </>
     </>
   );

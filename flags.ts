@@ -7,7 +7,7 @@ import {
   vercelFlagDefinitions as flagDefinitions,
   type Context,
   type FlagValues,
-} from "./generated/hypertune";
+} from "@/generated/hypertune";
 
 // Used for targeted features
 const identify: Identify<Context> = dedupe(

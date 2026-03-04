@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getLastSeenMovies } from "@/fetchers/movies";
-import { StaggerGroup, StaggerItem } from "./StaggerGrid";
+import { StaggerGroup, StaggerItem } from "@/components/StaggerGrid";
 
 export default async function LastSeen({
   user,
@@ -18,8 +18,8 @@ export default async function LastSeen({
   }
 
   return (
-    <div className="font-body">
-      <StaggerGroup className="flex gap-4 overflow-x-scroll no-scrollbar py-4">
+    <div className="font-body max-sm:-mx-6">
+      <StaggerGroup className="flex gap-4 overflow-x-scroll no-scrollbar py-4 max-sm:px-6">
         {movies.map((movie: any) => (
           <StaggerItem key={movie.id} className="basis-36 will-change-transform">
             <a

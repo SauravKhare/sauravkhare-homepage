@@ -1,5 +1,5 @@
 import { calculateExperience, replaceExperienceInRichText } from "@/lib/utils";
-import { RichText } from "./RichText/RichText";
+import { RichText } from "@/components/RichText/RichText";
 import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
 

@@ -2,19 +2,20 @@ import { postgresAdapter } from "@payloadcms/db-postgres";
 import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
 import { uploadthingStorage } from "@payloadcms/storage-uploadthing";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import path from "path";
 import { buildConfig, SharpDependency } from "payload";
-import { fileURLToPath } from "url";
-import sharp from "sharp";
 import { resendAdapter } from '@payloadcms/email-resend';
 
-import { Users } from "./collections/Users";
-import { Media } from "./collections/Media";
-import { Experiences } from "./collections/Experiences";
-import { Technologies } from "./collections/Technologies";
-import { Projects } from "./collections/Projects";
-import { SiteGlobal } from "./collections/SiteGlobal";
-import { Documents } from "./collections/Documents";
+import { Users } from "@/collections/Users";
+import { Media } from "@/collections/Media";
+import { Experiences } from "@/collections/Experiences";
+import { Technologies } from "@/collections/Technologies";
+import { Projects } from "@/collections/Projects";
+import { SiteGlobal } from "@/collections/SiteGlobal";
+import { Documents } from "@/collections/Documents";
+
+import { fileURLToPath } from "url";
+import path from "path";
+import sharp from "sharp";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
