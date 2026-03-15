@@ -4,9 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "doppler run next dev",
+    "dev": "next dev",
     "build": "next build",
-    "build:local": "doppler run next build",
     "start": "next start",
     "lint": "next lint",
     "ci": "payload migrate && pnpm build",
@@ -14,14 +13,14 @@
     "format:all": "pnpm exec prettier . --write",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
-    "migrate": "doppler run payload migrate",
-    "migrate:create": "doppler run payload migrate:create",
-    "migrate:status": "doppler run payload migrate:status",
-    "migrate:down": "doppler run payload migrate:down",
-    "migrate:refresh": "doppler run payload migrate:refresh",
-    "migrate:reset": "doppler run payload migrate:reset",
-    "migrate:fresh": "doppler run payload migrate:fresh",
-    "flags": "doppler run pnpm dlx hypertune"
+    "migrate": "payload migrate",
+    "migrate:create": "payload migrate:create",
+    "migrate:status": "payload migrate:status",
+    "migrate:down": "payload migrate:down",
+    "migrate:refresh": "payload migrate:refresh",
+    "migrate:reset": "payload migrate:reset",
+    "migrate:fresh": "payload migrate:fresh",
+    "flags": "pnpm dlx hypertune"
   },
   "dependencies": {
     "@flags-sdk/hypertune": "^0.3.2",

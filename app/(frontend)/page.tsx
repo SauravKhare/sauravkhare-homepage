@@ -102,7 +102,7 @@ export default async function Home() {
         </SectionContainer>
         {projectsVisible && (
           <SectionContainer title="Showcase" className="max-xl:px-6">
-            <Showcase data={projects ?? undefined} />
+            <Showcase data={projects ?? undefined} descriptionItalics />
           </SectionContainer>
         )}
         {lastSeenVisible && (

@@ -55,8 +55,20 @@ export default async function Experience({ data }: ExperiencesSectionProps) {
                     <Badge
                       key={techItem.id}
                       variant="outline"
-                      className="border-[6px] border-transparent [border-image:url(/border.svg)_10_stretch] text-ink px-3 py-0 text-center font-mono"
+                      className="relative border-[6px] border-transparent text-ink px-3 py-0 text-center font-mono"
                     >
+                      <span
+                        className="absolute -inset-1.5 -z-10 bg-ink"
+                        style={{
+                          WebkitMaskImage: `url(/border-mask.png)`,
+                          maskImage: `url(/border-mask.png)`,
+                          WebkitMaskSize: "100% 100%",
+                          maskSize: "100% 100%",
+                          WebkitMaskRepeat: "no-repeat",
+                          maskRepeat: "no-repeat",
+                        }}
+                        aria-hidden="true"
+                      />
                       {techItem.technology}
                     </Badge>
                   ) : null

@@ -16,9 +16,11 @@ interface ProjectsSectionProps {
   data: {
     docs: Project[];
   } | undefined;
+  titleItalics?: boolean;
+  descriptionItalics?: boolean;
 }
 
-export default async function Showcase({ data }: ProjectsSectionProps) {
+export default async function Showcase({ data, titleItalics, descriptionItalics }: ProjectsSectionProps) {
   return (
     <div className="">
       {
@@ -40,7 +42,7 @@ export default async function Showcase({ data }: ProjectsSectionProps) {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <Paragraph classname="font-body text-ink text-lg mb-6">
+                <Paragraph classname={`font-body text-ink text-lg mb-6 ${descriptionItalics && "italic"}`}>
                   {project.description}
                 </Paragraph>
               </CardContent>
@@ -51,8 +53,20 @@ export default async function Showcase({ data }: ProjectsSectionProps) {
                       <Badge
                         key={technology.id}
                         variant="outline"
-                        className="border-[6px] border-transparent [border-image:url(/border.svg)_10_stretch] text-ink px-3 py-0 text-center font-mono"
+                        className="relative border-[6px] border-transparent text-ink px-3 py-0 text-center font-mono"
                       >
+                        <span
+                          className="absolute -inset-1.5 -z-10 bg-ink"
+                          style={{
+                            WebkitMaskImage: `url(/border-mask.png)`,
+                            maskImage: `url(/border-mask.png)`,
+                            WebkitMaskSize: "100% 100%",
+                            maskSize: "100% 100%",
+                            WebkitMaskRepeat: "no-repeat",
+                            maskRepeat: "no-repeat",
+                          }}
+                          aria-hidden="true"
+                        />
                         {technology.technology}
                       </Badge>
                     );
