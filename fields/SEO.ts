@@ -12,6 +12,7 @@ export const seoField: Field = {
         {
           name: "title",
           type: "text",
+          defaultValue: "Saurav Khare",
           admin: {
             description: "Browser tab title and search engine title",
           },
@@ -19,6 +20,7 @@ export const seoField: Field = {
         {
           name: "description",
           type: "textarea",
+          defaultValue: "Frontend Developer",
           maxLength: 160,
           admin: {
             description: "Meta description (max 160 characters)",
