@@ -11,7 +11,7 @@ import LastSeenLoader from "@/components/LastSeenLoader";
 import { getExperiences } from "@/fetchers/experiences";
 import { getProjects } from "@/fetchers/projects";
 import { getArchives, getHeader, getNow, getSeoData } from "@/fetchers/globals";
-import { showProjects, showLastSeen } from "@/flags";
+import { showProjects, showLastSeen, showArchiveTimeMachineButton } from "@/flags";
 import { Metadata } from "next";
 import TimeMachine from "@/components/TimeMachine";
 
@@ -78,6 +78,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const projectsVisible = await showProjects();
   const lastSeenVisible = await showLastSeen();
+  const archiveButtonVisible = await showArchiveTimeMachineButton();
 
   const [header, experience, projects, now, archives] = await Promise.all([
     getHeader(),
@@ -116,7 +117,9 @@ export default async function Home() {
         )}
         <div className="max-xl:px-6">
           <Footer />
-          <TimeMachine records={archives} />
+          {
+            archiveButtonVisible && <TimeMachine records={archives} />
+          }
         </div>
       </>
     </>

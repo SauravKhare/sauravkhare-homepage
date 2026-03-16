@@ -4,13 +4,14 @@
 
 import * as sdk from "hypertune";
 
-export const queryCode = `query FullQuery{root{showThemeToggleButton showLastSeen showProjects}}`;
+export const queryCode = `query FullQuery{root{showArchiveTimeMacineButton showThemeToggleButton showLastSeen showProjects}}`;
 
-export const query: sdk.Query<sdk.ObjectValueWithVariables> = {"variableDefinitions":{},"fragmentDefinitions":{},"fieldQuery":{"Query":{"type":"InlineFragment","objectTypeName":"Query","selection":{"root":{"fieldArguments":{"__isPartialObject__":true},"fieldQuery":{"Root":{"type":"InlineFragment","objectTypeName":"Root","selection":{"showThemeToggleButton":{"fieldArguments":{},"fieldQuery":null},"showLastSeen":{"fieldArguments":{},"fieldQuery":null},"showProjects":{"fieldArguments":{},"fieldQuery":null}}}}}}}}};
+export const query: sdk.Query<sdk.ObjectValueWithVariables> = {"variableDefinitions":{},"fragmentDefinitions":{},"fieldQuery":{"Query":{"type":"InlineFragment","objectTypeName":"Query","selection":{"root":{"fieldArguments":{"__isPartialObject__":true},"fieldQuery":{"Root":{"type":"InlineFragment","objectTypeName":"Root","selection":{"showArchiveTimeMacineButton":{"fieldArguments":{},"fieldQuery":null},"showThemeToggleButton":{"fieldArguments":{},"fieldQuery":null},"showLastSeen":{"fieldArguments":{},"fieldQuery":null},"showProjects":{"fieldArguments":{},"fieldQuery":null}}}}}}}}};
 
-export const vercelFlagDefinitions = {"showThemeToggleButton":{"options":[{"label":"Off","value":false},{"label":"On","value":true}],"origin":"https://app.hypertune.com/projects/7970/main/draft/logic?selected_field_path=root%3EshowThemeToggleButton"},"showLastSeen":{"options":[{"label":"Off","value":false},{"label":"On","value":true}],"origin":"https://app.hypertune.com/projects/7970/main/draft/logic?selected_field_path=root%3EshowLastSeen"},"showProjects":{"options":[{"label":"Off","value":false},{"label":"On","value":true}],"origin":"https://app.hypertune.com/projects/7970/main/draft/logic?selected_field_path=root%3EshowProjects"}};
+export const vercelFlagDefinitions = {"showArchiveTimeMacineButton":{"options":[{"label":"Off","value":false},{"label":"On","value":true}],"origin":"https://app.hypertune.com/projects/7970/main/draft/logic?selected_field_path=root%3EshowArchiveTimeMacineButton"},"showThemeToggleButton":{"options":[{"label":"Off","value":false},{"label":"On","value":true}],"origin":"https://app.hypertune.com/projects/7970/main/draft/logic?selected_field_path=root%3EshowThemeToggleButton"},"showLastSeen":{"options":[{"label":"Off","value":false},{"label":"On","value":true}],"origin":"https://app.hypertune.com/projects/7970/main/draft/logic?selected_field_path=root%3EshowLastSeen"},"showProjects":{"options":[{"label":"Off","value":false},{"label":"On","value":true}],"origin":"https://app.hypertune.com/projects/7970/main/draft/logic?selected_field_path=root%3EshowProjects"}};
 
 export type FlagValues = {
+  "showArchiveTimeMacineButton": boolean;
   "showThemeToggleButton": boolean;
   "showLastSeen": boolean;
   "showProjects": boolean;
@@ -19,6 +20,7 @@ export type FlagValues = {
 export type FlagPath = keyof FlagValues & string;
 
 export const flagFallbacks: FlagValues = {
+  "showArchiveTimeMacineButton": false,
   "showThemeToggleButton": false,
   "showLastSeen": false,
   "showProjects": false,
@@ -65,12 +67,13 @@ export type RootArgs = {
 export type EmptyObject = {};
 
 export type Root = {
+  showArchiveTimeMacineButton: boolean;
   showThemeToggleButton: boolean;
   showLastSeen: boolean;
   showProjects: boolean;
 }
 
-const rootFallback = {showThemeToggleButton:false,showLastSeen:false,showProjects:false};
+const rootFallback = {showArchiveTimeMacineButton:false,showThemeToggleButton:false,showLastSeen:false,showProjects:false};
 
 export class RootNode extends sdk.Node {
   override typeName = "Root" as const;
@@ -87,6 +90,26 @@ export class RootNode extends sdk.Node {
       null,
     );
     return this.getValue({ query: getQuery, fallback }) as Root;
+  }
+
+  /**
+   * [Open in Hypertune UI]({@link https://app.hypertune.com/projects/7970/main/draft/logic?selected_field_path=root%3EshowArchiveTimeMacineButton})
+   */
+  showArchiveTimeMacineButton({ args = {}, fallback }: { args?: EmptyObject; fallback: boolean; }): boolean {
+    const props0 = this.getFieldNodeProps("showArchiveTimeMacineButton", { fieldArguments: args });
+    const expression0 = props0.expression;
+
+    if (
+      expression0 &&
+      expression0.type === "BooleanExpression"
+    ) {
+      const node = new sdk.BooleanNode(props0);
+      return node.get({ fallback });
+    }
+
+    const node = new sdk.BooleanNode(props0);
+    node._logUnexpectedTypeError();
+    return node.get({ fallback });
   }
 
   /**
@@ -171,7 +194,7 @@ export type Source = {
   root: Root;
 }
 
-const sourceFallback = {root:{showThemeToggleButton:false,showLastSeen:false,showProjects:false}};
+const sourceFallback = {root:{showArchiveTimeMacineButton:false,showThemeToggleButton:false,showLastSeen:false,showProjects:false}};
 
 export type GetQueryRootArgs = {
   args: RootArgs;
