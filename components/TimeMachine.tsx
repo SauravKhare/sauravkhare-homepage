@@ -15,6 +15,7 @@ export default function TimeMachine({ records }: { records: ArchiveRecord[] }) {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const wasOpen = useRef(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -22,13 +23,17 @@ export default function TimeMachine({ records }: { records: ArchiveRecord[] }) {
     };
 
     if (isOpen) {
+      wasOpen.current = true;
       document.body.style.overflow = "hidden";
       document.addEventListener("keydown", handleKeyDown);
       setTimeout(() => closeRef.current?.focus(), 10);
     } else {
       document.body.style.overflow = "unset";
       document.removeEventListener("keydown", handleKeyDown);
-      triggerRef.current?.focus();
+      if (wasOpen.current) {
+        triggerRef.current?.focus();
+        wasOpen.current = false;
+      }
     }
 
     return () => {
