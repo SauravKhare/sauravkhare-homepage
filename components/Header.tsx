@@ -12,6 +12,9 @@ interface HeaderSectionProps {
 }
 
 export default async function Header({ data }: HeaderSectionProps) {
+  const header = data?.[0];
+  const bio = header?.bio;
+
   return (
     <section className="">
       <header className="flex items-center justify-between mb-16">
@@ -21,13 +24,13 @@ export default async function Header({ data }: HeaderSectionProps) {
               headingLevel="h1"
               classname="font-heading font-bold leading-none text-5xl md:text-6xl text-accent"
             >
-              {data?.[0]?.heading}
+              {header?.heading}
             </Heading>
           </Link>
-          <SubHeading data={data?.[0]?.subHeading} />
+          <SubHeading data={header?.subHeading} />
         </div>
       </header>
-      <HeaderBio bio={data?.[0].bio as SerializedEditorState} className="mb-4" />
+      {bio && <HeaderBio bio={bio as SerializedEditorState} className="mb-4" />}
       <Socials />
     </section>
   );

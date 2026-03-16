@@ -2234,13 +2234,13 @@
           "name": "seo_title",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": true
+          "default": "Saurav Khare"
         },
         "seo_description": {
           "name": "seo_description",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": true
+          "default": "Frontend Developer"
         },
         "seo_keywords": {
           "name": "seo_keywords",

@@ -32,7 +32,7 @@
 
   --font-heading: var(--font-serif-heading), serif;
   --font-body: var(--font-serif-body), serif;
-  --font-mono: var(--font-mono), monospace;
+  --font-mono: var(--font-serif-mono), monospace;
 }
 
 @utility link-wet-ink {

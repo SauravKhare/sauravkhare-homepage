@@ -51,7 +51,17 @@ export async function getLastSeenMovies(user: string, type: string, limit: numbe
 
     return moviesWithPosters;
   } catch (error) {
-    console.error("Failed to fetch movies:", error);
+    if (axios.isAxiosError(error)) {
+      console.error("Failed to fetch movies", {
+        message: error.message,
+        status: error.response?.status,
+        code: error.code,
+      });
+    } else {
+      console.error("Failed to fetch movies", {
+        message: error instanceof Error ? error.message : "Unknown error",
+      });
+    }
     return [];
   }
 }

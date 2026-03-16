@@ -18,6 +18,8 @@ export const Technologies: CollectionConfig = {
     afterChange: [
       async () => {
         revalidateTag("technologies", { expire: 0 });
+        revalidateTag("projects", { expire: 0 });
+        revalidateTag("experiences", { expire: 0 });
       },
     ]
   }

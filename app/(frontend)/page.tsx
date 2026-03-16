@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
-    keywords: site?.keywords?.split(",").map(k => k.trim()),
+    keywords: site?.keywords?.split(",")?.map(k => k.trim()),
 
     openGraph: {
       type: "website",

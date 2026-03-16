@@ -2,10 +2,11 @@ import { getResumeLink } from "@/fetchers/globals";
 
 export default async function ResumeButton() {
   const resumeUrl = await getResumeLink();
+  if (!resumeUrl) return null;
 
   return (
     <a
-      href={resumeUrl ?? "#"}
+      href={resumeUrl}
       className="group inline-flex w-fit items-center gap-1.5 text-base link-wet-ink pr-2"
       target="_blank"
       rel="noopener noreferrer"

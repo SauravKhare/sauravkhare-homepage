@@ -30,13 +30,18 @@ export default async function Experience({ data }: ExperiencesSectionProps) {
               <CardHeader className={`pl-0 ${i === 0 ? `pt-0` : ``} mb-3`}>
                 <CardTitle className="font-heading text-ink text-2xl font-normal">
                   {item.position} <span className="inline-block mx-1">•</span>
-                  <Link
-                    href={item.link ?? ""}
-                    className="text-2xl italic link-wet-ink"
-                    target="_blank"
-                  >
-                    {item.companyName}
-                  </Link>
+                  {item.link ? (
+                    <Link
+                      href={item.link}
+                      className="text-2xl italic link-wet-ink"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.companyName}
+                    </Link>
+                  ) : (
+                    <span className="italic">{item.companyName}</span>
+                  )}
                 </CardTitle>
                 <CardDescription className="flex items-center font-mono text-ink text-sm">
                   {formatDate(item.startingDate)} <span>–</span>

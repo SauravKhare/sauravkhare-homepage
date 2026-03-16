@@ -34,4 +34,4 @@ export const showLastSeen = flag(hypertuneAdapter.declarations.showLastSeen);
 
 export const showThemeToggleButton = flag(hypertuneAdapter.declarations.showThemeToggleButton);
 
-export const showArchiveTimeMachineButton = flag(hypertuneAdapter.declarations.showArchiveTimeMacineButton);
+export const showArchiveTimeMachineButton = flag(hypertuneAdapter.declarations.showArchiveTimeMachineButton);

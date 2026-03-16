@@ -18,11 +18,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"focal_x" numeric,
   	"focal_y" numeric
   );
-  
+
   ALTER TABLE "payload_locked_documents_rels" ADD COLUMN "documents_id" integer;
   ALTER TABLE "siteglobal" ADD COLUMN "resume_id" integer;
-  ALTER TABLE "siteglobal" ADD COLUMN "seo_title" varchar NOT NULL;
-  ALTER TABLE "siteglobal" ADD COLUMN "seo_description" varchar NOT NULL;
+  ALTER TABLE "siteglobal" ADD COLUMN "seo_title" varchar DEFAULT "Saurav Khare";
+  ALTER TABLE "siteglobal" ADD COLUMN "seo_description" varchar DEFAULT "Frontend Developer";
   ALTER TABLE "siteglobal" ADD COLUMN "seo_keywords" varchar;
   ALTER TABLE "siteglobal" ADD COLUMN "seo_og_image_id" integer;
   ALTER TABLE "siteglobal" ADD COLUMN "seo_og_title" varchar;
@@ -47,11 +47,11 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
    ALTER TABLE "documents" DISABLE ROW LEVEL SECURITY;
   DROP TABLE "documents" CASCADE;
   ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_documents_fk";
-  
+
   ALTER TABLE "siteglobal" DROP CONSTRAINT "siteglobal_resume_id_documents_id_fk";
-  
+
   ALTER TABLE "siteglobal" DROP CONSTRAINT "siteglobal_seo_og_image_id_media_id_fk";
-  
+
   DROP INDEX "payload_locked_documents_rels_documents_id_idx";
   DROP INDEX "siteglobal_resume_idx";
   DROP INDEX "siteglobal_seo_seo_og_image_idx";

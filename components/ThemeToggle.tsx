@@ -17,8 +17,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      // Removed the hard shadow and translation. Added dashed borders and a soft ink-wash on hover.
-      className="group relative flex h-8 w-fit cursor-pointer items-center gap-2 border-2 border-dashed border-ink/40 bg-transparent px-3 font-mono text-xs uppercase tracking-widest text-ink transition-all duration-500 hover:border-ink hover:bg-ink/5 focus:outline-none"
+      className="group relative flex h-8 w-fit cursor-pointer items-center gap-2 border-2 border-dashed border-ink/40 bg-transparent px-3 font-mono text-xs uppercase tracking-widest text-ink transition-all duration-500 hover:border-ink hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
       aria-label="Toggle contrast"
     >
       <CircleHalf weight="fill" className="h-3 w-3 opacity-60 transition-opacity duration-300 group-hover:opacity-100" />

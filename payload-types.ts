@@ -472,15 +472,15 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Siteglobal {
   id: number;
   resume?: (number | null) | Document;
-  seo: {
+  seo?: {
     /**
      * Browser tab title and search engine title
      */
-    title: string;
+    title?: string | null;
     /**
      * Meta description (max 160 characters)
      */
-    description: string;
+    description?: string | null;
     /**
      * Comma-separated keywords
      */

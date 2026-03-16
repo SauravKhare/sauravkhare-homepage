@@ -15,7 +15,8 @@ export const Documents: CollectionConfig = {
   hooks: {
     afterChange: [
       async () => {
-        revalidateTag("media", { expire: 0 });
+        revalidateTag("documents", { expire: 0 });
+        revalidateTag("resume", { expire: 0 });
       }
     ]
   },

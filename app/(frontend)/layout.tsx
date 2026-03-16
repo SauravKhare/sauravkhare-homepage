@@ -21,7 +21,7 @@ const crimsonText = Crimson_Text({
 
 const courierPrime = Courier_Prime({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-serif-mono",
   display: "swap",
   weight: ["400"],
 });
