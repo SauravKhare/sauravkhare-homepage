@@ -52,7 +52,9 @@ export default buildConfig({
     uploadthingStorage({
       collections: {
         media: true,
-        documents: true,
+        documents: {
+          disablePayloadAccessControl: true,
+        },
       },
       options: {
         token: process.env.UPLOADTHING_TOKEN || "",
