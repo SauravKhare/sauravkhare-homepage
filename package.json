@@ -4,9 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "doppler run next dev",
+    "dev": "next dev",
     "build": "next build",
-    "build:local": "doppler run next build",
     "start": "next start",
     "lint": "next lint",
     "ci": "payload migrate && pnpm build",
@@ -14,14 +13,14 @@
     "format:all": "pnpm exec prettier . --write",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
-    "migrate": "doppler run payload migrate",
-    "migrate:create": "doppler run payload migrate:create",
-    "migrate:status": "doppler run payload migrate:status",
-    "migrate:down": "doppler run payload migrate:down",
-    "migrate:refresh": "doppler run payload migrate:refresh",
-    "migrate:reset": "doppler run payload migrate:reset",
-    "migrate:fresh": "doppler run payload migrate:fresh",
-    "flags": "doppler run pnpm dlx hypertune"
+    "migrate": "payload migrate",
+    "migrate:create": "payload migrate:create",
+    "migrate:status": "payload migrate:status",
+    "migrate:down": "payload migrate:down",
+    "migrate:refresh": "payload migrate:refresh",
+    "migrate:reset": "payload migrate:reset",
+    "migrate:fresh": "payload migrate:fresh",
+    "flags": "pnpm dlx hypertune"
   },
   "dependencies": {
     "@flags-sdk/hypertune": "^0.3.2",
@@ -48,6 +47,7 @@
     "lucide-react": "^0.483.0",
     "motion": "^12.23.12",
     "next": "^16.1.6",
+    "next-themes": "^0.4.6",
     "payload": "^3.77.0",
     "postcss": "8.5.3",
     "react": "^19.2.4",
@@ -63,6 +63,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.34.0",
     "@tailwindcss/typography": "^0.5.16",
+    "@types/node": "22.13.11",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "eslint": "^9.34.0",
@@ -70,7 +71,6 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-unused-imports": "^4.2.0",
     "prettier": "3.5.3",
-    "@types/node": "22.13.11",
     "typescript": "^5.9.2"
   },
   "resolutions": {

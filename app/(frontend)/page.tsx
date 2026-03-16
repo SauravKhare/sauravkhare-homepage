@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Experience from "@/components/Experience";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -5,54 +6,122 @@ import LastSeen from "@/components/LastSeen";
 import Paragraph from "@/components/Paragraph";
 import SectionContainer from "@/components/SectionContainer";
 import Showcase from "@/components/Showcase";
+import LastSeenLoader from "@/components/LastSeenLoader";
+
 import { getExperiences } from "@/fetchers/experiences";
 import { getProjects } from "@/fetchers/projects";
-import { getHeader, getNow } from "@/fetchers/globals";
-import { unstable_cache } from "next/cache";
-import { Suspense } from "react";
-import LastSeenLoader from "@/components/LastSeenLoader";
-import { showProjects, showLastSeen } from "@/flags";
+import { getArchives, getHeader, getNow, getSeoData } from "@/fetchers/globals";
+import { showProjects, showLastSeen, showArchiveTimeMachineButton } from "@/flags";
+import { Metadata } from "next";
+import TimeMachine from "@/components/TimeMachine";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSeoData();
+  const title = site?.title || "Saurav Khare";
+  const description = site?.description || "Frontend Engineer";
+  const ogTitle = site?.ogTitle || title;
+  const ogDescription = site?.ogDescription || description;
+  const ogImage = site?.ogImage && typeof site.ogImage === "object"
+    ? site.ogImage.url
+    : null;
+
+  return {
+    title,
+    description,
+    keywords: site?.keywords?.split(",")?.map(k => k.trim()),
+
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: site?.canonicalUrl || "https://sauravkhare.com",
+      siteName: title || "Saurav Khare",
+      title: ogTitle,
+      description: ogDescription,
+      images: ogImage ? [{
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: ogTitle,
+      }] : [],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      site: title || "Saurav Khare",
+      creator: site?.twitterHandle || "",
+      title: ogTitle,
+      description: ogDescription,
+      images: ogImage ? [ogImage] : [],
+    },
+
+    robots: {
+      index: !site?.noIndex,
+      follow: !site?.noFollow,
+      googleBot: {
+        index: !site?.noIndex,
+        follow: !site?.noFollow,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+
+    alternates: {
+      canonical: site?.canonicalUrl || "https://sauravkhare.com",
+    },
+
+    authors: [{ name: "Saurav Khare" }],
+    creator: "Saurav Khare",
+  };
+}
 
 export default async function Home() {
   const projectsVisible = await showProjects();
   const lastSeenVisible = await showLastSeen();
+  const archiveButtonVisible = await showArchiveTimeMachineButton();
 
-  const [header, experience, projects, now] = await Promise.all([
-    unstable_cache(getHeader, ["getHeader"], { tags: ["header"] })(),
-    unstable_cache(getExperiences, ["getExperiences"], { tags: ["experiences"] })(),
-    unstable_cache(getProjects, ["getProjects"], { tags: ["projects"] })(),
-    unstable_cache(getNow, ["getNow"], { tags: ["now"] })(),
+  const [header, experience, projects, now, archives] = await Promise.all([
+    getHeader(),
+    getExperiences(),
+    getProjects(),
+    getNow(),
+    getArchives(),
   ]);
 
   return (
-    <div className="flex justify-between flex-col md:flex-row gap-10">
-      <div className="md:sticky md:top-0 md:max-h-screen lg:w-1/2 md:flex-col md:pt-16">
+    <>
+      <div className="mb-32 max-xl:px-6">
         <Header data={header} />
       </div>
-      <div className="md:w-1/2 pt-16">
-        <SectionContainer title="Now">
-          <Paragraph classname="font-inter font-normal text-primary-text">
+      <>
+        <SectionContainer title="Now" className="max-xl:px-6">
+          <Paragraph classname="font-body text-lg text-ink">
             {now?.[0]?.nowCompanyDescription}{" "}
-            <a href={now?.[0]?.nowCompanyLink ?? ""} className="duration-500 hover:text-yellow-500 underline" target="_blank" rel="noopener noreferrer">{now?.[0]?.nowCompanyName}</a>
+            <a href={now?.[0]?.nowCompanyLink ?? ""} className="font-body italic link-wet-ink" target="_blank" rel="noopener noreferrer">{now?.[0]?.nowCompanyName}</a>
           </Paragraph>
         </SectionContainer>
-        <SectionContainer title="Experience">
-          <Experience data={experience} />
+        <SectionContainer title="Experience" className="max-xl:px-6">
+          <Experience data={experience ?? undefined} />
         </SectionContainer>
-        {
-          projectsVisible ? (<SectionContainer title="Showcase">
-            <Showcase data={projects} />
-          </SectionContainer>) : <></>
-        }
-        {
-          lastSeenVisible ? (<SectionContainer title="Last Seen">
+        {projectsVisible && (
+          <SectionContainer title="Showcase" className="max-xl:px-6">
+            <Showcase data={projects ?? undefined} descriptionItalics />
+          </SectionContainer>
+        )}
+        {lastSeenVisible && (
+          <SectionContainer title="Last Seen" className="max-xl:px-6">
             <Suspense fallback={<LastSeenLoader limit={4} />}>
               <LastSeen user="sauravkhare" type="movies" limit={4} />
             </Suspense>
-          </SectionContainer>) : <></>
-        }
-        <Footer />
-      </div>
-    </div>
+          </SectionContainer>
+        )}
+        <div className="max-xl:px-6">
+          <Footer />
+          {
+            archiveButtonVisible && <TimeMachine records={archives} />
+          }
+        </div>
+      </>
+    </>
   );
 }

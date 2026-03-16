@@ -12,7 +12,7 @@ export function RichText(props: Props) {
   return (
     <RichTextConverter
       {...rest}
-      className={className}
+      className={`text-pretty ${className}`}
       converters={jsxConverter}
     />
   )

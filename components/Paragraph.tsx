@@ -7,5 +7,5 @@ export default function Paragraph({
   classname?: string;
   children?: ReactNode;
 }) {
-  return <p className={classname}>{children}</p>;
+  return <p className={`text-pretty ${classname}`}>{children}</p>;
 }

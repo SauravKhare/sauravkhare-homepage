@@ -1,29 +1,30 @@
-import type { Metadata } from "next";
-
-import { Inter, Space_Grotesk } from "next/font/google";
-
+import { Courier_Prime, Crimson_Text, EB_Garamond } from "next/font/google";
 import QueryProvider from "@/context/query-context";
-import "./globals.css";
-import "@/styles/style.css";
+import "@/app/(frontend)/globals.css";
+import { ThemeProvider } from "@/context/theme-provider";
 
-const spaceGrotesk = Space_Grotesk({
+const eBGaramond = EB_Garamond({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-serif-heading",
   display: "swap",
-  weight: ["500", "600"],
+  weight: ["700", "400"],
+  style: ["normal", "italic"],
 });
 
-const inter = Inter({
+const crimsonText = Crimson_Text({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-serif-body",
   display: "swap",
-  weight: ["400", "500"],
+  weight: ["400"],
+  style: ["normal", "italic"],
 });
 
-export const metadata: Metadata = {
-  title: "Saurav Khare",
-  description: "Frontend Engineer",
-};
+const courierPrime = Courier_Prime({
+  subsets: ["latin"],
+  variable: "--font-serif-mono",
+  display: "swap",
+  weight: ["400"],
+});
 
 export default function RootLayout({
   children,
@@ -31,13 +32,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
-      <body className="bg-primary-bg font-inter">
-        <div className="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-16 lg:py-0">
-          <QueryProvider>
-            {children}
-          </QueryProvider>
-        </div>
+    <html lang="en" className={`${eBGaramond.variable} ${crimsonText.variable} ${courierPrime.variable}`} suppressHydrationWarning>
+      <body className="bg-canvas text-ink font-body antialiased transition-colors duration-300 relative">
+        <div
+          className="pointer-events-none absolute inset-0 z-0 h-full w-full bg-canvas bg-[url('/noise.png')] bg-repeat opacity-100 dark:opacity-10"
+          aria-hidden="true"
+        />
+        <main className="relative z-10 mx-auto min-h-screen max-w-3xl pt-12 md:pt-24">
+          <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
+            <QueryProvider>
+              {children}
+            </QueryProvider>
+          </ThemeProvider>
+        </main>
       </body>
     </html>
   );
