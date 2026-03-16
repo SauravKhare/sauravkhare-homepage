@@ -12,7 +12,6 @@ export const seoField: Field = {
         {
           name: "title",
           type: "text",
-          required: true,
           admin: {
             description: "Browser tab title and search engine title",
           },
@@ -20,7 +19,6 @@ export const seoField: Field = {
         {
           name: "description",
           type: "textarea",
-          required: true,
           maxLength: 160,
           admin: {
             description: "Meta description (max 160 characters)",
