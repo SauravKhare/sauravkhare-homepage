@@ -8,22 +8,20 @@ export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Prevent hydration mismatch by only rendering the UI after it mounts on the client
   useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    // Return a completely invisible placeholder of the exact same size to prevent layout shift
-    return <div className="h-8 w-22.5 opacity-0" aria-hidden="true" />;
+    return <div className="h-8 w-20.5 opacity-0" aria-hidden="true" />;
   }
 
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="group relative flex h-8 w-fit items-center gap-2 border border-ink bg-canvas px-3 font-mono text-xs uppercase tracking-widest text-ink transition-colors hover:bg-ink hover:text-canvas focus:outline-none
-      shadow-[2px_2px_0px_0px_var(--color-ink)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer"
+      // Removed the hard shadow and translation. Added dashed borders and a soft ink-wash on hover.
+      className="group relative flex h-8 w-fit cursor-pointer items-center gap-2 border-2 border-dashed border-ink/40 bg-transparent px-3 font-mono text-xs uppercase tracking-widest text-ink transition-all duration-500 hover:border-ink hover:bg-ink/5 focus:outline-none"
       aria-label="Toggle contrast"
     >
-      <CircleHalf weight="fill" className="h-3 w-3" />
+      <CircleHalf weight="fill" className="h-3 w-3 opacity-60 transition-opacity duration-300 group-hover:opacity-100" />
       <span>{theme === "dark" ? "Light" : "Dark"}</span>
     </button>
   );

@@ -97,9 +97,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     siteglobal: Siteglobal;
+    archives: Archive;
   };
   globalsSelect: {
     siteglobal: SiteglobalSelect<false> | SiteglobalSelect<true>;
+    archives: ArchivesSelect<false> | ArchivesSelect<true>;
   };
   locale: null;
   user: User;
@@ -567,6 +569,23 @@ export interface Siteglobal {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "archives".
+ */
+export interface Archive {
+  id: number;
+  records?:
+    | {
+        version: string;
+        yearRange: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "siteglobal_select".
  */
 export interface SiteglobalSelect<T extends boolean = true> {
@@ -620,6 +639,23 @@ export interface SiteglobalSelect<T extends boolean = true> {
     | {
         footerHeading?: T;
         footerDescription?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "archives_select".
+ */
+export interface ArchivesSelect<T extends boolean = true> {
+  records?:
+    | T
+    | {
+        version?: T;
+        yearRange?: T;
+        url?: T;
         id?: T;
       };
   updatedAt?: T;

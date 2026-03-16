@@ -10,9 +10,10 @@ import LastSeenLoader from "@/components/LastSeenLoader";
 
 import { getExperiences } from "@/fetchers/experiences";
 import { getProjects } from "@/fetchers/projects";
-import { getHeader, getNow, getSeoData } from "@/fetchers/globals";
+import { getArchives, getHeader, getNow, getSeoData } from "@/fetchers/globals";
 import { showProjects, showLastSeen } from "@/flags";
 import { Metadata } from "next";
+import TimeMachine from "@/components/TimeMachine";
 
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getSeoData();
@@ -78,11 +79,12 @@ export default async function Home() {
   const projectsVisible = await showProjects();
   const lastSeenVisible = await showLastSeen();
 
-  const [header, experience, projects, now] = await Promise.all([
+  const [header, experience, projects, now, archives] = await Promise.all([
     getHeader(),
     getExperiences(),
     getProjects(),
     getNow(),
+    getArchives(),
   ]);
 
   return (
@@ -114,6 +116,7 @@ export default async function Home() {
         )}
         <div className="max-xl:px-6">
           <Footer />
+          <TimeMachine records={archives} />
         </div>
       </>
     </>

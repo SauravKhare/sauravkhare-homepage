@@ -75,3 +75,18 @@ export async function getSeoData() {
     console.error("Failed to fetch seo data", error);
   }
 }
+
+export async function getArchives() {
+  "use cache";
+  cacheTag("archives");
+
+  try {
+    const payload = await getPayload({ config: configPromise });
+    const data = await payload.findGlobal({ slug: "archives" });
+
+    return data.records || [];
+  } catch (error) {
+    console.error("Failed to fetch archives data", error);
+    return [];
+  }
+}

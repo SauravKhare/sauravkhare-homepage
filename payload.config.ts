@@ -12,6 +12,7 @@ import { Technologies } from "@/collections/Technologies";
 import { Projects } from "@/collections/Projects";
 import { SiteGlobal } from "@/collections/SiteGlobal";
 import { Documents } from "@/collections/Documents";
+import { Archives } from "@/collections/globals/Archives";
 
 import { fileURLToPath } from "url";
 import path from "path";
@@ -27,7 +28,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  globals: [SiteGlobal],
+  globals: [SiteGlobal, Archives],
   collections: [Users, Media, Documents, Experiences, Technologies, Projects],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
