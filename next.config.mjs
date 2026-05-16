@@ -3,7 +3,6 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 1. Enable Next.js 16 Cache Components (Unlocks "use cache" and cacheTag)
   cacheComponents: true,
   images: {
     remotePatterns: [
