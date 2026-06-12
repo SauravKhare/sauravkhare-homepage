@@ -73,11 +73,6 @@
     "prettier": "3.8.4",
     "typescript": "^6.0.3"
   },
-  "optionalDependencies": {
-    "@img/sharp-win32-x64": "0.35.1",
-    "@img/sharp-linux-x64": "0.35.1",
-    "@img/sharp-darwin-arm64": "0.35.1"
-  },
   "resolutions": {
     "uploadthing": "^7.7.3"
   },
