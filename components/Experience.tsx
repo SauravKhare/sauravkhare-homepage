@@ -1,16 +1,8 @@
 import Link from "next/link";
 
 import { Badge } from "@/components/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/card";
 import { formatDate } from "@/lib/utils";
-import { type Experience } from "@/payload-types";
+import { Technology, type Experience } from "@/payload-types";
 import ResumeButton from "@/components/ResumeButton";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -18,72 +10,50 @@ interface ExperiencesSectionProps {
   data: {
     docs: Experience[];
   } | undefined;
+  technologies: {
+    docs: Technology[];
+  } | undefined;
 }
 
-export default async function Experience({ data }: ExperiencesSectionProps) {
+export default async function Experience({ data, technologies }: ExperiencesSectionProps) {
+  const tech = technologies?.docs.map((item) => item.technology);
   return (
-    <div className="flex flex-col">
-      {
-        data?.docs.map((item, i) => (
-          <ScrollReveal key={item.id} delay={i * 0.15}>
-            <Card key={item.id} className="bg-transparent border-none mb-16 shadow-none">
-              <CardHeader className={`pl-0 ${i === 0 ? `pt-0` : ``} mb-3`}>
-                <CardTitle className="font-heading text-ink text-2xl font-normal">
-                  {item.position} <span className="inline-block mx-1">•</span>
-                  {item.link ? (
-                    <Link
-                      href={item.link}
-                      className="text-2xl italic link-wet-ink"
+    <section id="experience" className="px-16 py-20 bg-dark-primary">
+      <div className="flex gap-32 justify-between items-start">
+        <div className="">
+          <p className="text-sm text-teal-primary font-jakarta uppercase mb-4">03. EXPERIENCE</p>
+          <div className="">
+            {
+              data?.docs.map((item, i) => (
+                <ScrollReveal key={item.id} delay={i * 0.15}>
+                  <div key={item.id} className="mb-8">
+                    <div className="flex justify-between items-center">
+                      <p className="font-fraunces text-light-primary text-2xl font-medium mb-2">{item.position}</p>
+                      <p className="font-jakarta text-[12px] text-light-primary">{formatDate(item.startingDate)} <span>–</span>
+                        {item.isCurrent ? `Present` : formatDate(item.endingDate ?? "")}</p>
+                    </div>
+                    <p className="font-jakarta text-[16px] text-teal-primary"><Link
+                      href={item?.link ?? ""}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       {item.companyName}
-                    </Link>
-                  ) : (
-                    <span className="italic">{item.companyName}</span>
-                  )}
-                </CardTitle>
-                <CardDescription className="flex items-center font-mono text-ink text-sm">
-                  {formatDate(item.startingDate)} <span>–</span>
-                  {item.isCurrent ? `Present` : formatDate(item.endingDate ?? "")}
-                </CardDescription>
-              </CardHeader>
-              {item.description && (
-                <CardContent className="font-body text-ink text-lg mb-6">
-                  <p>{item.description}</p>
-                </CardContent>
-              )}
+                    </Link></p>
+                    <p className="text-width mt-2.5 font-jakarta text-light-primary text-[16px] leading-6">{item.description}</p>
+                  </div>
+                </ScrollReveal>
+              ))
+            }
+          </div>
 
-              <CardFooter className="flex flex-wrap gap-1.5">
-                {item.technologies?.map((techItem) =>
-                  typeof techItem === "object" && techItem !== null ? (
-                    <Badge
-                      key={techItem.id}
-                      variant="outline"
-                      className="relative border-[6px] border-transparent text-ink px-3 py-0 text-center font-mono"
-                    >
-                      <span
-                        className="absolute -inset-1.5 -z-10 bg-ink"
-                        style={{
-                          WebkitMaskImage: `url(/border-mask.png)`,
-                          maskImage: `url(/border-mask.png)`,
-                          WebkitMaskSize: "100% 100%",
-                          maskSize: "100% 100%",
-                          WebkitMaskRepeat: "no-repeat",
-                          maskRepeat: "no-repeat",
-                        }}
-                        aria-hidden="true"
-                      />
-                      {techItem.technology}
-                    </Badge>
-                  ) : null
-                )}
-              </CardFooter>
-            </Card>
-          </ScrollReveal>
-        ))
-      }
-      <ResumeButton />
-    </div>
+        </div>
+        <div className="w-[362px]">
+          <p className="text-sm text-teal-primary font-jakarta uppercase mb-4">04. ARSENAL</p>
+          <div className="flex flex-wrap gap-3">
+            {tech?.map((item) => (<div className="px-2 py-3 rounded-md text-light-primary border border-light-primary/10 font-jakarta uppercase">{item}</div>))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

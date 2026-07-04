@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useField } from '@payloadcms/ui';
-import * as PhosphorIcons from '@phosphor-icons/react';
+import * as MuiIcons from '@mui/icons-material';
 
 interface IconPickerProps {
   path: string;
@@ -10,84 +10,57 @@ interface IconPickerProps {
   required?: boolean;
 }
 
-// Define common social/brand icons from Phosphor
-const PHOSPHOR_ICONS = [
-  'FacebookLogo',
-  'TwitterLogo',
-  'InstagramLogo',
-  'LinkedinLogo',
-  'YoutubeLogo',
-  'GithubLogo',
-  'DiscordLogo',
-  'TelegramLogo',
-  'WhatsappLogo',
-  'TiktokLogo',
-  'PinterestLogo',
-  'RedditLogo',
-  'SnapchatLogo',
-  'SpotifyLogo',
-  'TwitchLogo',
-  'SlackLogo',
-  'MediumLogo',
-  'DribbbleLogo',
-  'BehanceLogo',
-  'FigmaLogo',
-  'FramerLogo',
-  'GoogleLogo',
-  'AppleLogo',
-  'WindowsLogo',
-  'AndroidLogo',
-  'CodepenLogo',
-  'DevToLogo',
-  'GitlabLogo',
-  'NotionLogo',
-  'PaypalLogo',
-  'PatreonLogo',
-  'SkypeLogo',
-  'SoundcloudLogo',
-  'UberLogo',
-  'VimeoLogo',
-  'WechatLogo',
-  'XLogo',
-  'YahooLogo',
-  'ZoomLogo',
-  // Add more common icons
-  'Envelope',
+// Define common icons mapped to their Material-UI equivalents
+const MUI_ICONS = [
+  'Facebook',
+  'Twitter',
+  'Instagram',
+  'LinkedIn',
+  'YouTube',
+  'GitHub',
+  'Telegram',
+  'WhatsApp',
+  'Reddit',
+  'Pinterest',
+  'Apple',
+  'Android',
+  'Google',
+  'Email',
   'Phone',
-  'MapPin',
-  'Globe',
-  'House',
-  'User',
-  'Users',
-  'Heart',
+  'LocationOn', // Equivalent to MapPin
+  'Public',     // Equivalent to Globe
+  'Home',
+  'Person',     // Equivalent to User
+  'Group',      // Equivalent to Users
+  'Favorite',   // Equivalent to Heart
   'Star',
   'Share',
   'Link',
-  'ArrowRight',
-  'ArrowLeft',
-  'ArrowUp',
-  'ArrowDown',
-  'Plus',
-  'Minus',
-  'X',
+  'ArrowForward',
+  'ArrowBack',
+  'ArrowUpward',
+  'ArrowDownward',
+  'Add',        // Equivalent to Plus
+  'Remove',     // Equivalent to Minus
+  'Close',      // Equivalent to X
   'Check',
   'Info',
   'Warning',
-  'Question',
+  'Help',       // Equivalent to Question
   'Settings',
   'Search',
-  'Calendar',
-  'Clock',
+  'CalendarToday',
+  'AccessTime', // Equivalent to Clock
   'Download',
   'Upload',
-  'Play',
+  'PlayArrow',
   'Pause',
   'Stop',
   'ShoppingCart',
   'CreditCard',
   'Lock',
-  'Eye',
-  'EyeSlash',
+  'Visibility',    // Equivalent to Eye
+  'VisibilityOff', // Equivalent to EyeSlash
 ];
 
 const IconPicker: React.FC<IconPickerProps> = ({ path, label = 'Icon', required }) => {
@@ -95,9 +68,9 @@ const IconPicker: React.FC<IconPickerProps> = ({ path, label = 'Icon', required 
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState('');
 
-  // Filter available icons based on what actually exists in PhosphorIcons
-  const availableIcons = PHOSPHOR_ICONS.filter(iconName =>
-    PhosphorIcons[iconName as keyof typeof PhosphorIcons]
+  // Filter available icons based on what actually exists in MuiIcons
+  const availableIcons = MUI_ICONS.filter(iconName =>
+    MuiIcons[iconName as keyof typeof MuiIcons]
   );
 
   const filteredIcons = availableIcons.filter(name =>
@@ -105,8 +78,9 @@ const IconPicker: React.FC<IconPickerProps> = ({ path, label = 'Icon', required 
   );
 
   const renderIcon = (iconName: string, size = 24) => {
-    const IconComponent = PhosphorIcons[iconName as keyof typeof PhosphorIcons] as any;
-    return IconComponent ? <IconComponent size={size} color="#333" /> : null;
+    const IconComponent = MuiIcons[iconName as keyof typeof MuiIcons] as React.ElementType;
+    // MUI icons use the style prop or fontSize prop for sizing instead of a direct size prop
+    return IconComponent ? <IconComponent style={{ fontSize: size, color: '#333' }} /> : null;
   };
 
   return (

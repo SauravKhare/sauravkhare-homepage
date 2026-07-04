@@ -1,13 +1,11 @@
 'use client';
 
 import React from 'react';
-import * as PhosphorIcons from '@phosphor-icons/react';
-import type { IconProps } from "@phosphor-icons/react";
+import * as MuiIcons from '@mui/icons-material';
 
 interface SocialIconProps {
   iconName?: string;
-  size?: number;
-  weight?: 'thin' | 'light' | 'regular' | 'bold' | 'fill';
+  size?: number | string;
   className?: string;
   color?: string;
 }
@@ -15,25 +13,32 @@ interface SocialIconProps {
 const SocialIcon: React.FC<SocialIconProps> = ({
   iconName,
   size = 24,
-  weight = 'regular',
   className,
   color,
 }) => {
-  const icon = iconName;
-
-  if (!icon) {
+  if (!iconName) {
     console.warn('SocialIcon: No icon name provided');
     return null;
   }
 
-  const IconComponent = PhosphorIcons[icon as keyof typeof PhosphorIcons] as React.FC<IconProps>;
+  // Retrieve the icon dynamically from the MUI Icons package
+  const IconComponent = MuiIcons[iconName as keyof typeof MuiIcons] as React.ElementType;
 
   if (!IconComponent) {
-    console.warn(`SocialIcon: Icon "${icon}" not found in PhosphorIcons`);
+    console.warn(`SocialIcon: Icon "${iconName}" not found in @mui/icons-material`);
     return null;
   }
 
-  return <IconComponent size={size} weight={weight} className={className} color={color || "currentColor"} />;
+  return (
+    <IconComponent
+      className={className}
+      style={{
+        fontSize: size,
+        color: color || "currentColor",
+        fill: color || "currentColor"
+      }}
+    />
+  );
 };
 
 export default SocialIcon;

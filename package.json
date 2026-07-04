@@ -23,7 +23,11 @@
     "flags": "pnpm dlx hypertune"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@flags-sdk/hypertune": "^0.3.2",
+    "@mui/icons-material": "^9.2.0",
+    "@mui/material": "^9.2.0",
     "@payloadcms/db-postgres": "^3.84.1",
     "@payloadcms/email-resend": "^3.84.1",
     "@payloadcms/next": "^3.84.1",

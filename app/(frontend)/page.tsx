@@ -3,17 +3,16 @@ import Experience from "@/components/Experience";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import LastSeen from "@/components/LastSeen";
-import Paragraph from "@/components/Paragraph";
-import SectionContainer from "@/components/SectionContainer";
 import Showcase from "@/components/Showcase";
 import LastSeenLoader from "@/components/LastSeenLoader";
 
 import { getExperiences } from "@/fetchers/experiences";
 import { getProjects } from "@/fetchers/projects";
 import { getArchives, getHeader, getNow, getSeoData } from "@/fetchers/globals";
-import { showProjects, showLastSeen, showArchiveTimeMachineButton } from "@/flags";
 import { Metadata } from "next";
 import TimeMachine from "@/components/TimeMachine";
+import Hero from "@/components/Hero";
+import { getTechnologies } from "@/fetchers/technologies";
 
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getSeoData();
@@ -76,51 +75,53 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const projectsVisible = await showProjects();
-  const lastSeenVisible = await showLastSeen();
-  const archiveButtonVisible = await showArchiveTimeMachineButton();
 
-  const [header, experience, projects, now, archives] = await Promise.all([
+  const [header, experience, projects, now, tech, archives] = await Promise.all([
     getHeader(),
     getExperiences(),
     getProjects(),
     getNow(),
+    getTechnologies(),
     getArchives(),
   ]);
 
   return (
     <>
-      <div className="mb-32 max-xl:px-6">
-        <Header data={header} />
-      </div>
-      <>
-        <SectionContainer title="Now" className="max-xl:px-6">
-          <Paragraph classname="font-body text-lg text-ink">
-            {now?.[0]?.nowCompanyDescription}{" "}
-            <a href={now?.[0]?.nowCompanyLink ?? ""} className="font-body italic link-wet-ink" target="_blank" rel="noopener noreferrer">{now?.[0]?.nowCompanyName}</a>
-          </Paragraph>
-        </SectionContainer>
-        <SectionContainer title="Experience" className="max-xl:px-6">
-          <Experience data={experience ?? undefined} />
-        </SectionContainer>
-        {projectsVisible && (
-          <SectionContainer title="Showcase" className="max-xl:px-6">
-            <Showcase data={projects ?? undefined} descriptionItalics />
-          </SectionContainer>
-        )}
-        {lastSeenVisible && (
-          <SectionContainer title="Last Seen" className="max-xl:px-6">
-            <Suspense fallback={<LastSeenLoader limit={4} />}>
-              <LastSeen user="sauravkhare" type="movies" limit={4} />
-            </Suspense>
-          </SectionContainer>
-        )}
-        <div className="max-xl:px-6">
-          <Footer />
-          {
-            archiveButtonVisible && <TimeMachine records={archives} />
-          }
+      <Hero data={header} />
+      <section className="bg-dark-primary px-16 py-20 flex flex-col xl:flex-row justify-between items-start gap-8">
+        <div className=""><p className="text-sm text-teal-primary font-jakarta uppercase">01. PHILOSOPHY</p></div>
+        <div>
+          <p className="w-189.25 text-light-primary font-fraunces text-[40px] font-medium leading-12 mb-6">"Software is an editorial endeavor; every
+            line of code is a choice in clarity, intent,
+            and structural integrity."</p>
+          <p className="w-174.75 text-light-primary font-jakarta text-[16px] mb-6">I approach frontend engineering not just as a technical task, but as an exercise in design
+            execution. With a deep appreciation for typography, whitespace, and subtle interactions,
+            I build interfaces that feel luxurious, responsive, and timelessly polished.</p>
+          <p className="w-174.75 text-light-primary font-jakarta mb-6 text-[16px]">Over the years, I've honed my craft across various stacks, always prioritizing user
+            experience and architectural elegance over fleeting technological trends.</p>
         </div>
+
+      </section>
+      {/* <div className="mb-32 max-xl:px-6">
+        <Header data={header} />
+      </div> */}
+      <>
+        <section className="flex justify-between bg-dark-primary px-16 py-20">
+          <p className="text-sm text-teal-primary font-jakarta uppercase mb-4">03. NOW</p>
+          <p className="text-light-primary text-[18px] font-jakarta">{now?.[0]?.nowCompanyDescription}{" "}
+            <a href={now?.[0]?.nowCompanyLink ?? ""} className="f" target="_blank" rel="noopener noreferrer">{now?.[0]?.nowCompanyName}</a></p>
+
+        </section>
+        <Experience data={experience ?? undefined} technologies={tech ?? undefined} />
+        <Showcase data={projects ?? undefined} descriptionItalics />
+        <Suspense fallback={<LastSeenLoader limit={6} />}>
+          <LastSeen user="sauravkhare" type="movies" limit={6} />
+        </Suspense>
+
+        <Footer />
+        {/* {
+            archiveButtonVisible && <TimeMachine records={archives} />
+          } */}
       </>
     </>
   );

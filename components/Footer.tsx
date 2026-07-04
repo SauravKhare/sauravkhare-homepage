@@ -1,9 +1,11 @@
 import Paragraph from "@/components/Paragraph";
 import { RichText } from "@/components/RichText/RichText";
 import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
-import { getFooter } from "@/fetchers/globals";
+import { getFooter, getSocials } from "@/fetchers/globals";
 import { showThemeToggleButton } from "@/flags";
 import ThemeToggle from "@/components/ThemeToggle";
+import SocialIcon from "./SocialIcon";
+import Link from "next/link";
 
 export default async function Footer() {
   const footer = await getFooter();
@@ -12,28 +14,38 @@ export default async function Footer() {
   const footerDescription = footerEntry?.footerDescription;
   const themeToggleButtonVisible = await showThemeToggleButton();
 
+  const socialPlatforms = await getSocials();
+
   return (
-    <>
-      <section className="">
-        <div className="flex justify-center items-center text-center pb-6">
-          <div className="text-accent tracking-[1em]">*</div>
-          <div className="text-accent tracking-[1em]">*</div>
-          <div className="text-accent tracking-[1em]">*</div>
+    <footer className="px-5 py-10 md:px-16 md:py-10 bg-dark-primary text-light-primary">
+      <div className="bg-dark-primary text-center flex flex-col items-center mb-16">
+        <p className="font-fraunces text-7xl mb-8 leading-28 font-medium tracking-[8px]">{footerHeading}</p>
+        <span className="block bg-teal-primary/30 w-24 h-0.5"></span>
+      </div>
+      <div className="flex flex-col md:flex-row justify-between items-center">
+        <div><p className="font-fraunces text-[40px] uppercase">Saurav Khare</p></div>
+        <div>
+          <ul className="flex gap-8">
+            {socialPlatforms?.map((item) => (
+              <Link
+                key={item.id}
+                href={item.platformUrl}
+                target="_blank"
+                className="text-light-primary transition-all duration-300 hover:-translate-y-1"
+              >
+                <SocialIcon
+                  iconName={item.platformIcon || undefined}
+                  size={20}
+                  color="text-light-primary"
+                />
+              </Link>
+            ))}
+          </ul>
         </div>
-      </section>
-      <footer className="max-md:mx-6">
-        <div className="flex justify-center flex-col items-center pb-24">
-          <div className="flex flex-col gap-4 mb-4">
-            {
-              footerHeading && (<Paragraph classname="text-sm font-heading text-accent font-bold text-center tracking-[0.2em] mb-16">{footerHeading}</Paragraph>)
-            }
-            {
-              footerDescription && (<RichText data={footerDescription as SerializedEditorState} className="prose text-xs font-mono text-ink text-center prose-a:no-underline prose-a:text-ink prose-a:px-1 prose-a:-mx-1 prose-a:transition-none prose-a:hover:bg-ink prose-a:hover:text-canvas" />)
-            }
-          </div>
-          {themeToggleButtonVisible && <ThemeToggle />}
-        </div>
-      </footer>
-    </>
+        <p>{
+          footerDescription && (<RichText data={footerDescription as SerializedEditorState} className="prose text-xs font-jakarta prose:text-dark-primary prose-a:no-underline prose-a:text-teal-primary prose-a:px-1 prose-a:-mx-1 prose-a:transition-none" />)
+        }</p>
+      </div>
+    </footer>
   );
 }

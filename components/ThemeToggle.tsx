@@ -2,7 +2,8 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { CircleHalf } from "@phosphor-icons/react";
+import BedtimeOutlinedIcon from "@mui/icons-material/BedtimeOutlined";
+import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -11,17 +12,17 @@ export default function ThemeToggle() {
   useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    return <div className="h-8 w-20.5 opacity-0" aria-hidden="true" />;
+    return <WbSunnyOutlinedIcon style={{ fontSize: 18 }} className="transition-opacity duration-300 group-hover:opacity-100" />;
   }
 
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="group relative flex h-8 w-fit cursor-pointer items-center gap-2 border-2 border-dashed border-ink/40 bg-transparent px-3 font-mono text-xs uppercase tracking-widest text-ink transition-all duration-500 hover:border-ink hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+      className="group relative flex w-fit cursor-pointer items-center gap-2 bg-transparent transition-all duration-500"
       aria-label="Toggle contrast"
     >
-      <CircleHalf weight="fill" className="h-3 w-3 opacity-60 transition-opacity duration-300 group-hover:opacity-100" />
-      <span>{theme === "dark" ? "Light" : "Dark"}</span>
+
+      <span>{theme === "dark" ? (<BedtimeOutlinedIcon style={{ fontSize: 18 }} className="transition-opacity duration-300 group-hover:opacity-100" />) : (<WbSunnyOutlinedIcon style={{ fontSize: 18 }} className="transition-opacity duration-300 group-hover:opacity-100" />)}</span>
     </button>
   );
 }
