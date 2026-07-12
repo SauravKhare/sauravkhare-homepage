@@ -86,12 +86,12 @@
 
   /* trigger, kept quiet -- the moment belongs to the portal, not the icon */
   .tm-trigger {
-    color: var(--bone-dim, inherit);
+    color: var(--color-light-primary);
     transition: color 0.3s ease, filter 0.3s ease;
   }
 
   .tm-trigger:hover {
-    color: var(--spore-gold);
+    color: var(--color-light-primary);
     filter: drop-shadow(0 0 6px rgba(217, 178, 92, 0.45));
   }
 

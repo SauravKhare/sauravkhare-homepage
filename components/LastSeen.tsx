@@ -18,7 +18,7 @@ export default async function LastSeen({
   }
 
   return (
-    <section className="px-16 py-20 bg-dark-primary">
+    <section className="px-16 py-20 bg-dark-primary max-w-360 mx-auto">
       <p className="text-sm text-teal-primary font-jakarta uppercase mb-4">03. LAST SEEN</p>
       <p className="font-fraunces text-[40px] text-light-primary mb-4">Recently Watched</p>
       <StaggerGroup className="flex gap-8">
@@ -44,7 +44,7 @@ export default async function LastSeen({
                   </div>
                 )}
               </div>
-              <p className="flex flex-col text-[18px] text-light-primary font-jakarta transition-colors duration-300 group-hover:text-ink">
+              <p className="flex flex-col text-[18px] text-light-primary font-jakarta transition-colors duration-300">
                 {movie.movie.title}
                 <span className="text-xs">{movie.movie.year}</span>
               </p>

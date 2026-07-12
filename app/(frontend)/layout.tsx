@@ -1,5 +1,4 @@
 import { Courier_Prime, Crimson_Text, EB_Garamond, Fraunces, Plus_Jakarta_Sans } from "next/font/google";
-import QueryProvider from "@/context/query-context";
 import "@/app/(frontend)/globals.css";
 import { ThemeProvider } from "@/context/theme-provider";
 import HeaderTopNavigation from "@/components/HeaderTopNavigation";
@@ -50,14 +49,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${eBGaramond.variable} ${crimsonText.variable} ${courierPrime.variable} ${fraunces.variable} ${jakarta.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${eBGaramond.variable} ${crimsonText.variable} ${courierPrime.variable} ${fraunces.variable} ${jakarta.variable} scroll-smooth`} suppressHydrationWarning>
       <body className="bg-dark-primary text-light-primary font-body antialiased transition-colors duration-300 relative">
         <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
           <HeaderTopNavigation />
           <main className="relative z-10 mx-auto min-h-screen">
-            <QueryProvider>
-              {children}
-            </QueryProvider>
+            {children}
           </main>
         </ThemeProvider>
       </body>

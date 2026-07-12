@@ -25,23 +25,11 @@ export default function SubHeading({ data }: SubHeadingType) {
 
 
   return (
-    // <AnimatePresence mode="popLayout">
-    //   <motion.p
-    //     className="text-8xl font-fraunces italic text-teal-primary mb-8"
-    //     key={index}
-    //     initial={{ y: -10, opacity: 0 }}
-    //     animate={{ y: 0, opacity: 1 }}
-    //     exit={{ y: 10, opacity: 0 }}
-    //     transition={{ ease: "easeIn" }}
-    //   >
-    //     {subHeadings[index]}
-    //   </motion.p>
-    // </AnimatePresence>
-    <div className="relative overflow-hidden h-32 flex items-center">
+    <div className="relative overflow-hidden h-16 md:h-32 flex items-center">
       <AnimatePresence mode="sync" initial={false}>
         <motion.p
           key={index}
-          className="absolute inset-0 flex items-center font-fraunces italic text-8xl text-teal-primary"
+          className="absolute inset-0 flex items-center font-fraunces italic text-5xl md:text-8xl text-teal-primary font-variation-settings-['opsz'_96]"
           initial={{ y: "-100%" }}
           animate={{ y: "0%" }}
           exit={{ y: "100%" }}

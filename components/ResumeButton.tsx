@@ -7,7 +7,7 @@ export default async function ResumeButton() {
   return (
     <a
       href={resumeUrl}
-      className="inline-block bg-teal-primary font-jakarta text-sm text-dark-primary px-8 py-4 rounded-full"
+      className="inline-block bg-teal-primary font-jakarta text-sm text-dark-primary px-6 py-3 md:px-8 md:py-4 rounded-full"
       target="_blank"
       rel="noopener noreferrer"
     >

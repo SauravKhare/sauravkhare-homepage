@@ -18,8 +18,8 @@ interface ExperiencesSectionProps {
 export default async function Experience({ data, technologies }: ExperiencesSectionProps) {
   const tech = technologies?.docs.map((item) => item.technology);
   return (
-    <section id="experience" className="px-16 py-20 bg-dark-primary">
-      <div className="flex gap-32 justify-between items-start">
+    <section id="experience" className="px-6 md:px-16 py-20 bg-dark-primary md:max-w-360 md:mx-auto">
+      <div className="flex flex-col lg:flex-row gap-32 justify-between items-start">
         <div className="">
           <p className="text-sm text-teal-primary font-jakarta uppercase mb-4">03. EXPERIENCE</p>
           <div className="">
@@ -45,9 +45,8 @@ export default async function Experience({ data, technologies }: ExperiencesSect
               ))
             }
           </div>
-
         </div>
-        <div className="w-[362px]">
+        <div className="w-90.5">
           <p className="text-sm text-teal-primary font-jakarta uppercase mb-4">04. ARSENAL</p>
           <div className="flex flex-wrap gap-3">
             {tech?.map((item) => (<div className="px-2 py-3 rounded-md text-light-primary border border-light-primary/10 font-jakarta uppercase">{item}</div>))}
