@@ -19,13 +19,12 @@ export default async function Footer() {
   return (
     <footer className="bg-dark-primary text-light-primary">
       <div className="bg-dark-primary text-center flex flex-col items-center my-20 max-w-360 mx-auto">
-        <p className="font-fraunces text-7xl mb-8 leading-28 font-medium tracking-[8px] opacity-10">{footerHeading}</p>
+        <p className="font-fraunces text-2xl leading-8 md:text-7xl mb-8 md:leading-28 font-medium tracking-[8px] opacity-10">{footerHeading}</p>
         <span className="block bg-teal-primary/30 w-24 h-0.5 opacity-30"></span>
       </div>
       <div className="border-t border-white/10">
-        <div className="flex flex-col md:flex-row justify-between items-center x-16 py-10  max-w-360 mx-auto">
-          <div><p className="font-fraunces text-[40px] uppercase">Saurav Khare</p></div>
-          <div>
+        <div className="flex flex-col md:flex-row justify-between items-center px-6 md:px-16 py-10 md:py-10 md:max-w-360 md:mx-auto">
+          <div><p className="font-fraunces text-2xl mb-4 md:text-[40px] uppercase">Saurav Khare</p><div>
             <ul className="flex gap-8">
               {socialPlatforms?.map((item) => (
                 <Link
@@ -42,9 +41,10 @@ export default async function Footer() {
                 </Link>
               ))}
             </ul>
-          </div>
+          </div></div>
+
           <p>{
-            footerDescription && (<RichText data={footerDescription as SerializedEditorState} className="prose text-xs font-jakarta prose:text-dark-primary prose-a:no-underline prose-a:text-teal-primary prose-a:px-1 prose-a:-mx-1 prose-a:transition-none" />)
+            footerDescription && (<RichText data={footerDescription as SerializedEditorState} className="prose text-center text-xs font-jakarta prose:text-dark-primary prose-a:no-underline prose-a:text-teal-primary prose-a:px-1 prose-a:-mx-1 prose-a:transition-none" />)
           }</p>
         </div>
       </div>

@@ -25,11 +25,11 @@ export default function SubHeading({ data }: SubHeadingType) {
 
 
   return (
-    <div className="relative overflow-hidden h-16 md:h-32 flex items-center">
+    <div className="relative overflow-hidden h-14 md:h-32 flex items-center">
       <AnimatePresence mode="sync" initial={false}>
         <motion.p
           key={index}
-          className="absolute inset-0 flex items-center font-fraunces italic text-5xl md:text-8xl text-teal-primary font-variation-settings-['opsz'_96]"
+          className="absolute inset-0 flex items-center font-fraunces italic text-4xl md:text-8xl text-teal-primary font-variation-settings-['opsz'_96]"
           initial={{ y: "-100%" }}
           animate={{ y: "0%" }}
           exit={{ y: "100%" }}

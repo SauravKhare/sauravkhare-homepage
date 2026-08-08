@@ -58,6 +58,6 @@ export const Experiences: CollectionConfig = {
       relationTo: "technologies",
       hasMany: true,
       label: "Technologies",
-    }
+    },
   ]
 }
