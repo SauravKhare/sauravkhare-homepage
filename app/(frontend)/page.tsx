@@ -1,18 +1,26 @@
 import { Suspense } from "react";
-import Experience from "@/components/Experience";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import LastSeen from "@/components/LastSeen";
-import Showcase from "@/components/Showcase";
-import LastSeenLoader from "@/components/LastSeenLoader";
-
-import { getExperiences } from "@/fetchers/experiences";
-import { getProjects } from "@/fetchers/projects";
-import { getArchives, getHeader, getNow, getSeoData } from "@/fetchers/globals";
 import { Metadata } from "next";
-import Hero from "@/components/Hero";
-import { getTechnologies } from "@/fetchers/technologies";
-import { SubContext } from "@/components/SubContext";
+import { getSeoData } from "@/fetchers/globals";
+
+import { HeaderSection } from "@/sections/header-section";
+import { HeroSection } from "@/sections/hero-section";
+import { NowSection } from "@/sections/now-section";
+import { CapabilitiesSection } from "@/sections/capabilities-section";
+import { ExperienceSection } from "@/sections/experience-section";
+import { ShowcaseSection } from "@/sections/showcase-section";
+import { LastSeenSection } from "@/sections/last-seen-section";
+import { ContactSection } from "@/sections/contact-section";
+import { FooterSection } from "@/sections/footer-section";
+
+import { HeroSkeleton } from "@/components/skeletons/hero-skeleton";
+import { NowSkeleton } from "@/components/skeletons/now-skeleton";
+import { CapabilitiesSkeleton } from "@/components/skeletons/capabilities-skeleton";
+import { ExperienceSkeleton } from "@/components/skeletons/experience-skeleton";
+import { ShowcaseSkeleton } from "@/components/skeletons/showcase-skeleton";
+import { LastSeenSkeleton } from "@/components/skeletons/last-seen-skeleton";
+import { ContactSkeleton } from "@/components/skeletons/contact-skeleton";
+
+import { SectionErrorBoundary } from "@/components/section-error-boundary";
 
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getSeoData();
@@ -20,14 +28,15 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = site?.description || "Frontend Engineer";
   const ogTitle = site?.ogTitle || title;
   const ogDescription = site?.ogDescription || description;
-  const ogImage = site?.ogImage && typeof site.ogImage === "object"
-    ? site.ogImage.url
-    : null;
+  const ogImage =
+    site?.ogImage && typeof site.ogImage === "object"
+      ? site.ogImage.url
+      : null;
 
   return {
     title,
     description,
-    keywords: site?.keywords?.split(",")?.map(k => k.trim()),
+    keywords: site?.keywords?.split(",")?.map((k) => k.trim()),
 
     openGraph: {
       type: "website",
@@ -36,12 +45,16 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: title || "Saurav Khare",
       title: ogTitle,
       description: ogDescription,
-      images: ogImage ? [{
-        url: ogImage,
-        width: 1200,
-        height: 630,
-        alt: ogTitle,
-      }] : [],
+      images: ogImage
+        ? [
+            {
+              url: ogImage,
+              width: 1200,
+              height: 630,
+              alt: ogTitle,
+            },
+          ]
+        : [],
     },
 
     twitter: {
@@ -74,37 +87,58 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function Home() {
-
-  const [header, experience, projects, now, tech, archives] = await Promise.all([
-    getHeader(),
-    getExperiences(),
-    getProjects(),
-    getNow(),
-    getTechnologies(),
-    getArchives(),
-  ]);
-
+export default function Home() {
   return (
-    <>
-      <Hero data={header} />
-      <SubContext />
-      {/* <div className="mb-32 max-xl:px-6">
-        <Header data={header} />
-      </div> */}
-      <>
-        {/* <section className="flex flex-col xl:flex-row justify-between bg-dark-primary px-6 md:px-16 py-20 md:max-w-360 md:mx-auto">
-          <p className="text-sm text-teal-primary font-jakarta uppercase mb-4">03. NOW</p>
-          <p className="text-light-primary text-[18px] font-jakarta">{now?.[0]?.nowCompanyDescription}{" "}
-            <a href={now?.[0]?.nowCompanyLink ?? ""} className="f" target="_blank" rel="noopener noreferrer">{now?.[0]?.nowCompanyName}</a></p>
-        </section> */}
-        <Showcase data={projects ?? undefined} descriptionItalics />
-        <Experience data={experience ?? undefined} technologies={tech ?? undefined} />
-        {/* <Suspense fallback={<LastSeenLoader limit={4} />}>
-          <LastSeen user="sauravkhare" type="movies" limit={4} />
-        </Suspense> */}
-        <Footer />
-      </>
-    </>
+    <div className="min-h-screen overflow-hidden">
+      <Suspense>
+        <HeaderSection />
+      </Suspense>
+      <main className="mx-auto max-w-330 px-6 sm:px-10 lg:px-16">
+        <SectionErrorBoundary section="hero">
+          <Suspense fallback={<HeroSkeleton />}>
+            <HeroSection />
+          </Suspense>
+        </SectionErrorBoundary>
+
+        <SectionErrorBoundary section="now">
+          <Suspense fallback={<NowSkeleton />}>
+            <NowSection />
+          </Suspense>
+        </SectionErrorBoundary>
+
+        <SectionErrorBoundary section="capabilities">
+          <Suspense fallback={<CapabilitiesSkeleton />}>
+            <CapabilitiesSection />
+          </Suspense>
+        </SectionErrorBoundary>
+
+        <SectionErrorBoundary section="experience">
+          <Suspense fallback={<ExperienceSkeleton />}>
+            <ExperienceSection />
+          </Suspense>
+        </SectionErrorBoundary>
+
+        <SectionErrorBoundary section="showcase">
+          <Suspense fallback={<ShowcaseSkeleton />}>
+            <ShowcaseSection />
+          </Suspense>
+        </SectionErrorBoundary>
+
+        <SectionErrorBoundary section="last-seen">
+          <Suspense fallback={<LastSeenSkeleton />}>
+            <LastSeenSection />
+          </Suspense>
+        </SectionErrorBoundary>
+
+        <SectionErrorBoundary section="contact">
+          <Suspense fallback={<ContactSkeleton />}>
+            <ContactSection />
+          </Suspense>
+        </SectionErrorBoundary>
+      </main>
+      <Suspense>
+        <FooterSection />
+      </Suspense>
+    </div>
   );
 }

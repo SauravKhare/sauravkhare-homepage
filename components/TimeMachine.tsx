@@ -119,13 +119,9 @@ import { useState, useEffect, useRef } from "react";
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import Heading from "./Heading";
+import { Archive } from "@/payload-types";
 
-type ArchiveRecord = {
-  id?: string | null;
-  version: string;
-  yearRange: string;
-  url: string;
-};
+type ArchiveRecord = NonNullable<Archive["records"]>[number];
 
 export default function TimeMachine({ records }: { records: ArchiveRecord[] }) {
   const [isOpen, setIsOpen] = useState(false);

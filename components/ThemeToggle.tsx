@@ -4,8 +4,9 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import BedtimeOutlinedIcon from "@mui/icons-material/BedtimeOutlined";
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
+import { Moon, Sun } from 'lucide-react'
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -18,11 +19,11 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="group relative flex w-fit cursor-pointer items-center gap-2 bg-transparent transition-all duration-500"
+      className={`inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary ${className}`}
       aria-label="Toggle contrast"
     >
 
-      <span>{theme === "dark" ? (<BedtimeOutlinedIcon style={{ fontSize: 18 }} className="transition-opacity duration-300 group-hover:opacity-100" />) : (<WbSunnyOutlinedIcon style={{ fontSize: 18 }} className="transition-opacity duration-300 group-hover:opacity-100" />)}</span>
+      <span>{theme === "dark" ? (<Sun aria-hidden="true" className="h-4 w-4 transition-opacity duration-300 group-hover:opacity-100" />) : (<Moon aria-hidden="true" className="h-4 w-4 transition-opacity duration-300 group-hover:opacity-100" />)}</span>
     </button>
   );
 }

@@ -1,11 +1,10 @@
 import { calculateExperience, replaceExperienceInRichText } from "@/lib/utils";
 import { RichText } from "@/components/RichText/RichText";
-import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
-
+import { PayloadRichText } from "@/lib/types";
 
 interface HeaderBioProps {
-  bio: SerializedEditorState;
-  className?: string,
+  bio: PayloadRichText;
+  className?: string;
 }
 
 export default async function HeaderBio({ bio, className }: HeaderBioProps) {
@@ -15,13 +14,12 @@ export default async function HeaderBio({ bio, className }: HeaderBioProps) {
 
   const startDate = new Date("2021-01-15");
   const { years, months } = calculateExperience(startDate);
-  // Convert to decimal years
-  const decimalYears = (years + months / 12).toFixed(1); // "4.9"
+  const decimalYears = (years + months / 12).toFixed(1);
   const experienceText = `${decimalYears} years`;
 
   const updatedBio = replaceExperienceInRichText(bio, experienceText);
 
   return (
-    <RichText data={updatedBio as SerializedEditorState} className={`prose text-lg leading-relaxed font-body text-ink ${className}`} />
+    <RichText data={updatedBio} className={`prose text-lg leading-relaxed font-body text-ink ${className ?? ""}`} />
   )
 }

@@ -1,59 +1,109 @@
-import Link from "next/link";
+import Link from 'next/link'
+import Image from 'next/image'
+import { ArrowRight } from 'lucide-react'
+import { SectionHeading } from '@/components/section-heading'
+import { TagRow } from '@/components/tag'
+import { Reveal } from '@/components/Reveal'
+import { Experience as ExperienceType, Technology } from '@/payload-types'
+import { formatDate } from '@/lib/utils'
 
-import { Badge } from "@/components/badge";
-import { formatDate } from "@/lib/utils";
-import { Technology, type Experience } from "@/payload-types";
-import ResumeButton from "@/components/ResumeButton";
-import ScrollReveal from "@/components/ScrollReveal";
-import { Container } from "./Container";
-
-interface ExperiencesSectionProps {
-  data: {
-    docs: Experience[];
-  } | undefined;
-  technologies: {
-    docs: Technology[];
-  } | undefined;
+interface ExperienceProps {
+  data?: ExperienceType[] | null;
 }
 
-export default async function Experience({ data, technologies }: ExperiencesSectionProps) {
-  const tech = technologies?.docs.map((item) => item.technology);
+function getPeriod(exp: ExperienceType): string {
+  const start = formatDate(exp.startingDate);
+  if (exp.isCurrent) return `${start} — Now`;
+  const end = exp.endingDate ? formatDate(exp.endingDate) : "";
+  return end ? `${start} — ${end}` : start;
+}
+
+function getTechTags(exp: ExperienceType): string[] {
+  return (exp.technologies ?? [])
+    .filter((t): t is Technology => typeof t === "object" && t !== null)
+    .map((t) => t.technology);
+}
+
+const fallbackRoles = [
+  { role: 'Senior Experience Engineer', company: 'Publicis Sapient', period: 'Aug 2024 — Now', description: 'Owning the path from product intent to shipped interface: shaping interaction models, building the frontend architecture, and partnering across design and engineering to make complex work feel inevitable.', tags: ['Next.js', 'React 19', 'TypeScript', 'Design systems', 'Performance'] },
+  { role: 'Senior Systems Engineer', company: 'Infosys', period: 'Jul 2022 — Aug 2024', description: 'Led SPA-to-Next.js migrations and hybrid rendering work that improved performance by 20%. Extended search with Coveo and AI-assisted discovery without losing product clarity.', tags: ['React', 'Next.js', 'Redux', 'Coveo', 'SSR'] },
+  { role: 'UI / Frontend Developer', company: 'Voraco', period: 'Jan 2021 — Jul 2022', description: 'Built responsive React products from the ground up, including reusable UI libraries, GraphQL integrations, accessible states, and a WordPress-to-Craft CMS migration.', tags: ['React', 'TypeScript', 'GraphQL', 'Tailwind', 'Craft CMS'] },
+]
+
+export function Experience({ data }: ExperienceProps) {
+  const hasCmsData = data && data.length > 0;
+
   return (
-    <Container id="experience" borderBottom={true}>
-      <div className="flex flex-col lg:flex-row gap-32 justify-between items-start">
-        <div className="w-2/3">
-          <p className="text-sm text-teal-primary font-jakarta uppercase mb-4">03. EXPERIENCE</p>
-          <div className="">
-            {
-              data?.docs.map((item, i) => (
-                <ScrollReveal key={item.id} delay={i * 0.15}>
-                  <div key={item.id} className="mb-8">
-                    <div className="flex justify-between items-center">
-                      <p className="font-fraunces text-light-primary text-2xl font-medium mb-2">{item.position}</p>
-                      <p className="font-jakarta text-[12px] text-light-primary">{formatDate(item.startingDate)} <span>–</span>
-                        {item.isCurrent ? `Present` : formatDate(item.endingDate ?? "")}</p>
-                    </div>
-                    <p className="font-jakarta text-[16px] text-teal-primary"><Link
-                      href={item?.link ?? ""}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.companyName}
-                    </Link></p>
-                    <p className="text-width mt-2.5 font-jakarta text-light-primary text-[16px] leading-6">{item.description}</p>
-                  </div>
-                </ScrollReveal>
-              ))
-            }
-          </div>
+    <section id="experience" aria-labelledby="experience-heading" className="section-space scroll-mt-24">
+      <div className="relative">
+        <div className="pointer-events-none absolute -right-4 -top-10 z-0 hidden h-32 w-32 opacity-40 mix-blend-screen lg:block" aria-hidden="true">
+          <Image src="/art/abstract-flow.png" alt="" fill sizes="128px" className="float-slow object-contain" />
         </div>
-        <div className="w-1/3">
-          <p className="text-sm text-teal-primary font-jakarta uppercase mb-4">04. ARSENAL</p>
-          <div className="flex flex-wrap gap-3">
-            {tech?.map((item) => (<div className="px-2 py-3 rounded-md text-light-primary border border-light-primary/10 font-jakarta uppercase">{item}</div>))}
-          </div>
-        </div>
+        <Reveal as="header">
+          <SectionHeading id="experience-heading" label="The path" title="Six years of making complexity disappear">
+            <span className="text-foreground/65">Different products, same instinct: find the essential signal and build the system around it.</span>
+          </SectionHeading>
+        </Reveal>
       </div>
-    </Container>
-  );
+
+      <ol className="mt-16 flex flex-col">
+        {hasCmsData
+          ? data.map((exp, i) => (
+              <Reveal
+                as="li"
+                key={exp.id}
+                delay={i * 90}
+                className="group relative grid gap-4 border-t border-border py-10 transition-colors hover:bg-primary/[0.02] sm:grid-cols-[auto_1fr_150px] sm:gap-10"
+              >
+                <span className="ghost-index text-4xl sm:text-6xl" aria-hidden="true">0{i + 1}</span>
+                <div>
+                  <span className="block h-px w-8 bg-primary transition-all duration-500 group-hover:w-16" aria-hidden="true" />
+                  <h3 className="mt-4 font-serif text-2xl tracking-tight sm:text-3xl">
+                    {exp.position} <span className="text-primary">/ {exp.companyName}</span>
+                  </h3>
+                  {exp.link && (
+                    <a href={exp.link} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-sm text-primary hover:underline">
+                      {exp.companyName}
+                    </a>
+                  )}
+                  {exp.description && (
+                    <p className="mt-4 max-w-2xl text-sm leading-relaxed text-foreground/68">{exp.description}</p>
+                  )}
+                  <div className="mt-5">
+                    <TagRow tags={getTechTags(exp)} />
+                  </div>
+                </div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground sm:pt-2 sm:text-right">{getPeriod(exp)}</p>
+              </Reveal>
+            ))
+          : fallbackRoles.map((r, i) => (
+              <Reveal
+                as="li"
+                key={r.company}
+                delay={i * 90}
+                className="group relative grid gap-4 border-t border-border py-10 transition-colors hover:bg-primary/[0.02] sm:grid-cols-[auto_1fr_150px] sm:gap-10"
+              >
+                <span className="ghost-index text-4xl sm:text-6xl" aria-hidden="true">0{i + 1}</span>
+                <div>
+                  <span className="block h-px w-8 bg-primary transition-all duration-500 group-hover:w-16" aria-hidden="true" />
+                  <h3 className="mt-4 font-serif text-2xl tracking-tight sm:text-3xl">
+                    {r.role} <span className="text-primary">/ {r.company}</span>
+                  </h3>
+                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-foreground/68">{r.description}</p>
+                  <div className="mt-5">
+                    <TagRow tags={r.tags} />
+                  </div>
+                </div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground sm:pt-2 sm:text-right">{r.period}</p>
+              </Reveal>
+            ))}
+      </ol>
+
+      <Reveal delay={160}>
+        <Link href="/resume" className="group mt-14 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-primary">
+          View full résumé <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+      </Reveal>
+    </section>
+  )
 }

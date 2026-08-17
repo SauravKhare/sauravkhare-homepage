@@ -1,8 +1,9 @@
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { cacheTag } from "next/cache";
+import { Experience } from "@/payload-types";
 
-export async function getExperiences() {
+export async function getExperiences(): Promise<Experience[] | null> {
   "use cache";
   cacheTag("experiences");
 
@@ -14,8 +15,7 @@ export async function getExperiences() {
       pagination: false,
       sort: "-startingDate",
     });
-
-    return data;
+    return data.docs;
   } catch (error) {
     console.error("Failed to fetch experiences", error);
     return null;

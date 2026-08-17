@@ -17,7 +17,6 @@ export default async function Socials() {
           <SocialIcon
             iconName={item.platformIcon || undefined}
             size={20}
-            weight="fill"
           />
         </Link>
       ))}

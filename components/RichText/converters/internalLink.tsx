@@ -13,9 +13,7 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
     ? String(value.slug)
     : undefined;
 
-  if (relationTo === "posts") {
-    return `/posts/${slug ?? ""}`;
-  } else if (relationTo === "users") {
+  if (relationTo === "users") {
     return `/users/${slug ?? ""}`;
   } else {
     return `/${slug ?? ""}`;

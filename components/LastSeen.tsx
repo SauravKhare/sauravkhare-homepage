@@ -1,59 +1,70 @@
-import Image from "next/image";
-import { getLastSeenMovies } from "@/fetchers/movies";
-import { StaggerGroup, StaggerItem } from "@/components/StaggerGrid";
+import Image from 'next/image'
+import { SectionHeading } from '@/components/section-heading'
+import { Reveal } from '@/components/Reveal'
+import type { TraktMovie } from '@/fetchers/movies/types'
 
-export default async function LastSeen({
-  user,
-  type,
-  limit,
-}: {
-  user: string;
-  type: string;
-  limit: number;
-}) {
-  const movies = await getLastSeenMovies(user, type, limit);
+interface LastSeenProps {
+  data?: TraktMovie[] | null;
+}
 
-  if (!movies || movies.length === 0) {
-    return <p className="text-ink/70">No movies found.</p>;
-  }
+const fallbackMovies = [
+  { title: 'Perfect Days', year: '2023', director: 'Wim Wenders', poster: '/movies/perfect-days.png' },
+  { title: 'Drive', year: '2011', director: 'Nicolas Winding Refn', poster: '/movies/drive.png' },
+  { title: 'Whiplash', year: '2014', director: 'Damien Chazelle', poster: '/movies/whiplash.png' },
+  { title: 'La Haine', year: '1995', director: 'Mathieu Kassovitz', poster: '/movies/la-haine.png' },
+]
+
+export function LastSeen({ data }: LastSeenProps) {
+  const hasCmsData = data && data.length > 0;
 
   return (
-    <section className="py-20 bg-dark-primary md:max-w-360 mx-auto">
-      <p className="text-sm text-teal-primary font-jakarta uppercase mb-4 px-6 md:px-16">03. LAST SEEN</p>
-      <p className="font-fraunces text-[40px] text-light-primary mb-4 px-6 md:px-16">Recently Watched</p>
-      <div className="max-sm:-mx-6 md:px-16">
-        <StaggerGroup className="flex gap-8 overflow-x-scroll no-scrollbar max-sm:px-6">
-          {movies.map((movie: any) => (
-            <StaggerItem key={movie.id} className="basis-36 will-change-transform">
-              <a
-                href={`https://www.imdb.com/title/${movie.movie.ids.imdb}`}
-                target="_blank"
-                className="shrink-0 group block outline-none"
-              >
-                <div className="w-32 h-48 md:w-66 md:h-[396] rounded-md overflow-hidden bg-ink/5">
-                  {movie.movie.posterUrl ? (
-                    <Image
-                      src={movie.movie.posterUrl}
-                      alt={movie.movie.title}
-                      width={262}
-                      height={394}
-                      className="object-cover transition-all duration-500 ease-out group-hover:scale-105 transform-gpu backface-hidden will-change-transform"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-ink/40 text-sm">No Poster</span>
-                    </div>
-                  )}
+    <section aria-labelledby="last-seen-heading" className="my-28">
+      <Reveal as="header">
+        <SectionHeading id="last-seen-heading" label="Off the clock" title="Last seen">
+          <span className="text-foreground/70">Stories with a point of view. The other half of how I think about craft.</span>
+        </SectionHeading>
+      </Reveal>
+
+      <ul className="-mx-6 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-3 sm:mx-0 sm:grid sm:grid-cols-4 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0">
+        {hasCmsData
+          ? data.map((item, index) => (
+              <Reveal as="li" key={item.id} delay={index * 60} className="group min-w-[42vw] snap-start sm:min-w-0">
+                <a
+                  href={`https://www.imdb.com/title/${item.movie.ids.imdb}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <div className="dither relative aspect-[2/3] overflow-hidden bg-secondary">
+                    {item.movie.posterUrl ? (
+                      <Image
+                        src={item.movie.posterUrl}
+                        alt={item.movie.title}
+                        fill
+                        sizes="(max-width: 640px) 42vw, 25vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center">
+                        <span className="text-sm text-muted-foreground">No Poster</span>
+                      </div>
+                    )}
+                  </div>
+                  <p className="mt-3 font-serif text-sm">{item.movie.title}</p>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">{item.movie.year}</p>
+                </a>
+              </Reveal>
+            ))
+          : fallbackMovies.map((movie, index) => (
+              <Reveal as="li" key={movie.title} delay={index * 60} className="group min-w-[42vw] snap-start sm:min-w-0">
+                <div className="dither relative aspect-[2/3] overflow-hidden bg-secondary">
+                  <Image src={movie.poster} alt={`Poster for ${movie.title}`} fill sizes="(max-width: 640px) 42vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
                 </div>
-                <div className="flex flex-col text-[13px] md:text-[18px] text-light-primary font-jakarta transition-colors duration-300">
-                  {movie.movie.title}
-                  <span className="text-xs">{movie.movie.year}</span>
-                </div>
-              </a>
-            </StaggerItem>
-          ))}
-        </StaggerGroup>
-      </div>
+                <p className="mt-3 font-serif text-sm">{movie.title}</p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">{movie.year} · {movie.director}</p>
+              </Reveal>
+            ))}
+      </ul>
     </section>
-  );
+  )
 }

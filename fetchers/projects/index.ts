@@ -1,8 +1,9 @@
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { cacheTag } from "next/cache";
+import { Project } from "@/payload-types";
 
-export async function getProjects() {
+export async function getProjects(): Promise<Project[] | null> {
   "use cache";
   cacheTag("projects");
 
@@ -14,8 +15,7 @@ export async function getProjects() {
       pagination: false,
       sort: "order",
     });
-
-    return data;
+    return data.docs;
   } catch (error) {
     console.error("Failed to fetch projects", error);
     return null;
