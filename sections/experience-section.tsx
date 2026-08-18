@@ -1,7 +1,11 @@
+import { getExperienceConfig } from "@/fetchers/globals";
 import { getExperiences } from "@/fetchers/experiences";
 import { Experience } from "@/components/Experience";
 
 export async function ExperienceSection() {
-  const data = await getExperiences();
-  return <Experience data={data} />;
+  const [config, experiences] = await Promise.all([
+    getExperienceConfig(),
+    getExperiences(),
+  ]);
+  return <Experience config={config} data={experiences} />;
 }

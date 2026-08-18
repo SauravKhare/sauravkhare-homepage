@@ -3,9 +3,10 @@ import { ArrowUpRight, ExternalLink } from 'lucide-react'
 import { SectionHeading } from '@/components/section-heading'
 import { TagRow } from '@/components/tag'
 import { Reveal } from '@/components/Reveal'
-import { Project as ProjectType, Technology, Media } from '@/payload-types'
+import { Project as ProjectType, Technology, Media, type Showcase as ShowcaseConfig } from '@/payload-types'
 
 interface ShowcaseProps {
+  config?: ShowcaseConfig | null;
   data?: ProjectType[] | null;
 }
 
@@ -29,15 +30,19 @@ const fallbackProjects = [
   { title: 'Ledger', type: 'Product system', year: '2024', description: 'A finance workspace designed around hierarchy, useful defaults, and trust.', href: '#contact', image: '/projects/ledger.png', tags: ['Next.js', 'TypeScript', 'Postgres'] },
 ]
 
-export function Showcase({ data }: ShowcaseProps) {
+export function Showcase({ config, data }: ShowcaseProps) {
   const hasCmsData = data && data.length > 0;
+  const heading = config?.heading;
 
   return (
     <section id="work" aria-labelledby="showcase-heading" className="section-space scroll-mt-24">
       <Reveal as="header">
-        <SectionHeading id="showcase-heading" label="Selected work" title="Built to be used">
-          <span className="text-foreground/65">A few places where product thinking, interface craft, and engineering discipline meet.</span>
-        </SectionHeading>
+        <SectionHeading
+          id="showcase-heading"
+          label={heading?.label ?? "Selected work"}
+          title={heading?.title ?? "Built to be used"}
+          subtitle={heading?.subtitle}
+        />
       </Reveal>
 
       <div className="mt-16 flex flex-col gap-y-20">

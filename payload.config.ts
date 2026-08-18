@@ -10,8 +10,17 @@ import { Media } from "@/collections/Media";
 import { Experiences } from "@/collections/Experiences";
 import { Technologies } from "@/collections/Technologies";
 import { Projects } from "@/collections/Projects";
-import { SiteGlobal } from "@/collections/SiteGlobal";
 import { Documents } from "@/collections/Documents";
+import { Capabilities } from "@/collections/Capabilities";
+
+import { Site } from "@/collections/globals/Site";
+import { Hero } from "@/collections/globals/Hero";
+import { Now } from "@/collections/globals/Now";
+import { ExperienceConfig } from "@/collections/globals/Experience";
+import { ShowcaseConfig } from "@/collections/globals/Showcase";
+import { LastSeenConfig } from "@/collections/globals/LastSeen";
+import { Contact } from "@/collections/globals/Contact";
+import { FooterConfig } from "@/collections/globals/Footer";
 import { Archives } from "@/collections/globals/Archives";
 
 import { fileURLToPath } from "url";
@@ -28,8 +37,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  globals: [SiteGlobal, Archives],
-  collections: [Users, Media, Documents, Experiences, Technologies, Projects],
+  globals: [Site, Hero, Now, ExperienceConfig, ShowcaseConfig, LastSeenConfig, Contact, FooterConfig, Archives],
+  collections: [Users, Media, Documents, Experiences, Technologies, Projects, Capabilities],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

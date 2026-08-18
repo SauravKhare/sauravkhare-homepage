@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
-import { getSeoData } from "@/fetchers/globals";
+import { getSiteData } from "@/fetchers/globals";
 
 import { HeaderSection } from "@/sections/header-section";
 import { HeroSection } from "@/sections/hero-section";
@@ -23,8 +23,10 @@ import { ContactSkeleton } from "@/components/skeletons/contact-skeleton";
 import { SectionErrorBoundary } from "@/components/section-error-boundary";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const site = await getSeoData();
-  const title = site?.title || "Saurav Khare";
+  const siteData = await getSiteData();
+  const site = siteData?.seo;
+  const brandName = siteData?.brandName || "Saurav Khare";
+  const title = site?.title || brandName;
   const description = site?.description || "Frontend Engineer";
   const ogTitle = site?.ogTitle || title;
   const ogDescription = site?.ogDescription || description;
@@ -42,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       locale: "en_US",
       url: site?.canonicalUrl || "https://sauravkhare.com",
-      siteName: title || "Saurav Khare",
+      siteName: title || brandName,
       title: ogTitle,
       description: ogDescription,
       images: ogImage
@@ -59,7 +61,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
     twitter: {
       card: "summary_large_image",
-      site: title || "Saurav Khare",
+      site: title || brandName,
       creator: site?.twitterHandle || "",
       title: ogTitle,
       description: ogDescription,
@@ -82,8 +84,8 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: site?.canonicalUrl || "https://sauravkhare.com",
     },
 
-    authors: [{ name: "Saurav Khare" }],
-    creator: "Saurav Khare",
+    authors: [{ name: brandName }],
+    creator: brandName,
   };
 }
 

@@ -4,10 +4,11 @@ import { ArrowRight } from 'lucide-react'
 import { SectionHeading } from '@/components/section-heading'
 import { TagRow } from '@/components/tag'
 import { Reveal } from '@/components/Reveal'
-import { Experience as ExperienceType, Technology } from '@/payload-types'
+import { Experience as ExperienceType, Technology, Experience1 } from '@/payload-types'
 import { formatDate } from '@/lib/utils'
 
 interface ExperienceProps {
+  config?: Experience1 | null;
   data?: ExperienceType[] | null;
 }
 
@@ -30,19 +31,25 @@ const fallbackRoles = [
   { role: 'UI / Frontend Developer', company: 'Voraco', period: 'Jan 2021 — Jul 2022', description: 'Built responsive React products from the ground up, including reusable UI libraries, GraphQL integrations, accessible states, and a WordPress-to-Craft CMS migration.', tags: ['React', 'TypeScript', 'GraphQL', 'Tailwind', 'Craft CMS'] },
 ]
 
-export function Experience({ data }: ExperienceProps) {
+export function Experience({ config, data }: ExperienceProps) {
   const hasCmsData = data && data.length > 0;
+  const heading = config?.heading;
 
   return (
     <section id="experience" aria-labelledby="experience-heading" className="section-space scroll-mt-24">
       <div className="relative">
-        <div className="pointer-events-none absolute -right-4 -top-10 z-0 hidden h-32 w-32 opacity-40 mix-blend-screen lg:block" aria-hidden="true">
-          <Image src="/art/abstract-flow.png" alt="" fill sizes="128px" className="float-slow object-contain" />
-        </div>
+        {config?.decorativeImage && typeof config.decorativeImage === "object" && "url" in config.decorativeImage && (
+          <div className="pointer-events-none absolute -right-4 -top-10 z-0 hidden h-32 w-32 opacity-40 mix-blend-screen lg:block" aria-hidden="true">
+            <Image src={config.decorativeImage.url!} alt="" fill sizes="128px" className="float-slow object-contain" />
+          </div>
+        )}
         <Reveal as="header">
-          <SectionHeading id="experience-heading" label="The path" title="Six years of making complexity disappear">
-            <span className="text-foreground/65">Different products, same instinct: find the essential signal and build the system around it.</span>
-          </SectionHeading>
+          <SectionHeading
+            id="experience-heading"
+            label={heading?.label ?? "The path"}
+            title={heading?.title ?? "Six years of making complexity disappear"}
+            subtitle={heading?.subtitle}
+          />
         </Reveal>
       </div>
 
@@ -100,8 +107,8 @@ export function Experience({ data }: ExperienceProps) {
       </ol>
 
       <Reveal delay={160}>
-        <Link href="/resume" className="group mt-14 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-primary">
-          View full résumé <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        <Link href={config?.cta?.href ?? "/resume"} className="group mt-14 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-primary">
+          {config?.cta?.text ?? "View full résumé"} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </Reveal>
     </section>

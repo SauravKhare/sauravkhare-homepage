@@ -1,7 +1,13 @@
-import { getSocials } from "@/fetchers/globals";
+import { getContactConfig, getSiteData } from "@/fetchers/globals";
 import { Contact } from "@/components/Contact";
 
 export async function ContactSection() {
-  const data = await getSocials();
-  return <Contact data={data} />;
+  const [config, site] = await Promise.all([getContactConfig(), getSiteData()]);
+  return (
+    <Contact
+      config={config}
+      email={site?.email ?? "hello@sauravkhare.com"}
+      socials={site?.socialPlatforms ?? []}
+    />
+  );
 }
