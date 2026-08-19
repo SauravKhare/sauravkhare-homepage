@@ -3,6 +3,7 @@ import { ArrowUp } from 'lucide-react'
 import { Footerconfig, Site } from '@/payload-types'
 import { RichText } from '@/components/RichText/RichText'
 import SocialIcon from '@/components/SocialIcon'
+import { CopyrightYear } from '@/components/CopyrightYear'
 
 interface FooterProps {
   config?: Footerconfig | null;
@@ -67,7 +68,7 @@ export function Footer({ config, brandName = "Saurav Khare", email = "hello@saur
         </div>
 
         <div className="mt-14 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{config?.copyright ?? "Bengaluru · India"} · © {new Date().getFullYear()}</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{config?.copyright ?? "Pune · India"} · © <CopyrightYear /></p>
           <Link href={config?.cta?.href ?? "#top"} className="group inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-primary">
             {config?.cta?.text ?? "Back to top"} <ArrowUp className="h-3 w-3 transition-transform group-hover:-translate-y-1" />
           </Link>
