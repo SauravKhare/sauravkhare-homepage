@@ -41,7 +41,7 @@ export function Hero({ data }: HeroProps) {
                 </div>
               </Reveal>
             )}
-            {data.cta && (
+            {data.cta?.href && (
               <Reveal delay={210}>
                 <div className="mt-10">
                   <Link href={data.cta.href} className="group inline-flex items-center gap-2 border-b-2 border-primary pb-1.5 font-mono text-xs uppercase tracking-[0.13em] text-foreground transition-colors hover:text-primary">

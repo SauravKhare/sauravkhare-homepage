@@ -14,6 +14,14 @@ interface FooterProps {
 }
 
 export function Footer({ config, brandName = "Saurav Khare", email = "hello@sauravkhare.com", socials, navLinks }: FooterProps) {
+  const defaultNavLinks: NonNullable<Site["footerNavLinks"]> = [
+    { label: 'Craft', href: '#capabilities', id: "1" },
+    { label: 'Experience', href: '#experience', id: "2" },
+    { label: 'Work', href: '#work', id: "3" },
+    { label: 'Contact', href: '#contact', id: "4" },
+  ];
+  const validNavLinks = (navLinks ?? []).filter((item) => typeof item.href === "string" && item.href.trim().length > 0);
+  const navItems = validNavLinks.length > 0 ? validNavLinks : defaultNavLinks;
   return (
     <footer className="relative mt-32 overflow-hidden border-t border-border">
       <div className="mx-auto max-w-[1320px] px-6 pt-16 sm:px-10 lg:px-16">
@@ -36,12 +44,7 @@ export function Footer({ config, brandName = "Saurav Khare", email = "hello@saur
 
           <nav aria-label="Footer" className="flex flex-col gap-3">
             <p className="eyebrow mb-1">Index</p>
-            {(navLinks && navLinks.length > 0 ? navLinks : [
-              { label: 'Craft', href: '#capabilities', id: "1" },
-              { label: 'Experience', href: '#experience', id: "2" },
-              { label: 'Work', href: '#work', id: "3" },
-              { label: 'Contact', href: '#contact', id: "4" },
-            ]).map((item) => (
+            {navItems.map((item) => (
               <Link key={item.id} href={item.href} className="text-sm text-foreground/75 transition-colors hover:text-primary">
                 {item.label}
               </Link>

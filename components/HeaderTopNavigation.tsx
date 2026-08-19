@@ -31,7 +31,8 @@ export default function HeaderTopNavigation({
     { label: 'Work', href: '#work', id: "2" },
     { label: 'Contact', href: '#contact', id: "3" },
   ]
-  const links = navLinks && navLinks.length > 0 ? navLinks : defaultLinks;
+  const validNavLinks = (navLinks ?? []).filter((item) => typeof item.href === "string" && item.href.trim().length > 0);
+  const links = validNavLinks.length > 0 ? validNavLinks : defaultLinks;
 
   return (
     <header className="relative z-30">
