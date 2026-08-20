@@ -1,9 +1,9 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
-import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
-import { uploadthingStorage } from "@payloadcms/storage-uploadthing";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig, SharpDependency } from "payload";
 import { resendAdapter } from '@payloadcms/email-resend';
+
+import { cloudinaryStorage } from "@/lib/storage/cloudinary";
 
 import { Users } from "@/collections/Users";
 import { Media } from "@/collections/Media";
@@ -57,18 +57,19 @@ export default buildConfig({
   }),
   sharp: sharp as SharpDependency,
   plugins: [
-    payloadCloudPlugin(),
-    uploadthingStorage({
+    cloudinaryStorage({
       collections: {
         media: true,
         documents: {
           disablePayloadAccessControl: true,
         },
       },
-      options: {
-        token: process.env.UPLOADTHING_TOKEN || "",
-        acl: 'public-read',
+      cloudConfig: {
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME || '',
+        api_key: process.env.CLOUDINARY_API_KEY || '',
+        api_secret: process.env.CLOUDINARY_API_SECRET || '',
       },
+      folder: 'homepage',
     }),
   ],
 });

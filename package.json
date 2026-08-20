@@ -29,9 +29,8 @@
     "@payloadcms/db-postgres": "3.84.1",
     "@payloadcms/email-resend": "3.84.1",
     "@payloadcms/next": "3.84.1",
-    "@payloadcms/payload-cloud": "3.84.1",
+    "@payloadcms/plugin-cloud-storage": "^3.88.0",
     "@payloadcms/richtext-lexical": "3.84.1",
-    "@payloadcms/storage-uploadthing": "3.84.1",
     "@payloadcms/ui": "3.84.1",
     "@phosphor-icons/react": "^2.1.10",
     "@radix-ui/react-dialog": "^1.1.19",
@@ -41,6 +40,7 @@
     "@vercel/edge-config": "^1.4.3",
     "axios": "^1.16.1",
     "class-variance-authority": "^0.7.1",
+    "cloudinary": "^2.10.1",
     "clsx": "^2.1.1",
     "geist": "^1.7.0",
     "graphql": "^16.14.0",
@@ -77,8 +77,5 @@
     "prettier": "3.5.3",
     "typescript": "^6.0.3"
   },
-  "packageManager": "pnpm@11.22.0",
-  "resolutions": {
-    "uploadthing": "^7.7.3"
-  }
+  "packageManager": "pnpm@11.22.0"
 }

@@ -7,6 +7,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "images-na.ssl-images-amazon.com",
         port: "",
         pathname: "/images/**",
