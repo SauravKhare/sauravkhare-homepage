@@ -55,7 +55,7 @@ export const FALLBACK_PROJECTS = [
     description:
       "An anonymous, self-destructing chat room powered by serverless real-time messaging.",
     href: "https://poof-rho.vercel.app",
-    image: "/projects/poof.png",
+    image: "/projects/poof.webp",
     tags: ["Next.js", "TypeScript", "Tailwind", "ElysiaJS"],
   },
   {
@@ -65,7 +65,7 @@ export const FALLBACK_PROJECTS = [
     description:
       "Telemetry for curious fans: dense race data transformed into a calm, readable tool.",
     href: "#contact",
-    image: "/projects/grid.png",
+    image: "/projects/grid.webp",
     tags: ["React", "D3", "SWR", "Edge"],
   },
   {
@@ -75,7 +75,7 @@ export const FALLBACK_PROJECTS = [
     description:
       "A finance workspace designed around hierarchy, useful defaults, and trust.",
     href: "#contact",
-    image: "/projects/ledger.png",
+    image: "/projects/ledger.webp",
     tags: ["Next.js", "TypeScript", "Postgres"],
   },
 ];
@@ -86,25 +86,25 @@ export const FALLBACK_MOVIES = [
     title: "Perfect Days",
     year: "2023",
     director: "Wim Wenders",
-    poster: "/movies/perfect-days.png",
+    poster: "/movies/perfect-days.webp",
   },
   {
     title: "Drive",
     year: "2011",
     director: "Nicolas Winding Refn",
-    poster: "/movies/drive.png",
+    poster: "/movies/drive.webp",
   },
   {
     title: "Whiplash",
     year: "2014",
     director: "Damien Chazelle",
-    poster: "/movies/whiplash.png",
+    poster: "/movies/whiplash.webp",
   },
   {
     title: "La Haine",
     year: "1995",
     director: "Mathieu Kassovitz",
-    poster: "/movies/la-haine.png",
+    poster: "/movies/la-haine.webp",
   },
 ];
 
@@ -115,7 +115,7 @@ export const FALLBACK_FEATURES = [
     label: "Shape",
     title: "UI & interaction",
     copy: "A sharp visual system, fluid responsive behavior, and interactions that quietly explain themselves.",
-    image: "/art/classical-face.png",
+    image: "/art/classical-face.webp",
     alt: "Dithered engraving of a classical marble face",
   },
   {
@@ -123,7 +123,7 @@ export const FALLBACK_FEATURES = [
     label: "Structure",
     title: "Frontend architecture",
     copy: "React, Next.js, TypeScript, rendering strategy, component APIs, and boundaries that hold as products grow.",
-    image: "/art/abstract-grid.png",
+    image: "/art/abstract-grid.webp",
     alt: "Dithered warped wireframe grid",
   },
   {
@@ -131,7 +131,7 @@ export const FALLBACK_FEATURES = [
     label: "Connect",
     title: "Backend & data",
     copy: "The interface does not stop at the browser. I design the routes, contracts, caching, and services behind it.",
-    image: "/art/abstract-flow.png",
+    image: "/art/abstract-flow.webp",
     alt: "Dithered flowing contour interference pattern",
   },
   {
@@ -139,7 +139,7 @@ export const FALLBACK_FEATURES = [
     label: "Include",
     title: "Accessibility & quality",
     copy: "Keyboard paths, semantics, testing, performance budgets, and the confidence to ship without holding your breath.",
-    image: "/art/classical-face-2.png",
+    image: "/art/classical-face-2.webp",
     alt: "Dithered engraving of a classical figure",
   },
   {
@@ -147,7 +147,7 @@ export const FALLBACK_FEATURES = [
     label: "Extend",
     title: "AI-enabled products",
     copy: "Useful AI experiences with thoughtful streaming, tool calls, states, and a human-first fallback.",
-    image: "/art/abstract-burst.png",
+    image: "/art/abstract-burst.webp",
     alt: "Dithered radial starburst",
   },
   {
@@ -155,7 +155,7 @@ export const FALLBACK_FEATURES = [
     label: "Sustain",
     title: "Performance & polish",
     copy: "Core Web Vitals, motion with intent, and the last 5% of detail that makes work feel finished.",
-    image: "/art/abstract-sphere.png",
+    image: "/art/abstract-sphere.webp",
     alt: "Dithered fragmented particle sphere",
   },
 ];
