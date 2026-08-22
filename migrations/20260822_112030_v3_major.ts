@@ -2,7 +2,6 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
-  ALTER TABLE "now" ADD COLUMN "description" varchar;
   ALTER TABLE "media" DROP COLUMN "prefix";
   ALTER TABLE "documents" DROP COLUMN "prefix";`)
 }
@@ -10,6 +9,5 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    ALTER TABLE "media" ADD COLUMN "prefix" varchar DEFAULT '';
-  ALTER TABLE "documents" ADD COLUMN "prefix" varchar DEFAULT '';
-  ALTER TABLE "now" DROP COLUMN "description";`)
+  ALTER TABLE "documents" ADD COLUMN "prefix" varchar DEFAULT '';`)
 }
