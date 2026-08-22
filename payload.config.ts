@@ -1,5 +1,6 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { TextColorFeature } from "@/fields/textColor/server";
 import { buildConfig, SharpDependency } from "payload";
 import { resendAdapter } from '@payloadcms/email-resend';
 
@@ -39,7 +40,12 @@ export default buildConfig({
   },
   globals: [Site, Hero, Now, ExperienceConfig, ShowcaseConfig, LastSeenConfig, Contact, FooterConfig, Archives],
   collections: [Users, Media, Documents, Experiences, Technologies, Projects, Capabilities],
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      TextColorFeature(),
+    ],
+  }),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),

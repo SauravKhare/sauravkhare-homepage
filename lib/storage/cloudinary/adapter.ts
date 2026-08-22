@@ -24,8 +24,17 @@ function getResourceType(mimeType: string): 'image' | 'video' | 'raw' {
   return 'raw'
 }
 
-function getCloudinaryPublicId(prefix: string | undefined, filename: string): string {
-  const name = filename.replace(/\.[^/.]+$/, '')
+function getFileExtension(filename: string): string {
+  const match = filename.match(/\.[^/.]+$/)
+  return match ? match[0] : ''
+}
+
+function getCloudinaryPublicId(
+  prefix: string | undefined,
+  filename: string,
+  { keepExtension = false }: { keepExtension?: boolean } = {},
+): string {
+  const name = keepExtension ? filename : filename.replace(/\.[^/.]+$/, '')
   return prefix ? `${prefix}/${name}` : name
 }
 
@@ -58,7 +67,9 @@ export function createCloudinaryAdapter({
         cloudinary.config(cloudConfig)
 
         const resourceType = getResourceType(file.mimeType)
-        const publicId = getCloudinaryPublicId(folder, file.filename)
+        const basePublicId = getCloudinaryPublicId(folder, file.filename)
+        const extension = getFileExtension(file.filename)
+        const publicId = resourceType === 'raw' ? `${basePublicId}${extension}` : basePublicId
 
         const uploadResult = await new Promise<UploadApiResponse>((resolve, reject) => {
           const stream = cloudinary.uploader.upload_stream(
@@ -93,7 +104,11 @@ export function createCloudinaryAdapter({
           sizes[foundSize]._key = uploadResult.public_id
         } else {
           data._key = uploadResult.public_id
-          data.filename = uploadResult.public_id.split('/').pop() + '.' + uploadResult.format
+          const uploadedName = uploadResult.public_id.split('/').pop() || file.filename
+          data.filename =
+            resourceType === 'raw'
+              ? uploadedName
+              : `${uploadedName}.${uploadResult.format || extension.replace(/^\./, '')}`
           data.filesize = uploadResult.bytes
         }
 
@@ -111,11 +126,12 @@ export function createCloudinaryAdapter({
         const cloudinary = (await import('cloudinary')).v2
         cloudinary.config(cloudConfig)
 
-        const publicId = getCloudinaryPublicId(folder, filename)
-
         const docRecord = doc as unknown as Record<string, unknown>
         const mimeType = docRecord.mimeType as string | undefined
         const resourceType = mimeType ? getResourceType(mimeType) : 'raw'
+        const basePublicId = getCloudinaryPublicId(folder, filename)
+        const publicId =
+          resourceType === 'raw' ? `${basePublicId}${getFileExtension(filename)}` : basePublicId
 
         await cloudinary.uploader.destroy(publicId, { resource_type: resourceType })
       } catch (error: unknown) {
@@ -127,15 +143,15 @@ export function createCloudinaryAdapter({
 
     generateURL: ({ filename, prefix }) => {
       const cloudName = cloudConfig.cloud_name
-      const publicId = getCloudinaryPublicId(prefix || folder, filename)
       const ext = filename.split('.').pop()
       const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif', 'svg'].includes(ext || '')
 
       if (isImage) {
+        const publicId = getCloudinaryPublicId(prefix || folder, filename)
         return `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto/v1/${publicId}.${ext}`
       }
 
-      return `https://res.cloudinary.com/${cloudName}/raw/upload/${publicId}.${ext}`
+      return `https://res.cloudinary.com/${cloudName}/raw/upload/${getCloudinaryPublicId(prefix || folder, filename, { keepExtension: true })}`
     },
 
     staticHandler: (async (req: PayloadRequest, { params: { collection, filename, prefix } }) => {
@@ -143,7 +159,7 @@ export function createCloudinaryAdapter({
         const cloudinary = (await import('cloudinary')).v2
         cloudinary.config(cloudConfig)
 
-        const publicId = getCloudinaryPublicId(prefix || folder, filename)
+        const basePublicId = getCloudinaryPublicId(prefix || folder, filename)
         const collectionSlug = collection as UploadCollectionSlug
         const collectionConfig = req.payload.collections[collectionSlug]?.config
 
@@ -177,6 +193,10 @@ export function createCloudinaryAdapter({
 
         const docMimeType = retrievedDoc.mimeType as string | undefined
         const resourceType = docMimeType ? getResourceType(docMimeType) : 'raw'
+        const publicId =
+          resourceType === 'raw'
+            ? `${basePublicId}${getFileExtension(filename)}`
+            : basePublicId
 
         const url = cloudinary.url(publicId, {
           resource_type: resourceType,
