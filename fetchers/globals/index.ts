@@ -1,90 +1,71 @@
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { cacheTag } from "next/cache";
+import { TAGS } from "@/lib/cache-tags";
+import {
+  Site,
+  Hero,
+  Now,
+  Experience1,
+  Showcase,
+  Lastseen,
+  Contact,
+  Footerconfig,
+  Archive,
+} from "@/payload-types";
 
-export async function getGlobalData() {
-  "use cache";
-  cacheTag("siteglobal", "footer", "socials", "header", "now", "resume", "globalSeo");
+function createGlobalFetcher<T>(
+  slug: string,
+  tags: string[],
+): () => Promise<T | null> {
+  return async function fetchGlobal() {
+    "use cache";
+    cacheTag(...tags);
 
-  try {
-    const payload = await getPayload({ config: configPromise });
-    const data = await payload.findGlobal({ slug: "siteglobal" });
-    return data;
-  } catch (error) {
-    console.error("Failed to fetch global data", error);
-    throw error;
-  }
-}
-
-export async function getNow() {
-  try {
-    const data = await getGlobalData();
-    return data.now;
-  } catch (error) {
-    console.error("Failed to fetch now data", error);
-  }
-}
-
-export async function getHeader() {
-  try {
-    const data = await getGlobalData();
-    return data.header;
-  } catch (error) {
-    console.error("Failed to fetch header data", error);
-  }
-}
-
-export async function getSocials() {
-  try {
-    const data = await getGlobalData();
-    return data.socialPlatforms;
-  } catch (error) {
-    console.error("Failed to fetch social data", error);
-  }
-}
-
-export async function getFooter() {
-  try {
-    const data = await getGlobalData();
-    return data.footer;
-  } catch (error) {
-    console.error("Failed to fetch footer data", error);
-  }
-}
-
-export async function getResumeLink() {
-  try {
-    const data = await getGlobalData();
-
-    if (data?.resume && typeof data.resume === 'object' && data.resume.url) {
-      return data.resume.url;
+    try {
+      const payload = await getPayload({ config: configPromise });
+      return (await payload.findGlobal({ slug: slug as never })) as T;
+    } catch (error) {
+      console.error(`Failed to fetch global "${slug}"`, error);
+      return null;
     }
-
-    return null;
-  } catch (error) {
-    console.error("Failed to fetch resume link", error);
-    return null;
-  }
+  };
 }
 
-export async function getSeoData() {
-  try {
-    const data = await getGlobalData();
-    return data.seo;
-  } catch (error) {
-    console.error("Failed to fetch seo data", error);
-  }
-}
+export const getSiteData = createGlobalFetcher<Site>("site", [
+  TAGS.site,
+  TAGS.globalSeo,
+  TAGS.resume,
+  TAGS.socials,
+]);
 
-export async function getArchives() {
+export const getHero = createGlobalFetcher<Hero>("hero", [TAGS.hero]);
+
+export const getNow = createGlobalFetcher<Now>("now", [TAGS.now]);
+
+export const getExperienceConfig =
+  createGlobalFetcher<Experience1>("experience", [TAGS.experience]);
+
+export const getShowcaseConfig =
+  createGlobalFetcher<Showcase>("showcase", [TAGS.showcase]);
+
+export const getLastSeenConfig =
+  createGlobalFetcher<Lastseen>("lastseen", [TAGS.lastSeen]);
+
+export const getContactConfig =
+  createGlobalFetcher<Contact>("contact", [TAGS.contact]);
+
+export const getFooterConfig =
+  createGlobalFetcher<Footerconfig>("footerconfig", [TAGS.footer]);
+
+export async function getArchives(): Promise<Archive["records"]> {
   "use cache";
-  cacheTag("archives");
+  cacheTag(TAGS.archives);
 
   try {
     const payload = await getPayload({ config: configPromise });
     const data = await payload.findGlobal({ slug: "archives" });
-
-    return data.records || [];
+    return data.records ?? [];
   } catch (error) {
     console.error("Failed to fetch archives data", error);
     return [];

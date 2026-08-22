@@ -1,82 +1,114 @@
-import Link from "next/link";
+import Image from 'next/image'
+import { ArrowUpRight, ExternalLink } from 'lucide-react'
+import { SectionHeading } from '@/components/section-heading'
+import { TagRow } from '@/components/tag'
+import { Reveal } from '@/components/Reveal'
+import { Project as ProjectType, Technology, Media, type Showcase as ShowcaseConfig } from '@/payload-types'
+import { FALLBACK_PROJECTS } from '@/lib/fallbacks'
 
-import { Badge } from "@/components/badge";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/card";
-import Paragraph from "@/components/Paragraph";
-import { Project } from "@/payload-types";
-import ScrollReveal from "@/components/ScrollReveal";
-
-interface ProjectsSectionProps {
-  data: {
-    docs: Project[];
-  } | undefined;
-  titleItalics?: boolean;
-  descriptionItalics?: boolean;
+interface ShowcaseProps {
+  config?: ShowcaseConfig | null;
+  data?: ProjectType[] | null;
 }
 
-export default async function Showcase({ data, titleItalics, descriptionItalics }: ProjectsSectionProps) {
+function getProjectTags(project: ProjectType): string[] {
+  return (project.technologies ?? [])
+    .filter((t): t is Technology => typeof t === "object" && t !== null)
+    .map((t) => t.technology);
+}
+
+function getScreenshotUrl(project: ProjectType): string | null {
+  const screenshot = project.screenshot;
+  if (screenshot && typeof screenshot === "object" && "url" in screenshot) {
+    return (screenshot as Media).url ?? null;
+  }
+  return null;
+}
+
+export function Showcase({ config, data }: ShowcaseProps) {
+  const hasCmsData = data && data.length > 0;
+  const heading = config?.heading;
+
   return (
-    <div className="">
-      {
-        data?.docs.map((project, index) => (
-          <ScrollReveal key={project.id} delay={index * 0.15}>
-            <Card
-              key={project.id}
-              className="bg-transparent border-none mb-16 shadow-none"
-            >
-              <CardHeader>
-                <CardTitle>
-                  <Link
+    <section id="work" aria-labelledby="showcase-heading" className="section-space scroll-mt-24">
+      <Reveal as="header">
+        <SectionHeading
+          id="showcase-heading"
+          label={heading?.label ?? "Selected work"}
+          title={heading?.title ?? "Built to be used"}
+          subtitle={heading?.subtitle}
+        />
+      </Reveal>
+
+      <div className="mt-16 flex flex-col gap-y-20">
+        {hasCmsData
+          ? data.map((project, index) => {
+              const external = project.projectLink.startsWith('http')
+              const screenshotUrl = getScreenshotUrl(project)
+              return (
+                <Reveal key={project.id} delay={index * 80}>
+                  <a
                     href={project.projectLink}
-                    target="_blank"
-                    className="font-heading text-ink text-2xl font-normal link-wet-ink"
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noreferrer noopener' : undefined}
+                    className={`group grid gap-8 sm:items-center sm:gap-14 ${index % 2 === 1 ? 'sm:grid-cols-[340px_1fr]' : 'sm:grid-cols-[1fr_340px]'}`}
                   >
-                    {project.projectName}
-                  </Link>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Paragraph classname={`font-body text-ink text-lg mb-6 ${descriptionItalics && "italic"}`}>
-                  {project.description}
-                </Paragraph>
-              </CardContent>
-              <CardFooter className="flex flex-wrap mt-3 gap-1.5">
-                {project.technologies && project.technologies.map((technology) => {
-                  if (typeof technology === "object" && technology !== null) {
-                    return (
-                      <Badge
-                        key={technology.id}
-                        variant="outline"
-                        className="relative border-[6px] border-transparent text-ink px-3 py-0 text-center font-mono"
-                      >
-                        <span
-                          className="absolute -inset-1.5 -z-10 bg-ink"
-                          style={{
-                            WebkitMaskImage: `url(/border-mask.png)`,
-                            maskImage: `url(/border-mask.png)`,
-                            WebkitMaskSize: "100% 100%",
-                            maskSize: "100% 100%",
-                            WebkitMaskRepeat: "no-repeat",
-                            maskRepeat: "no-repeat",
-                          }}
-                          aria-hidden="true"
-                        />
-                        {technology.technology}
-                      </Badge>
-                    );
-                  }
-                })}
-              </CardFooter>
-            </Card>
-          </ScrollReveal>
-        ))
-      }
-    </div>
-  );
+                    <div className={index % 2 === 1 ? 'sm:order-2' : ''}>
+                      <div className="flex items-baseline gap-4">
+                        <span className="ghost-index text-3xl sm:text-4xl" aria-hidden="true">0{index + 1}</span>
+                      </div>
+                      <h3 className="mt-4 font-serif text-4xl tracking-[-0.04em] transition-colors group-hover:text-primary sm:text-5xl">{project.projectName}</h3>
+                      <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/65">{project.description}</p>
+                      <div className="mt-6 flex items-center gap-4">
+                        <TagRow tags={getProjectTags(project)} />
+                        <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-primary" />
+                      </div>
+                    </div>
+                    <div className={`corner-frame relative ${index % 2 === 1 ? 'sm:order-1' : ''}`}>
+                      <div className="dither relative aspect-[16/10] overflow-hidden bg-card">
+                        {external && <ExternalLink className="dither-badge absolute right-3 top-3 h-4 w-4 text-primary" />}
+                        {screenshotUrl && (
+                          <Image src={screenshotUrl} alt={`Preview of ${project.projectName}`} fill sizes="340px" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                        )}
+                      </div>
+                    </div>
+                  </a>
+                </Reveal>
+              )
+            })
+          : FALLBACK_PROJECTS.map((project, index) => {
+              const external = project.href.startsWith('http')
+              return (
+                <Reveal key={project.title} delay={index * 80}>
+                  <a
+                    href={project.href}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noreferrer noopener' : undefined}
+                    className={`group grid gap-8 sm:items-center sm:gap-14 ${index % 2 === 1 ? 'sm:grid-cols-[340px_1fr]' : 'sm:grid-cols-[1fr_340px]'}`}
+                  >
+                    <div className={index % 2 === 1 ? 'sm:order-2' : ''}>
+                      <div className="flex items-baseline gap-4">
+                        <span className="ghost-index text-3xl sm:text-4xl" aria-hidden="true">0{index + 1}</span>
+                        <p className="eyebrow text-primary">{project.type} / {project.year}</p>
+                      </div>
+                      <h3 className="mt-4 font-serif text-4xl tracking-[-0.04em] transition-colors group-hover:text-primary sm:text-5xl">{project.title}</h3>
+                      <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/65">{project.description}</p>
+                      <div className="mt-6 flex items-center gap-4">
+                        <TagRow tags={project.tags} />
+                        <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-primary" />
+                      </div>
+                    </div>
+                    <div className={`corner-frame relative ${index % 2 === 1 ? 'sm:order-1' : ''}`}>
+                      <div className="dither relative aspect-[16/10] overflow-hidden bg-card">
+                        {external && <ExternalLink className="dither-badge absolute right-3 top-3 h-4 w-4 text-primary" />}
+                        <Image src={project.image} alt={`Preview of ${project.title}`} fill sizes="340px" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                      </div>
+                    </div>
+                  </a>
+                </Reveal>
+              )
+            })}
+      </div>
+    </section>
+  )
 }

@@ -1,27 +1,30 @@
-"use client";
+'use client'
 
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { CircleHalf } from "@phosphor-icons/react";
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
+import { Moon, Sun } from 'lucide-react'
 
-export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+export default function ThemeToggle({ className }: { className?: string }) {
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => setMounted(true), [])
 
-  if (!mounted) {
-    return <div className="h-8 w-20.5 opacity-0" aria-hidden="true" />;
-  }
+  const isDark = mounted && theme === 'dark'
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="group relative flex h-8 w-fit cursor-pointer items-center gap-2 border-2 border-dashed border-ink/40 bg-transparent px-3 font-mono text-xs uppercase tracking-widest text-ink transition-all duration-500 hover:border-ink hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
-      aria-label="Toggle contrast"
+      type="button"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      aria-label="Toggle color theme"
+      className={`inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary ${className}`}
     >
-      <CircleHalf weight="fill" className="h-3 w-3 opacity-60 transition-opacity duration-300 group-hover:opacity-100" />
-      <span>{theme === "dark" ? "Light" : "Dark"}</span>
+      {isDark ? (
+        <Sun className="h-4 w-4" aria-hidden="true" />
+      ) : (
+        <Moon className="h-4 w-4" aria-hidden="true" />
+      )}
+      <span className="sr-only">Toggle theme</span>
     </button>
-  );
+  )
 }

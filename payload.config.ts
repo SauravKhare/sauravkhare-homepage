@@ -1,17 +1,27 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
-import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
-import { uploadthingStorage } from "@payloadcms/storage-uploadthing";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { TextColorFeature } from "@/fields/textColor/server";
 import { buildConfig, SharpDependency } from "payload";
 import { resendAdapter } from '@payloadcms/email-resend';
+
+import { cloudinaryStorage } from "@/lib/storage/cloudinary";
 
 import { Users } from "@/collections/Users";
 import { Media } from "@/collections/Media";
 import { Experiences } from "@/collections/Experiences";
 import { Technologies } from "@/collections/Technologies";
 import { Projects } from "@/collections/Projects";
-import { SiteGlobal } from "@/collections/SiteGlobal";
 import { Documents } from "@/collections/Documents";
+import { Capabilities } from "@/collections/Capabilities";
+
+import { Site } from "@/collections/globals/Site";
+import { Hero } from "@/collections/globals/Hero";
+import { Now } from "@/collections/globals/Now";
+import { ExperienceConfig } from "@/collections/globals/Experience";
+import { ShowcaseConfig } from "@/collections/globals/Showcase";
+import { LastSeenConfig } from "@/collections/globals/LastSeen";
+import { Contact } from "@/collections/globals/Contact";
+import { FooterConfig } from "@/collections/globals/Footer";
 import { Archives } from "@/collections/globals/Archives";
 
 import { fileURLToPath } from "url";
@@ -28,9 +38,14 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  globals: [SiteGlobal, Archives],
-  collections: [Users, Media, Documents, Experiences, Technologies, Projects],
-  editor: lexicalEditor(),
+  globals: [Site, Hero, Now, ExperienceConfig, ShowcaseConfig, LastSeenConfig, Contact, FooterConfig, Archives],
+  collections: [Users, Media, Documents, Experiences, Technologies, Projects, Capabilities],
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      TextColorFeature(),
+    ],
+  }),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
@@ -48,18 +63,19 @@ export default buildConfig({
   }),
   sharp: sharp as SharpDependency,
   plugins: [
-    payloadCloudPlugin(),
-    uploadthingStorage({
+    cloudinaryStorage({
       collections: {
         media: true,
         documents: {
           disablePayloadAccessControl: true,
         },
       },
-      options: {
-        token: process.env.UPLOADTHING_TOKEN || "",
-        acl: 'public-read',
+      cloudConfig: {
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME || '',
+        api_key: process.env.CLOUDINARY_API_KEY || '',
+        api_secret: process.env.CLOUDINARY_API_SECRET || '',
       },
+      folder: 'homepage',
     }),
   ],
 });

@@ -73,6 +73,7 @@ export interface Config {
     experiences: Experience;
     technologies: Technology;
     projects: Project;
+    capabilities: Capability;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     experiences: ExperiencesSelect<false> | ExperiencesSelect<true>;
     technologies: TechnologiesSelect<false> | TechnologiesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    capabilities: CapabilitiesSelect<false> | CapabilitiesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -96,11 +98,25 @@ export interface Config {
   };
   fallbackLocale: null;
   globals: {
-    siteglobal: Siteglobal;
+    site: Site;
+    hero: Hero;
+    now: Now;
+    experience: Experience1;
+    showcase: Showcase;
+    lastseen: Lastseen;
+    contact: Contact;
+    footerconfig: Footerconfig;
     archives: Archive;
   };
   globalsSelect: {
-    siteglobal: SiteglobalSelect<false> | SiteglobalSelect<true>;
+    site: SiteSelect<false> | SiteSelect<true>;
+    hero: HeroSelect<false> | HeroSelect<true>;
+    now: NowSelect<false> | NowSelect<true>;
+    experience: ExperienceSelect<false> | ExperienceSelect<true>;
+    showcase: ShowcaseSelect<false> | ShowcaseSelect<true>;
+    lastseen: LastseenSelect<false> | LastseenSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
+    footerconfig: FooterconfigSelect<false> | FooterconfigSelect<true>;
     archives: ArchivesSelect<false> | ArchivesSelect<true>;
   };
   locale: null;
@@ -164,7 +180,6 @@ export interface Media {
   id: number;
   alt: string;
   _key?: string | null;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -185,7 +200,6 @@ export interface Document {
   id: number;
   Name: string;
   _key?: string | null;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -235,10 +249,38 @@ export interface Project {
   description: string;
   projectLink: string;
   technologies?: (number | Technology)[] | null;
+  screenshot?: (number | null) | Media;
   /**
    * Lower numbers appear first. Set new projects to 1 to show them first.
    */
   order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "capabilities".
+ */
+export interface Capability {
+  id: number;
+  /**
+   * Short label above the title (e.g., 'Shape')
+   */
+  label: string;
+  /**
+   * Feature card title (e.g., 'UI & interaction')
+   */
+  title: string;
+  /**
+   * Short description of this capability
+   */
+  copy: string;
+  image: number | Media;
+  imageAlt: string;
+  /**
+   * Lower numbers appear first
+   */
+  order?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -289,6 +331,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'capabilities';
+        value: number | Capability;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -361,7 +407,6 @@ export interface UsersSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   _key?: T;
-  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -381,7 +426,6 @@ export interface MediaSelect<T extends boolean = true> {
 export interface DocumentsSelect<T extends boolean = true> {
   Name?: T;
   _key?: T;
-  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -428,6 +472,21 @@ export interface ProjectsSelect<T extends boolean = true> {
   description?: T;
   projectLink?: T;
   technologies?: T;
+  screenshot?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "capabilities_select".
+ */
+export interface CapabilitiesSelect<T extends boolean = true> {
+  label?: T;
+  title?: T;
+  copy?: T;
+  image?: T;
+  imageAlt?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -474,10 +533,12 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "siteglobal".
+ * via the `definition` "site".
  */
-export interface Siteglobal {
+export interface Site {
   id: number;
+  brandName: string;
+  email: string;
   resume?: (number | null) | Document;
   seo?: {
     /**
@@ -505,72 +566,408 @@ export interface Siteglobal {
   };
   socialPlatforms?:
     | {
-        platform: string;
-        platformUrl: string;
-        platformIcon: string;
+        name: string;
+        url: string;
+        icon: string;
         /**
-         * Enter hex color code (e.g., #FF5733, #1DA1F2)
+         * Hex color code (e.g., #FF5733, #1DA1F2)
          */
-        platformIconColor?: string | null;
+        iconColor?: string | null;
         id?: string | null;
       }[]
     | null;
-  header?:
+  headerNavLinks?:
     | {
-        heading: string;
-        subHeading?:
-          | {
-              text: string;
-              id?: string | null;
-            }[]
-          | null;
-        bio?: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
+        label: string;
+        /**
+         * Internal anchor (#experience) or full URL (/resume)
+         */
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  footerNavLinks?:
+    | {
+        label: string;
+        /**
+         * Internal anchor (#experience) or full URL (/resume)
+         */
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  sectionVisibility?: {
+    hero?: boolean | null;
+    now?: boolean | null;
+    capabilities?: boolean | null;
+    experience?: boolean | null;
+    showcase?: boolean | null;
+    lastSeen?: boolean | null;
+    contact?: boolean | null;
+    archives?: boolean | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero".
+ */
+export interface Hero {
+  id: number;
+  /**
+   * Small text above heading (e.g., 'Frontend engineer / 5.6 years / India')
+   */
+  eyebrow: string;
+  /**
+   * Use inline styling for colored text segments (e.g., make 'Saurav.' primary-colored)
+   */
+  heading: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  subHeading?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  bio?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  cta: {
+    text: string;
+    /**
+     * Internal anchor (#work) or full URL (https://...)
+     */
+    href: string;
+  };
+  heroImage: number | Media;
+  heroImageAlt: string;
+  /**
+   * Optional decorative image (e.g., abstract burst)
+   */
+  decorativeImage?: (number | null) | Media;
+  imagePosition?: ('right' | 'left') | null;
+  marqueeItems?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "now".
+ */
+export interface Now {
+  id: number;
+  /**
+   * e.g., 'Senior Experience Engineer'
+   */
+  companyDescription: string;
+  companyName: string;
+  companyLink: string;
+  /**
+   * Short paragraph below the role heading (e.g., 'Shipping product surfaces...')
+   */
+  description?: string | null;
+  disciplines?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experience".
+ */
+export interface Experience1 {
+  id: number;
+  heading: {
+    /**
+     * Small text above the heading (e.g., 'Open channel')
+     */
+    label: string;
+    /**
+     * Main heading text. Use inline styling for colored text segments.
+     */
+    title: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
           [k: string]: unknown;
-        } | null;
-        id?: string | null;
-      }[]
-    | null;
-  now?:
-    | {
-        nowCompanyName: string;
-        nowCompanyLink: string;
-        nowCompanyDescription: string;
-        id?: string | null;
-      }[]
-    | null;
-  footer?:
-    | {
-        footerHeading?: string | null;
-        footerDescription?: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    /**
+     * Optional description below the heading
+     */
+    subtitle?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
           [k: string]: unknown;
-        } | null;
-        id?: string | null;
-      }[]
-    | null;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  cta: {
+    text: string;
+    /**
+     * Internal anchor (#work) or full URL (https://...)
+     */
+    href: string;
+  };
+  /**
+   * Optional floating decorative image
+   */
+  decorativeImage?: (number | null) | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "showcase".
+ */
+export interface Showcase {
+  id: number;
+  heading: {
+    /**
+     * Small text above the heading (e.g., 'Open channel')
+     */
+    label: string;
+    /**
+     * Main heading text. Use inline styling for colored text segments.
+     */
+    title: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    /**
+     * Optional description below the heading
+     */
+    subtitle?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lastseen".
+ */
+export interface Lastseen {
+  id: number;
+  heading: {
+    /**
+     * Small text above the heading (e.g., 'Open channel')
+     */
+    label: string;
+    /**
+     * Main heading text. Use inline styling for colored text segments.
+     */
+    title: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    /**
+     * Optional description below the heading
+     */
+    subtitle?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: number;
+  heading: {
+    /**
+     * Small text above the heading (e.g., 'Open channel')
+     */
+    label: string;
+    /**
+     * Main heading text. Use inline styling for colored text segments.
+     */
+    title: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    /**
+     * Optional description below the heading
+     */
+    subtitle?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  /**
+   * Small text above email (e.g., 'Let's talk about the interesting version')
+   */
+  eyebrow: string;
+  cta: {
+    text: string;
+    /**
+     * Internal anchor (#work) or full URL (https://...)
+     */
+    href: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footerconfig".
+ */
+export interface Footerconfig {
+  id: number;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * e.g., 'Bengaluru · India'
+   */
+  copyright: string;
+  /**
+   * Large decorative text at bottom (e.g., 'PER ASPERA AD ASTRA')
+   */
+  decorativeText?: string | null;
+  cta: {
+    text: string;
+    /**
+     * Internal anchor (#work) or full URL (https://...)
+     */
+    href: string;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -593,9 +990,11 @@ export interface Archive {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "siteglobal_select".
+ * via the `definition` "site_select".
  */
-export interface SiteglobalSelect<T extends boolean = true> {
+export interface SiteSelect<T extends boolean = true> {
+  brandName?: T;
+  email?: T;
   resume?: T;
   seo?:
     | T
@@ -614,39 +1013,186 @@ export interface SiteglobalSelect<T extends boolean = true> {
   socialPlatforms?:
     | T
     | {
-        platform?: T;
-        platformUrl?: T;
-        platformIcon?: T;
-        platformIconColor?: T;
+        name?: T;
+        url?: T;
+        icon?: T;
+        iconColor?: T;
         id?: T;
       };
-  header?:
+  headerNavLinks?:
     | T
     | {
-        heading?: T;
-        subHeading?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
-        bio?: T;
+        label?: T;
+        href?: T;
         id?: T;
       };
-  now?:
+  footerNavLinks?:
     | T
     | {
-        nowCompanyName?: T;
-        nowCompanyLink?: T;
-        nowCompanyDescription?: T;
+        label?: T;
+        href?: T;
         id?: T;
       };
-  footer?:
+  sectionVisibility?:
     | T
     | {
-        footerHeading?: T;
-        footerDescription?: T;
+        hero?: T;
+        now?: T;
+        capabilities?: T;
+        experience?: T;
+        showcase?: T;
+        lastSeen?: T;
+        contact?: T;
+        archives?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero_select".
+ */
+export interface HeroSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  subHeading?:
+    | T
+    | {
+        text?: T;
         id?: T;
+      };
+  bio?: T;
+  cta?:
+    | T
+    | {
+        text?: T;
+        href?: T;
+      };
+  heroImage?: T;
+  heroImageAlt?: T;
+  decorativeImage?: T;
+  imagePosition?: T;
+  marqueeItems?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "now_select".
+ */
+export interface NowSelect<T extends boolean = true> {
+  companyDescription?: T;
+  companyName?: T;
+  companyLink?: T;
+  description?: T;
+  disciplines?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experience_select".
+ */
+export interface ExperienceSelect<T extends boolean = true> {
+  heading?:
+    | T
+    | {
+        label?: T;
+        title?: T;
+        subtitle?: T;
+      };
+  cta?:
+    | T
+    | {
+        text?: T;
+        href?: T;
+      };
+  decorativeImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "showcase_select".
+ */
+export interface ShowcaseSelect<T extends boolean = true> {
+  heading?:
+    | T
+    | {
+        label?: T;
+        title?: T;
+        subtitle?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lastseen_select".
+ */
+export interface LastseenSelect<T extends boolean = true> {
+  heading?:
+    | T
+    | {
+        label?: T;
+        title?: T;
+        subtitle?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  heading?:
+    | T
+    | {
+        label?: T;
+        title?: T;
+        subtitle?: T;
+      };
+  eyebrow?: T;
+  cta?:
+    | T
+    | {
+        text?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footerconfig_select".
+ */
+export interface FooterconfigSelect<T extends boolean = true> {
+  description?: T;
+  copyright?: T;
+  decorativeText?: T;
+  cta?:
+    | T
+    | {
+        text?: T;
+        href?: T;
       };
   updatedAt?: T;
   createdAt?: T;

@@ -41,6 +41,12 @@ export const Projects: CollectionConfig = {
       hasMany: true,
     },
     {
+      name: "screenshot",
+      type: "upload",
+      relationTo: "media",
+      label: "Project Screenshot",
+    },
+    {
       name: 'order',
       type: 'number',
       required: true,

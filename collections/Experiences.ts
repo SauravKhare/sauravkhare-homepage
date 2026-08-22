@@ -1,4 +1,4 @@
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { CollectionConfig } from "payload";
 
 export const Experiences: CollectionConfig = {
@@ -58,6 +58,6 @@ export const Experiences: CollectionConfig = {
       relationTo: "technologies",
       hasMany: true,
       label: "Technologies",
-    }
+    },
   ]
 }

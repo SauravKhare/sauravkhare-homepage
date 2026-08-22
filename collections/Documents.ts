@@ -3,9 +3,7 @@ import { revalidateTag } from "next/cache";
 
 export const Documents: CollectionConfig = {
   slug: "documents",
-  upload: {
-    mimeTypes: ["application/pdf"],
-  },
+  upload: true,
   access: {
     read: () => true,
     create: ({ req: { user } }) => !!user,
