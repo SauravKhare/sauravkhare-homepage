@@ -68,8 +68,17 @@ export function createCloudinaryAdapter({
               overwrite: false,
               use_filename: false,
             },
-            (error, result) => {
-              if (error) return reject(error)
+            (errorOrResponse, result) => {
+              // Cloudinary SDK wraps errors differently for unexpected status codes (e.g. 403)
+              // For expected codes (200, 400, 401, 404, 420, 500): (error, result)
+              // For unexpected codes (e.g. 403): ({ error: {...} }) - single nested argument
+              if (errorOrResponse) {
+                const actualError = errorOrResponse.error || errorOrResponse
+                const message = actualError.message || actualError.msg || 'Unknown Cloudinary error'
+                const httpCode = actualError.http_code || actualError.statusCode
+                reject(new Error(`Cloudinary upload failed (${httpCode || 'unknown'}): ${message}`))
+                return
+              }
               if (!result) return reject(new Error('No result returned from Cloudinary'))
               resolve(result)
             },
@@ -90,9 +99,10 @@ export function createCloudinaryAdapter({
 
         return data
       } catch (error: unknown) {
-        req.payload.logger.error({ err: error, msg: 'Error uploading to Cloudinary' })
+        const message = error instanceof Error ? error.message : 'Unknown error'
+        req.payload.logger.error({ err: error, msg: `Cloudinary upload failed: ${message}` })
         if (error instanceof APIError) throw error
-        throw new APIError(`Error uploading to Cloudinary: ${error instanceof Error ? error.message : 'Unknown error'}`)
+        throw new APIError(`Cloudinary upload failed: ${message}`)
       }
     },
 
@@ -109,8 +119,9 @@ export function createCloudinaryAdapter({
 
         await cloudinary.uploader.destroy(publicId, { resource_type: resourceType })
       } catch (error: unknown) {
-        req.payload.logger.error({ err: error, msg: `Error deleting file from Cloudinary: ${filename}` })
-        throw new APIError(`Error deleting file from Cloudinary: ${filename}`)
+        const message = error instanceof Error ? error.message : 'Unknown error'
+        req.payload.logger.error({ err: error, msg: `Cloudinary delete failed for ${filename}: ${message}` })
+        throw new APIError(`Cloudinary delete failed for ${filename}: ${message}`)
       }
     },
 

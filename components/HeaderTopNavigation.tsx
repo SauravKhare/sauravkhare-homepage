@@ -8,6 +8,7 @@ import TimeMachine from './TimeMachine'
 import { MobileSideNav } from "./MobileSideNav"
 import { Archive, Site } from '@/payload-types'
 import SocialIcon from '@/components/SocialIcon'
+import { DEFAULT_BRAND_NAME, DEFAULT_HEADER_NAV_LINKS } from '@/lib/fallbacks'
 
 interface HeaderTopNavigationProps {
   records?: Archive["records"] | null;
@@ -21,18 +22,13 @@ export default function HeaderTopNavigation({
   records,
   socials = [],
   navLinks = [],
-  brandName = "Saurav Khare",
+  brandName = DEFAULT_BRAND_NAME,
   resumeUrl,
 }: HeaderTopNavigationProps) {
   const [open, setOpen] = useState(false)
 
-  const defaultLinks = [
-    { label: 'Experience', href: '#experience', id: "1" },
-    { label: 'Work', href: '#work', id: "2" },
-    { label: 'Contact', href: '#contact', id: "3" },
-  ]
   const validNavLinks = (navLinks ?? []).filter((item) => typeof item.href === "string" && item.href.trim().length > 0);
-  const links = validNavLinks.length > 0 ? validNavLinks : defaultLinks;
+  const links = validNavLinks.length > 0 ? validNavLinks : DEFAULT_HEADER_NAV_LINKS;
 
   return (
     <header className="relative z-30">

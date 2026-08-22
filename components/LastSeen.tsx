@@ -1,18 +1,12 @@
 import { SectionHeading } from '@/components/section-heading'
 import { Reveal } from '@/components/Reveal'
 import { Lastseen } from '@/payload-types'
+import { FALLBACK_MOVIES } from '@/lib/fallbacks'
 
 interface LastSeenProps {
   config?: Lastseen | null;
   data?: import('@/fetchers/movies/types').TraktMovie[] | null;
 }
-
-const fallbackMovies = [
-  { title: 'Perfect Days', year: '2023', director: 'Wim Wenders', poster: '/movies/perfect-days.png' },
-  { title: 'Drive', year: '2011', director: 'Nicolas Winding Refn', poster: '/movies/drive.png' },
-  { title: 'Whiplash', year: '2014', director: 'Damien Chazelle', poster: '/movies/whiplash.png' },
-  { title: 'La Haine', year: '1995', director: 'Mathieu Kassovitz', poster: '/movies/la-haine.png' },
-]
 
 export function LastSeen({ config, data }: LastSeenProps) {
   const hasCmsData = data && data.length > 0;
@@ -57,7 +51,7 @@ export function LastSeen({ config, data }: LastSeenProps) {
                 </a>
               </Reveal>
             ))
-          : fallbackMovies.map((movie, index) => (
+          : FALLBACK_MOVIES.map((movie, index) => (
               <Reveal as="li" key={movie.title} delay={index * 60} className="group min-w-[42vw] snap-start sm:min-w-0">
                 <div className="dither relative aspect-[2/3] overflow-hidden bg-secondary">
                   <img src={movie.poster} alt={`Poster for ${movie.title}`} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />

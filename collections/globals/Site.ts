@@ -92,5 +92,60 @@ export const Site: GlobalConfig = {
       },
       fields: [...navLinkField],
     },
+    {
+      name: "sectionVisibility",
+      type: "group",
+      label: "Section Visibility",
+      fields: [
+        {
+          name: "hero",
+          type: "checkbox",
+          label: "Hero",
+          defaultValue: true,
+        },
+        {
+          name: "now",
+          type: "checkbox",
+          label: "Now",
+          defaultValue: true,
+        },
+        {
+          name: "capabilities",
+          type: "checkbox",
+          label: "Capabilities",
+          defaultValue: true,
+        },
+        {
+          name: "experience",
+          type: "checkbox",
+          label: "Experience",
+          defaultValue: true,
+        },
+        {
+          name: "showcase",
+          type: "checkbox",
+          label: "Showcase",
+          defaultValue: true,
+        },
+        {
+          name: "lastSeen",
+          type: "checkbox",
+          label: "Last Seen",
+          defaultValue: true,
+        },
+        {
+          name: "contact",
+          type: "checkbox",
+          label: "Contact",
+          defaultValue: true,
+        },
+        {
+          name: "archives",
+          type: "checkbox",
+          label: "Archives",
+          defaultValue: true,
+        },
+      ],
+    },
   ],
 };

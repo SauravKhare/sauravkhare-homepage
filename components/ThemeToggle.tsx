@@ -1,29 +1,30 @@
-"use client";
+'use client'
 
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import BedtimeOutlinedIcon from "@mui/icons-material/BedtimeOutlined";
-import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
 import { Moon, Sun } from 'lucide-react'
 
 export default function ThemeToggle({ className }: { className?: string }) {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => setMounted(true), [])
 
-  if (!mounted) {
-    return <WbSunnyOutlinedIcon style={{ fontSize: 18 }} className="transition-opacity duration-300 group-hover:opacity-100" />;
-  }
+  const isDark = mounted && theme === 'dark'
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      type="button"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      aria-label="Toggle color theme"
       className={`inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary ${className}`}
-      aria-label="Toggle contrast"
     >
-
-      <span>{theme === "dark" ? (<Sun aria-hidden="true" className="h-4 w-4 transition-opacity duration-300 group-hover:opacity-100" />) : (<Moon aria-hidden="true" className="h-4 w-4 transition-opacity duration-300 group-hover:opacity-100" />)}</span>
+      {isDark ? (
+        <Sun className="h-4 w-4" aria-hidden="true" />
+      ) : (
+        <Moon className="h-4 w-4" aria-hidden="true" />
+      )}
+      <span className="sr-only">Toggle theme</span>
     </button>
-  );
+  )
 }

@@ -4,6 +4,8 @@ import { Footerconfig, Site } from '@/payload-types'
 import { RichText } from '@/components/RichText/RichText'
 import SocialIcon from '@/components/SocialIcon'
 import { CopyrightYear } from '@/components/CopyrightYear'
+import { MonumentQuote } from '@/components/MonumentQuote'
+import { DEFAULT_BRAND_NAME, DEFAULT_EMAIL, DEFAULT_FOOTER_NAV_LINKS } from '@/lib/fallbacks'
 
 interface FooterProps {
   config?: Footerconfig | null;
@@ -13,15 +15,9 @@ interface FooterProps {
   navLinks?: Site["footerNavLinks"];
 }
 
-export function Footer({ config, brandName = "Saurav Khare", email = "hello@sauravkhare.com", socials, navLinks }: FooterProps) {
-  const defaultNavLinks: NonNullable<Site["footerNavLinks"]> = [
-    { label: 'Craft', href: '#capabilities', id: "1" },
-    { label: 'Experience', href: '#experience', id: "2" },
-    { label: 'Work', href: '#work', id: "3" },
-    { label: 'Contact', href: '#contact', id: "4" },
-  ];
+export function Footer({ config, brandName = DEFAULT_BRAND_NAME, email = DEFAULT_EMAIL, socials, navLinks }: FooterProps) {
   const validNavLinks = (navLinks ?? []).filter((item) => typeof item.href === "string" && item.href.trim().length > 0);
-  const navItems = validNavLinks.length > 0 ? validNavLinks : defaultNavLinks;
+  const navItems = validNavLinks.length > 0 ? validNavLinks : DEFAULT_FOOTER_NAV_LINKS;
   return (
     <footer className="relative mt-32 overflow-hidden border-t border-border">
       <div className="mx-auto max-w-[1320px] px-6 pt-16 sm:px-10 lg:px-16">
@@ -78,13 +74,11 @@ export function Footer({ config, brandName = "Saurav Khare", email = "hello@saur
         </div>
       </div>
 
-      {config?.decorativeText && (
-        <div className="mt-14 overflow-hidden px-4" aria-hidden="true">
-          <p className="quote-monument select-none text-center" style={{ fontSize: '13vw' }}>
-            {config.decorativeText}
-          </p>
+      {config?.decorativeText ? (
+        <div className="mt-14 px-4">
+          <MonumentQuote text={config.decorativeText} />
         </div>
-      )}
+      ) : null}
     </footer>
   )
 }

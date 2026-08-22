@@ -37,6 +37,14 @@ export const Now: GlobalConfig = {
       label: "Company URL",
     },
     {
+      name: "description",
+      type: "text",
+      label: "Description",
+      admin: {
+        description: "Short paragraph below the role heading (e.g., 'Shipping product surfaces...')",
+      },
+    },
+    {
       name: "disciplines",
       type: "array",
       label: "Disciplines",

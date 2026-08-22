@@ -41,9 +41,9 @@ export function SectionHeading({
         </div>
       )}
       {children ? (
-        <div className="mt-4 max-w-xl text-pretty leading-relaxed text-muted-foreground">
+        <p className="mt-4 max-w-xl text-pretty leading-relaxed text-muted-foreground">
           {children}
-        </div>
+        </p>
       ) : null}
     </header>
   )

@@ -25,6 +25,9 @@ export function Now({ data }: NowProps) {
                 {data.companyName}
               </a>.
             </p>
+            <p className="mt-6 text-pretty text-base leading-relaxed text-foreground/70">
+              {data.description ?? "Shipping product surfaces, internal platforms, and AI-assisted workflows at enterprise scale — with room for a few interesting projects on the side."}
+            </p>
           </div>
 
           <div>

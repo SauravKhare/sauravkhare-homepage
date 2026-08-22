@@ -4,6 +4,7 @@ import { SectionHeading } from '@/components/section-heading'
 import { TagRow } from '@/components/tag'
 import { Reveal } from '@/components/Reveal'
 import { Project as ProjectType, Technology, Media, type Showcase as ShowcaseConfig } from '@/payload-types'
+import { FALLBACK_PROJECTS } from '@/lib/fallbacks'
 
 interface ShowcaseProps {
   config?: ShowcaseConfig | null;
@@ -23,12 +24,6 @@ function getScreenshotUrl(project: ProjectType): string | null {
   }
   return null;
 }
-
-const fallbackProjects = [
-  { title: 'Poof.', type: 'Live product', year: '2025', description: 'An anonymous, self-destructing chat room powered by serverless real-time messaging.', href: 'https://poof-rho.vercel.app', image: '/projects/poof.png', tags: ['Next.js', 'TypeScript', 'Tailwind', 'ElysiaJS'] },
-  { title: 'Grid', type: 'Data interface', year: '2024', description: 'Telemetry for curious fans: dense race data transformed into a calm, readable tool.', href: '#contact', image: '/projects/grid.png', tags: ['React', 'D3', 'SWR', 'Edge'] },
-  { title: 'Ledger', type: 'Product system', year: '2024', description: 'A finance workspace designed around hierarchy, useful defaults, and trust.', href: '#contact', image: '/projects/ledger.png', tags: ['Next.js', 'TypeScript', 'Postgres'] },
-]
 
 export function Showcase({ config, data }: ShowcaseProps) {
   const hasCmsData = data && data.length > 0;
@@ -81,7 +76,7 @@ export function Showcase({ config, data }: ShowcaseProps) {
                 </Reveal>
               )
             })
-          : fallbackProjects.map((project, index) => {
+          : FALLBACK_PROJECTS.map((project, index) => {
               const external = project.href.startsWith('http')
               return (
                 <Reveal key={project.title} delay={index * 80}>

@@ -488,34 +488,48 @@
   color: color-mix(in oklch, var(--primary) 14%, transparent);
 }
 
-/* --- Monument quote: dim moving gradient, fades legibly into the bottom edge --- */
-.quote-monument {
+/* --- Monument quote: near-invisible by default, a torch reveals it, fades into the bottom edge --- */
+.quote-torch {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 97%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 97%);
+}
+.quote-base,
+.quote-spot {
+  display: block;
+  text-align: center;
+  user-select: none;
   font-family: var(--font-serif), serif;
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 0.82;
-  background: linear-gradient(100deg, oklch(0.46 0.13 264), oklch(0.52 0.15 300), oklch(0.44 0.1 205), oklch(0.5 0.14 264));
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: quoteGrad 16s ease-in-out infinite;
-  -webkit-mask-image: linear-gradient(to bottom, #000 42%, color-mix(in srgb, #000 30%, transparent) 100%);
-  mask-image: linear-gradient(to bottom, #000 42%, color-mix(in srgb, #000 30%, transparent) 100%);
+  font-size: 13vw;
 }
-
-@keyframes quoteGrad {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
+.quote-base {
+  color: color-mix(in oklch, var(--foreground) 3%, transparent);
+  filter: blur(0.6px);
+}
+.quote-spot {
+  position: absolute;
+  inset: 0;
+  color: color-mix(in oklch, var(--foreground) 86%, var(--primary) 14%);
+  opacity: var(--spot-opacity, 0);
+  -webkit-mask-image: radial-gradient(circle 260px at var(--spot-x, 50%) var(--spot-y, 20%), #000 0%, transparent 72%);
+  mask-image: radial-gradient(circle 260px at var(--spot-x, 50%) var(--spot-y, 20%), #000 0%, transparent 72%);
+  transition: opacity 0.7s ease;
+  will-change: opacity;
+}
+.quote-torch.is-static .quote-spot {
+  opacity: 0.5;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+@media (max-width: 640px) {
+  .quote-base,
+  .quote-spot {
+    font-size: 20vw;
   }
 }
 
@@ -577,13 +591,13 @@
   .cursor-blink,
   .marquee-track,
   .float-slow,
-  .spin-slow,
-  .quote-monument {
+  .spin-slow {
     animation: none;
   }
 
   .feature-media img,
-  .dither img {
+  .dither img,
+  .quote-spot {
     transition: none;
   }
 }

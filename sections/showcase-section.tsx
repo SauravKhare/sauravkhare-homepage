@@ -1,5 +1,5 @@
 import { getShowcaseConfig } from "@/fetchers/globals";
-import { getProjects } from "@/fetchers/projects";
+import { getProjects } from "@/fetchers/collections";
 import { Showcase } from "@/components/Showcase";
 
 export async function ShowcaseSection() {

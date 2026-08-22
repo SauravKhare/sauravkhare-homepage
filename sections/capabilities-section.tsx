@@ -1,4 +1,4 @@
-import { getCapabilities } from "@/fetchers/capabilities";
+import { getCapabilities } from "@/fetchers/collections";
 import { Capabilities } from "@/components/Capabilities";
 
 export async function CapabilitiesSection() {

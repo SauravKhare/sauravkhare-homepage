@@ -1,5 +1,5 @@
 import { getExperienceConfig } from "@/fetchers/globals";
-import { getExperiences } from "@/fetchers/experiences";
+import { getExperiences } from "@/fetchers/collections";
 import { Experience } from "@/components/Experience";
 
 export async function ExperienceSection() {

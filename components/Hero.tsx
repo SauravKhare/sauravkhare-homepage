@@ -119,8 +119,7 @@ export function Hero({ data }: HeroProps) {
 
         <Reveal delay={180} className="lg:pt-2">
           <div className="relative">
-            <Image src="/art/abstract-burst.png" alt="" width={144} height={144} aria-hidden="true" className="spin-slow pointer-events-none absolute -right-6 -top-8 z-0 h-28 w-28 object-contain opacity-70 mix-blend-screen sm:h-36 sm:w-36" />
-            <div className="corner-frame float-slow relative">
+            <div className="corner-frame relative">
               <div className="feature-media relative aspect-[4/5]">
                 <Image src="/art/hero-figure.png" alt="Dithered engraving of a classical figure surrounded by radiating light" fill sizes="(max-width: 1024px) 100vw, 420px" priority className="object-cover" />
               </div>

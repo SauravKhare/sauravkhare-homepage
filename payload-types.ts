@@ -180,7 +180,6 @@ export interface Media {
   id: number;
   alt: string;
   _key?: string | null;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -201,7 +200,6 @@ export interface Document {
   id: number;
   Name: string;
   _key?: string | null;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -409,7 +407,6 @@ export interface UsersSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   _key?: T;
-  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -429,7 +426,6 @@ export interface MediaSelect<T extends boolean = true> {
 export interface DocumentsSelect<T extends boolean = true> {
   Name?: T;
   _key?: T;
-  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -600,6 +596,16 @@ export interface Site {
         id?: string | null;
       }[]
     | null;
+  sectionVisibility?: {
+    hero?: boolean | null;
+    now?: boolean | null;
+    capabilities?: boolean | null;
+    experience?: boolean | null;
+    showcase?: boolean | null;
+    lastSeen?: boolean | null;
+    contact?: boolean | null;
+    archives?: boolean | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -687,6 +693,10 @@ export interface Now {
   companyDescription: string;
   companyName: string;
   companyLink: string;
+  /**
+   * Short paragraph below the role heading (e.g., 'Shipping product surfaces...')
+   */
+  description?: string | null;
   disciplines?:
     | {
         text: string;
@@ -1023,6 +1033,18 @@ export interface SiteSelect<T extends boolean = true> {
         href?: T;
         id?: T;
       };
+  sectionVisibility?:
+    | T
+    | {
+        hero?: T;
+        now?: T;
+        capabilities?: T;
+        experience?: T;
+        showcase?: T;
+        lastSeen?: T;
+        contact?: T;
+        archives?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1069,6 +1091,7 @@ export interface NowSelect<T extends boolean = true> {
   companyDescription?: T;
   companyName?: T;
   companyLink?: T;
+  description?: T;
   disciplines?:
     | T
     | {
