@@ -8,6 +8,7 @@ import {
   Now,
   Experience1,
   Showcase,
+  CapabilitiesConfig,
   Lastseen,
   Contact,
   Footerconfig,
@@ -48,6 +49,9 @@ export const getExperienceConfig =
 
 export const getShowcaseConfig =
   createGlobalFetcher<Showcase>("showcase", [TAGS.showcase]);
+
+export const getCapabilitiesConfig =
+  createGlobalFetcher<CapabilitiesConfig>("capabilitiesConfig", [TAGS.capabilitiesConfig]);
 
 export const getLastSeenConfig =
   createGlobalFetcher<Lastseen>("lastseen", [TAGS.lastSeen]);

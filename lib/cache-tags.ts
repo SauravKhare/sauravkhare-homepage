@@ -5,6 +5,7 @@ export const TAGS = {
   now: "now",
   experience: "experience",
   showcase: "showcase",
+  capabilitiesConfig: "capabilitiesConfig",
   lastSeen: "lastSeen",
   contact: "contact",
   footer: "footer",

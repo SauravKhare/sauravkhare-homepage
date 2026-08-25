@@ -1,4 +1,3 @@
-import { revalidateTag } from "next/cache";
 import { Field } from "payload";
 
 export const sectionHeadingField: Field = {
@@ -33,11 +32,4 @@ export const sectionHeadingField: Field = {
       },
     },
   ],
-  hooks: {
-    afterChange: [
-      async () => {
-        revalidateTag("sectionHeadings", { expire: 0 });
-      },
-    ],
-  },
 };

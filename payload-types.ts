@@ -103,6 +103,7 @@ export interface Config {
     now: Now;
     experience: Experience1;
     showcase: Showcase;
+    capabilitiesConfig: CapabilitiesConfig;
     lastseen: Lastseen;
     contact: Contact;
     footerconfig: Footerconfig;
@@ -114,6 +115,7 @@ export interface Config {
     now: NowSelect<false> | NowSelect<true>;
     experience: ExperienceSelect<false> | ExperienceSelect<true>;
     showcase: ShowcaseSelect<false> | ShowcaseSelect<true>;
+    capabilitiesConfig: CapabilitiesConfigSelect<false> | CapabilitiesConfigSelect<true>;
     lastseen: LastseenSelect<false> | LastseenSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
     footerconfig: FooterconfigSelect<false> | FooterconfigSelect<true>;
@@ -821,6 +823,57 @@ export interface Showcase {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "capabilitiesConfig".
+ */
+export interface CapabilitiesConfig {
+  id: number;
+  heading: {
+    /**
+     * Small text above the heading (e.g., 'Open channel')
+     */
+    label: string;
+    /**
+     * Main heading text. Use inline styling for colored text segments.
+     */
+    title: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    /**
+     * Optional description below the heading
+     */
+    subtitle?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "lastseen".
  */
 export interface Lastseen {
@@ -1130,6 +1183,22 @@ export interface ExperienceSelect<T extends boolean = true> {
  * via the `definition` "showcase_select".
  */
 export interface ShowcaseSelect<T extends boolean = true> {
+  heading?:
+    | T
+    | {
+        label?: T;
+        title?: T;
+        subtitle?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "capabilitiesConfig_select".
+ */
+export interface CapabilitiesConfigSelect<T extends boolean = true> {
   heading?:
     | T
     | {

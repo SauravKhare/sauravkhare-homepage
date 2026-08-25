@@ -3,15 +3,15 @@ import { Site } from "@/payload-types";
 
 export function siteToMetadata(site: Site | null): Metadata {
   const seo = site?.seo;
-  const brandName = site?.brandName || "Saurav Khare";
+  const brandName = site?.brandName ?? undefined;
   const title = seo?.title || brandName;
-  const description = seo?.description || "Frontend Engineer";
+  const description = seo?.description ?? undefined;
   const ogTitle = seo?.ogTitle || title;
-  const ogDescription = seo?.ogDescription || description;
+  const ogDescription = seo?.ogDescription ?? description;
   const ogImage =
     seo?.ogImage && typeof seo.ogImage === "object"
       ? seo.ogImage.url
-      : null;
+      : undefined;
 
   return {
     title,

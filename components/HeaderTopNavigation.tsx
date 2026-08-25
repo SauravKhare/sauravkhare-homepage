@@ -8,7 +8,6 @@ import TimeMachine from './TimeMachine'
 import { MobileSideNav } from "./MobileSideNav"
 import { Archive, Site } from '@/payload-types'
 import SocialIcon from '@/components/SocialIcon'
-import { DEFAULT_BRAND_NAME, DEFAULT_HEADER_NAV_LINKS } from '@/lib/fallbacks'
 
 interface HeaderTopNavigationProps {
   records?: Archive["records"] | null;
@@ -22,13 +21,12 @@ export default function HeaderTopNavigation({
   records,
   socials = [],
   navLinks = [],
-  brandName = DEFAULT_BRAND_NAME,
+  brandName,
   resumeUrl,
 }: HeaderTopNavigationProps) {
   const [open, setOpen] = useState(false)
 
   const validNavLinks = (navLinks ?? []).filter((item) => typeof item.href === "string" && item.href.trim().length > 0);
-  const links = validNavLinks.length > 0 ? validNavLinks : DEFAULT_HEADER_NAV_LINKS;
 
   return (
     <header className="relative z-30">
@@ -37,12 +35,14 @@ export default function HeaderTopNavigation({
           <span className="text-primary transition-transform group-hover:-translate-x-1">{brandName}</span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
-          {links.map((item, index) => (
+          {validNavLinks.map((item, index) => (
             <Link key={item.id} href={item.href} className="nav-link">
               <span className="mr-1 text-primary">0{index + 1}</span>{item.label}
             </Link>
           ))}
-          <Link href={resumeUrl ?? "/resume"} className="nav-link">Résumé <ArrowUpRight className="h-3.5 w-3.5" /></Link>
+          {resumeUrl && (
+            <Link href={resumeUrl} className="nav-link">Résumé <ArrowUpRight className="h-3.5 w-3.5" /></Link>
+          )}
           <span className="ml-1 h-4 w-px bg-border" />
           {socials && socials.map((platform) => (
             <a key={platform.id} href={platform.url} target="_blank" rel="noreferrer" aria-label={platform.name} className="text-muted-foreground transition-colors hover:text-primary">
@@ -63,12 +63,14 @@ export default function HeaderTopNavigation({
       {open && (
         <nav className="border-t border-border/70 px-6 py-6 md:hidden" aria-label="Mobile navigation">
           <div className="flex flex-col gap-5">
-            {links.map((item, index) => (
+            {validNavLinks.map((item, index) => (
               <Link key={item.id} href={item.href} onClick={() => setOpen(false)} className="nav-link text-sm">
                 <span className="mr-2 text-primary">0{index + 1}</span>{item.label}
               </Link>
             ))}
-            <Link href={resumeUrl ?? "/resume"} className="nav-link text-sm">Résumé ↗</Link>
+            {resumeUrl && (
+              <Link href={resumeUrl} className="nav-link text-sm">Résumé ↗</Link>
+            )}
             <div className="flex gap-4 pt-2">
               {socials && socials.map((platform) => (
                 <a key={platform.id} href={platform.url} target="_blank" rel="noreferrer" aria-label={platform.name} className="text-muted-foreground hover:text-primary">
