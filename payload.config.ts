@@ -19,6 +19,7 @@ import { Hero } from "@/collections/globals/Hero";
 import { Now } from "@/collections/globals/Now";
 import { ExperienceConfig } from "@/collections/globals/Experience";
 import { ShowcaseConfig } from "@/collections/globals/Showcase";
+import { CapabilitiesConfig } from "@/collections/globals/Capabilities";
 import { LastSeenConfig } from "@/collections/globals/LastSeen";
 import { Contact } from "@/collections/globals/Contact";
 import { FooterConfig } from "@/collections/globals/Footer";
@@ -38,7 +39,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  globals: [Site, Hero, Now, ExperienceConfig, ShowcaseConfig, LastSeenConfig, Contact, FooterConfig, Archives],
+  globals: [Site, Hero, Now, ExperienceConfig, ShowcaseConfig, CapabilitiesConfig, LastSeenConfig, Contact, FooterConfig, Archives],
   collections: [Users, Media, Documents, Experiences, Technologies, Projects, Capabilities],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [

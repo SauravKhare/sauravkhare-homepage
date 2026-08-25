@@ -11,6 +11,7 @@ import * as migration_20260819_043625_v3_db_changes from './20260819_043625_v3_d
 import * as migration_20260820_215620_add_now_description from './20260820_215620_add_now_description';
 import * as migration_20260820_230000_add_section_visibility from './20260820_230000_add_section_visibility';
 import * as migration_20260822_112030_v3_major from './20260822_112030_v3_major';
+import * as migration_20260825_084033 from './20260825_084033';
 
 export const migrations = [
   {
@@ -76,6 +77,11 @@ export const migrations = [
   {
     up: migration_20260822_112030_v3_major.up,
     down: migration_20260822_112030_v3_major.down,
-    name: '20260822_112030_v3_major'
+    name: '20260822_112030_v3_major',
+  },
+  {
+    up: migration_20260825_084033.up,
+    down: migration_20260825_084033.down,
+    name: '20260825_084033'
   },
 ];

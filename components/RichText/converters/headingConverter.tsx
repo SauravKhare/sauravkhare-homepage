@@ -1,6 +1,7 @@
 import { JSXConverters } from '@payloadcms/richtext-lexical/react'
 import { SerializedHeadingNode } from '@payloadcms/richtext-lexical'
 
+let headingCounter = 0
 
 export const headingConverter: JSXConverters<SerializedHeadingNode> = {
   heading: ({ node, nodesToJSX }) => {
@@ -10,8 +11,8 @@ export const headingConverter: JSXConverters<SerializedHeadingNode> = {
       const id = text.join("").toLowerCase()
         .replace(/\s+/g, '-')
         .replace(/[^\w-]/g, '')
-        .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
-        + '-' + Math.random().toString(36).substring(2, 5) // Add uniqueness
+        .replace(/^-+|-+$/g, '')
+        + '-' + (headingCounter++).toString(36)
       return <h2 id={id}>{text}</h2>
     }
     else {
