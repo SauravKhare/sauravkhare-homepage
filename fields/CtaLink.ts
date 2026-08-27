@@ -8,13 +8,13 @@ export const ctaLinkField: Field = {
     {
       name: "text",
       type: "text",
-      required: true,
+      required: false,
       label: "Link Text",
     },
     {
       name: "href",
       type: "text",
-      required: true,
+      required: false,
       label: "Link URL",
       admin: {
         description: "Internal anchor (#work) or full URL (https://...)",

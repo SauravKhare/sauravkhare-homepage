@@ -10,7 +10,7 @@ import { Archive, Site } from '@/payload-types'
 import SocialIcon from '@/components/SocialIcon'
 
 interface HeaderTopNavigationProps {
-  records?: Archive["records"] | null;
+  archive?: Archive | null;
   socials?: Site["socialPlatforms"];
   navLinks?: Site["headerNavLinks"];
   brandName?: string;
@@ -18,7 +18,7 @@ interface HeaderTopNavigationProps {
 }
 
 export default function HeaderTopNavigation({
-  records,
+  archive,
   socials = [],
   navLinks = [],
   brandName,
@@ -49,11 +49,11 @@ export default function HeaderTopNavigation({
               <SocialIcon iconName={platform.icon} size={16} color={platform.iconColor ?? undefined} />
             </a>
           ))}
-          <TimeMachine records={records ?? []} />
+          <TimeMachine archive={archive} />
           <ThemeToggle />
         </nav>
         <div className="flex items-center gap-1 md:hidden">
-          <TimeMachine records={records ?? []} />
+          <TimeMachine archive={archive} />
           <ThemeToggle />
           <button type="button" className="icon-button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}

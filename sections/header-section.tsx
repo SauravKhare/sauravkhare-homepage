@@ -1,4 +1,4 @@
-import { getSiteData, getArchives } from "@/fetchers/globals";
+import { getSiteData, getArchivesConfig } from "@/fetchers/globals";
 import HeaderTopNavigation from "@/components/HeaderTopNavigation";
 
 interface HeaderSectionProps {
@@ -6,13 +6,13 @@ interface HeaderSectionProps {
 }
 
 export async function HeaderSection({ archivesVisible = true }: HeaderSectionProps) {
-  const [site, records] = await Promise.all([
+  const [site, archive] = await Promise.all([
     getSiteData(),
-    archivesVisible ? getArchives() : Promise.resolve(null),
+    archivesVisible ? getArchivesConfig() : Promise.resolve(null),
   ]);
   return (
     <HeaderTopNavigation
-      records={records}
+      archive={archive}
       socials={site?.socialPlatforms ?? []}
       navLinks={site?.headerNavLinks ?? []}
       brandName={site?.brandName}
