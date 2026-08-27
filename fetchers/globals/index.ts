@@ -62,16 +62,5 @@ export const getContactConfig =
 export const getFooterConfig =
   createGlobalFetcher<Footerconfig>("footerconfig", [TAGS.footer]);
 
-export async function getArchives(): Promise<Archive["records"]> {
-  "use cache";
-  cacheTag(TAGS.archives);
-
-  try {
-    const payload = await getPayload({ config: configPromise });
-    const data = await payload.findGlobal({ slug: "archives" });
-    return data.records ?? [];
-  } catch (error) {
-    console.error("Failed to fetch archives data", error);
-    return [];
-  }
-}
+export const getArchivesConfig =
+  createGlobalFetcher<Archive>("archives", [TAGS.archives]);

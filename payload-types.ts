@@ -660,12 +660,12 @@ export interface Hero {
     };
     [k: string]: unknown;
   } | null;
-  cta: {
-    text: string;
+  cta?: {
+    text?: string | null;
     /**
      * Internal anchor (#work) or full URL (https://...)
      */
-    href: string;
+    href?: string | null;
   };
   heroImage: number | Media;
   heroImageAlt: string;
@@ -756,12 +756,12 @@ export interface Experience1 {
       [k: string]: unknown;
     } | null;
   };
-  cta: {
-    text: string;
+  cta?: {
+    text?: string | null;
     /**
      * Internal anchor (#work) or full URL (https://...)
      */
-    href: string;
+    href?: string | null;
   };
   /**
    * Optional floating decorative image
@@ -975,12 +975,12 @@ export interface Contact {
    * Small text above email (e.g., 'Let's talk about the interesting version')
    */
   eyebrow: string;
-  cta: {
-    text: string;
+  cta?: {
+    text?: string | null;
     /**
      * Internal anchor (#work) or full URL (https://...)
      */
-    href: string;
+    href?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1014,12 +1014,12 @@ export interface Footerconfig {
    * Large decorative text at bottom (e.g., 'PER ASPERA AD ASTRA')
    */
   decorativeText?: string | null;
-  cta: {
-    text: string;
+  cta?: {
+    text?: string | null;
     /**
      * Internal anchor (#work) or full URL (https://...)
      */
-    href: string;
+    href?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1030,10 +1030,28 @@ export interface Footerconfig {
  */
 export interface Archive {
   id: number;
+  /**
+   * Small text above the heading (e.g., 'Time capsule'). Leave blank to hide.
+   */
+  eyebrow?: string | null;
+  /**
+   * Main title (e.g., 'The Archive'). Leave blank to hide.
+   */
+  heading?: string | null;
+  /**
+   * Body copy below the heading. Leave blank to hide.
+   */
+  description?: string | null;
+  /**
+   * Small note at the bottom (e.g., 'Archived snapshots, hosted separately...'). Leave blank to hide.
+   */
+  footer?: string | null;
   records?:
     | {
-        version: string;
-        yearRange: string;
+        index: string;
+        label: string;
+        year: string;
+        description: string;
         url: string;
         id?: string | null;
       }[]
@@ -1272,11 +1290,17 @@ export interface FooterconfigSelect<T extends boolean = true> {
  * via the `definition` "archives_select".
  */
 export interface ArchivesSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  description?: T;
+  footer?: T;
   records?:
     | T
     | {
-        version?: T;
-        yearRange?: T;
+        index?: T;
+        label?: T;
+        year?: T;
+        description?: T;
         url?: T;
         id?: T;
       };
