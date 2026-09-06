@@ -48,19 +48,14 @@ export function Experience({ config, data }: ExperienceProps) {
             as="li"
             key={exp.id}
             delay={i * 90}
-            className="group relative grid gap-4 border-t border-border py-10 transition-colors hover:bg-primary/[0.02] sm:grid-cols-[auto_1fr_150px] sm:gap-10"
+            className="group relative grid gap-4 border-t border-border py-10 transition-colors hover:bg-primary/2 sm:grid-cols-[auto_1fr_150px] sm:gap-10"
           >
             <span className="ghost-index text-4xl sm:text-6xl" aria-hidden="true">0{i + 1}</span>
             <div>
               <span className="block h-px w-8 bg-primary transition-all duration-500 group-hover:w-16" aria-hidden="true" />
               <h3 className="mt-4 font-serif text-2xl tracking-tight sm:text-3xl">
-                {exp.position} <span className="text-primary">/ {exp.companyName}</span>
+                {exp.position} <span className="text-primary">/ {exp.link ? (<a href={exp.link} target="_blank" rel="noopener noreferrer">{exp.companyName}</a>) : null}</span>
               </h3>
-              {exp.link ? (
-                <a href={exp.link} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-sm text-primary hover:underline">
-                  {exp.companyName}
-                </a>
-              ) : null}
               {exp.description ? (
                 <p className="mt-4 max-w-2xl text-sm leading-relaxed text-foreground/68">{exp.description}</p>
               ) : null}

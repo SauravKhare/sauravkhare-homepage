@@ -475,7 +475,9 @@
 }
 
 /* --- The Archive: a borderless portal into old versions of the site --- */
-.archive-void { background: radial-gradient(circle at 50% 38%, oklch(0.22 0.045 264) 0%, oklch(0.095 0.024 265) 55%, oklch(0.04 0.012 265) 100%); }
+.archive-void {
+  background: radial-gradient(circle at 50% 38%, oklch(0.22 0.045 264) 0%, oklch(0.095 0.024 265) 55%, oklch(0.04 0.012 265) 100%);
+}
 
 /* The portal stays dark in both themes, so scope light text tokens here:
    theme-aware utilities inside the portal resolve to these regardless of mode. */
@@ -487,7 +489,7 @@
 
 .portal-halo {
   position: absolute;
-  inset: -100%;
+  inset: -150%;
   border-radius: 50%;
   filter: blur(48px) saturate(1.3);
   background:
@@ -497,18 +499,25 @@
     radial-gradient(34% 40% at 58% 22%, oklch(0.73 0.15 330 / 0.38), transparent 70%);
   background-size: 260% 260%;
   background-position: 12% 22%, 88% 28%, 48% 82%, 62% 18%;
-  animation: portalDrift 50s ease-in-out infinite alternate;
-  opacity: 0.7;
+  animation: portalDrift 8s ease-in-out infinite alternate;
+  opacity: 0.3;
 }
+
 @keyframes portalDrift {
-  from { background-position: 12% 22%, 88% 28%, 48% 82%, 62% 18%; }
-  to { background-position: 78% 66%, 26% 70%, 20% 30%, 40% 76%; }
+  from {
+    background-position: 12% 22%, 88% 28%, 48% 82%, 62% 18%;
+  }
+
+  to {
+    background-position: 78% 66%, 26% 70%, 20% 30%, 40% 76%;
+  }
 }
 
 .portal-surface {
   position: relative;
   border-radius: 50% / 9%;
 }
+
 .portal-surface::before {
   content: '';
   position: absolute;
@@ -517,15 +526,49 @@
   pointer-events: none;
 }
 
-.archive-index { font-family: var(--font-serif), serif; font-weight: 600; -webkit-text-stroke: 1px oklch(1 0 0 / 0.24); color: transparent; transition: color 0.3s ease; }
-.group:hover .archive-index { color: oklch(1 0 0 / 0.14); }
-.archive-row-glow { position: absolute; inset: -4px -12px; border-radius: 1.25rem; opacity: 0; background: radial-gradient(ellipse 80% 100% at 0% 50%, oklch(0.68 0.15 264 / 0.16), transparent 70%); transition: opacity 0.4s ease; pointer-events: none; }
-.group:hover .archive-row-glow { opacity: 1; }
+.archive-index {
+  font-family: var(--font-serif), serif;
+  font-weight: 600;
+  -webkit-text-stroke: 1px oklch(1 0 0 / 0.24);
+  color: transparent;
+  transition: color 0.3s ease;
+}
 
-.portal-scroll { scrollbar-width: thin; scrollbar-color: oklch(1 0 0 / 0.18) transparent; }
-.portal-scroll::-webkit-scrollbar { width: 6px; }
-.portal-scroll::-webkit-scrollbar-thumb { background: oklch(1 0 0 / 0.18); border-radius: 999px; }
-.portal-scroll::-webkit-scrollbar-track { background: transparent; }
+.group:hover .archive-index {
+  color: oklch(1 0 0 / 0.14);
+}
+
+.archive-row-glow {
+  position: absolute;
+  inset: -4px -12px;
+  border-radius: 1.25rem;
+  opacity: 0;
+  background: radial-gradient(ellipse 80% 100% at 0% 50%, oklch(0.68 0.15 264 / 0.16), transparent 70%);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.group:hover .archive-row-glow {
+  opacity: 1;
+}
+
+.portal-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(1 0 0 / 0.18) transparent;
+}
+
+.portal-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.portal-scroll::-webkit-scrollbar-thumb {
+  background: oklch(1 0 0 / 0.18);
+  border-radius: 999px;
+}
+
+.portal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
 
 /* --- Ghost index numeral --- */
 .ghost-index {
@@ -549,6 +592,7 @@
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 97%);
   mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 97%);
 }
+
 .quote-base,
 .quote-spot {
   display: block;
@@ -560,10 +604,12 @@
   line-height: 0.82;
   font-size: 13vw;
 }
+
 .quote-base {
   color: color-mix(in oklch, var(--foreground) 3%, transparent);
   filter: blur(0.6px);
 }
+
 .quote-spot {
   position: absolute;
   inset: 0;
@@ -574,12 +620,15 @@
   transition: opacity 0.7s ease;
   will-change: opacity;
 }
+
 .quote-torch.is-static .quote-spot {
   opacity: 0.5;
   -webkit-mask-image: none;
   mask-image: none;
 }
+
 @media (max-width: 640px) {
+
   .quote-base,
   .quote-spot {
     font-size: 20vw;
