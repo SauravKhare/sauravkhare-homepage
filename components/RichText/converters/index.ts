@@ -7,6 +7,7 @@ import {
 import { internalDocToHref } from '@/components/RichText/converters/internalLink'
 import { headingConverter } from '@/components/RichText/converters/headingConverter'
 import { textWithStyleConverter } from '@/components/RichText/converters/textStyle'
+import { codeBlockConverter } from '@/components/RichText/converters/codeBlockConverter'
 
 type NodeTypes = DefaultNodeTypes;
 
@@ -15,4 +16,5 @@ export const jsxConverter: JSXConvertersFunction<NodeTypes> = ({ defaultConverte
   ...LinkJSXConverter({ internalDocToHref }),
   ...headingConverter,
   ...textWithStyleConverter,
+  ...codeBlockConverter,
 })

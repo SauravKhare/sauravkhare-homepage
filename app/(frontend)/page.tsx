@@ -10,6 +10,7 @@ import { NowSection } from "@/sections/now-section";
 import { CapabilitiesSection } from "@/sections/capabilities-section";
 import { ExperienceSection } from "@/sections/experience-section";
 import { ShowcaseSection } from "@/sections/showcase-section";
+import { BlogPreviewSection } from "@/sections/blog-preview-section";
 import { LastSeenSection } from "@/sections/last-seen-section";
 import { ContactSection } from "@/sections/contact-section";
 import { FooterSection } from "@/sections/footer-section";
@@ -19,6 +20,7 @@ import { NowSkeleton } from "@/components/skeletons/now-skeleton";
 import { CapabilitiesSkeleton } from "@/components/skeletons/capabilities-skeleton";
 import { ExperienceSkeleton } from "@/components/skeletons/experience-skeleton";
 import { ShowcaseSkeleton } from "@/components/skeletons/showcase-skeleton";
+import { BlogPreviewSkeleton } from "@/components/skeletons/blog-preview-skeleton";
 import { LastSeenSkeleton } from "@/components/skeletons/last-seen-skeleton";
 import { ContactSkeleton } from "@/components/skeletons/contact-skeleton";
 
@@ -55,6 +57,12 @@ export default async function Home() {
           )}
         {vis?.showcase !== false &&
           renderSection("showcase", <ShowcaseSkeleton />, <ShowcaseSection />)}
+        {vis?.notes !== false &&
+          renderSection(
+            "notes",
+            <BlogPreviewSkeleton />,
+            <BlogPreviewSection />,
+          )}
         {vis?.lastSeen !== false &&
           renderSection(
             "last-seen",

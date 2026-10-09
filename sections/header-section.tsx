@@ -16,6 +16,7 @@ export async function HeaderSection({ archivesVisible = true }: HeaderSectionPro
       socials={site?.socialPlatforms ?? []}
       navLinks={site?.headerNavLinks ?? []}
       brandName={site?.brandName}
+      brandHref={site?.brandLink || "/"}
       resumeUrl={site?.resume && typeof site.resume === "object" ? site.resume.url ?? null : null}
     />
   );

@@ -1,9 +1,32 @@
 import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import type { Media } from "@/payload-types";
 
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
+}
+
+export function getMediaUrl(media?: number | Media | null): string | null {
+  if (media && typeof media === "object" && "url" in media) {
+    return media.url ?? null;
+  }
+  return null;
+}
+
+export function getMediaAlt(media?: number | Media | null): string | null {
+  if (media && typeof media === "object" && "alt" in media) {
+    return media.alt ?? null;
+  }
+  return null;
+}
+
+export function formatNoteDate(dateString?: string | null): string {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return "";
+  const pad = (value: number) => value.toString().padStart(2, "0");
+  return `${pad(date.getMonth() + 1)}.${pad(date.getDate())}.${date.getFullYear()}`;
 }
 
 export function calculateExperience(startDate: Date): {

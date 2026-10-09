@@ -10,6 +10,7 @@ export const TAGS = {
   contact: "contact",
   footer: "footer",
   archives: "archives",
+  blog: "blog",
 
   // Global sub-fields
   globalSeo: "globalSeo",
@@ -22,6 +23,7 @@ export const TAGS = {
   projects: "projects",
   technologies: "technologies",
   media: "media",
+  posts: "posts",
 } as const;
 
 export type CacheTag = (typeof TAGS)[keyof typeof TAGS];
