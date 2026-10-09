@@ -1,4 +1,4 @@
-import { getPayload } from "payload";
+import { getPayload, type Where } from "payload";
 import configPromise from "@payload-config";
 import { cacheTag } from "next/cache";
 import { TAGS } from "@/lib/cache-tags";
@@ -9,6 +9,7 @@ interface CollectionFetcherOptions {
   depth?: number;
   sort?: string;
   pagination?: boolean;
+  where?: Where;
 }
 
 function createCollectionFetcher<T>(
@@ -20,6 +21,7 @@ function createCollectionFetcher<T>(
     depth = 1,
     sort,
     pagination = false,
+    where,
   } = options;
 
   return async function fetchCollection() {
@@ -33,6 +35,7 @@ function createCollectionFetcher<T>(
         depth,
         pagination,
         ...(sort ? { sort } : {}),
+        ...(where ? { where } : {}),
       });
       return data.docs as T[];
     } catch (error) {
@@ -42,7 +45,7 @@ function createCollectionFetcher<T>(
   };
 }
 
-import { Capability, Experience, Project } from "@/payload-types";
+import { Capability, Experience, Post, Project } from "@/payload-types";
 
 export const getCapabilities = createCollectionFetcher<Capability>({
   collection: "capabilities",
@@ -62,3 +65,35 @@ export const getProjects = createCollectionFetcher<Project>({
   depth: 2,
   sort: "order",
 });
+
+export const getPosts = createCollectionFetcher<Post>({
+  collection: "posts",
+  tag: TAGS.posts,
+  depth: 2,
+  sort: "-publishedDate",
+  where: { _status: { equals: "published" } },
+});
+
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  "use cache";
+  cacheTag(TAGS.posts);
+
+  try {
+    const payload = await getPayload({ config: configPromise });
+    const data = await payload.find({
+      collection: "posts",
+      where: {
+        and: [
+          { slug: { equals: slug } },
+          { _status: { equals: "published" } },
+        ],
+      },
+      depth: 2,
+      limit: 1,
+    });
+    return (data.docs[0] as Post) ?? null;
+  } catch (error) {
+    console.error(`Failed to fetch post "${slug}"`, error);
+    return null;
+  }
+}

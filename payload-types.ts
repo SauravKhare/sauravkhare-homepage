@@ -74,6 +74,7 @@ export interface Config {
     technologies: Technology;
     projects: Project;
     capabilities: Capability;
+    posts: Post;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     technologies: TechnologiesSelect<false> | TechnologiesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     capabilities: CapabilitiesSelect<false> | CapabilitiesSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -108,6 +110,7 @@ export interface Config {
     contact: Contact;
     footerconfig: Footerconfig;
     archives: Archive;
+    blog: Blog;
   };
   globalsSelect: {
     site: SiteSelect<false> | SiteSelect<true>;
@@ -120,6 +123,7 @@ export interface Config {
     contact: ContactSelect<false> | ContactSelect<true>;
     footerconfig: FooterconfigSelect<false> | FooterconfigSelect<true>;
     archives: ArchivesSelect<false> | ArchivesSelect<true>;
+    blog: BlogSelect<false> | BlogSelect<true>;
   };
   locale: null;
   widgets: {
@@ -288,6 +292,96 @@ export interface Capability {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  /**
+   * URL segment. Auto-generated from the title when left blank.
+   */
+  slug: string;
+  /**
+   * Short summary shown on cards and in the archive list.
+   */
+  excerpt: string;
+  /**
+   * Format label shown on the card (e.g., Essay, Notebook).
+   */
+  kind: 'Essay' | 'Notebook' | 'Field note';
+  /**
+   * e.g., '12 min read'. Leave blank to hide.
+   */
+  readTime?: string | null;
+  publishedDate: string;
+  /**
+   * Falls back to the default cover set in the Notes Section settings.
+   */
+  coverImage?: (number | null) | Media;
+  coverImageAlt?: string | null;
+  /**
+   * Feature this note at the top of the archive and homepage preview.
+   */
+  pinned?: boolean | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Optional aside shown beside the article. Hidden when the text is empty.
+   */
+  readingNote?: {
+    label?: string | null;
+    text?: string | null;
+  };
+  /**
+   * Optional sticky aside shown on wide screens. Hidden when the text is empty.
+   */
+  inThisNote?: {
+    label?: string | null;
+    text?: string | null;
+  };
+  seo?: {
+    /**
+     * Browser tab title and search engine title
+     */
+    title?: string | null;
+    /**
+     * Meta description (max 160 characters)
+     */
+    description?: string | null;
+    /**
+     * Comma-separated keywords
+     */
+    keywords?: string | null;
+    /**
+     * 1200x630px recommended
+     */
+    ogImage?: (number | null) | Media;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    twitterHandle?: string | null;
+    noIndex?: boolean | null;
+    noFollow?: boolean | null;
+    canonicalUrl?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -337,6 +431,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'capabilities';
         value: number | Capability;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: number | Post;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -495,6 +593,51 @@ export interface CapabilitiesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  kind?: T;
+  readTime?: T;
+  publishedDate?: T;
+  coverImage?: T;
+  coverImageAlt?: T;
+  pinned?: T;
+  content?: T;
+  readingNote?:
+    | T
+    | {
+        label?: T;
+        text?: T;
+      };
+  inThisNote?:
+    | T
+    | {
+        label?: T;
+        text?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogImage?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        twitterHandle?: T;
+        noIndex?: T;
+        noFollow?: T;
+        canonicalUrl?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -540,6 +683,10 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Site {
   id: number;
   brandName: string;
+  /**
+   * Where the header brand name points (e.g., / or #top). Defaults to home.
+   */
+  brandLink?: string | null;
   email: string;
   resume?: (number | null) | Document;
   seo?: {
@@ -607,6 +754,7 @@ export interface Site {
     lastSeen?: boolean | null;
     contact?: boolean | null;
     archives?: boolean | null;
+    notes?: boolean | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1061,10 +1209,135 @@ export interface Archive {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog".
+ */
+export interface Blog {
+  id: number;
+  heading: {
+    /**
+     * Small text above the heading (e.g., 'Open channel')
+     */
+    label: string;
+    /**
+     * Main heading text. Use inline styling for colored text segments.
+     */
+    title: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    /**
+     * Optional description below the heading
+     */
+    subtitle?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  archive?: {
+    /**
+     * Small label above the archive heading.
+     */
+    eyebrow?: string | null;
+    /**
+     * Use inline styling for colored text segments.
+     */
+    heading?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * Intro copy beside the archive heading.
+     */
+    description?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * Small note below the description.
+     */
+    note?: string | null;
+    archiveEyebrow?: string | null;
+    archiveTitle?: string | null;
+  };
+  labels?: {
+    pinned?: string | null;
+    recent?: string | null;
+    readNote?: string | null;
+    openAll?: string | null;
+    enterNote?: string | null;
+    allNotes?: string | null;
+    backToNotes?: string | null;
+  };
+  images?: {
+    /**
+     * Used on cards and detail pages when a note has no cover image.
+     */
+    fallbackCover?: (number | null) | Media;
+    fallbackCoverAlt?: string | null;
+    /**
+     * Optional art shown behind the archive heading.
+     */
+    decorativeImage?: (number | null) | Media;
+    decorativeImageAlt?: string | null;
+    /**
+     * Used for social sharing when a note has no social image of its own.
+     */
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site_select".
  */
 export interface SiteSelect<T extends boolean = true> {
   brandName?: T;
+  brandLink?: T;
   email?: T;
   resume?: T;
   seo?:
@@ -1115,6 +1388,7 @@ export interface SiteSelect<T extends boolean = true> {
         lastSeen?: T;
         contact?: T;
         archives?: T;
+        notes?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1303,6 +1577,52 @@ export interface ArchivesSelect<T extends boolean = true> {
         description?: T;
         url?: T;
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog_select".
+ */
+export interface BlogSelect<T extends boolean = true> {
+  heading?:
+    | T
+    | {
+        label?: T;
+        title?: T;
+        subtitle?: T;
+      };
+  archive?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        description?: T;
+        note?: T;
+        archiveEyebrow?: T;
+        archiveTitle?: T;
+      };
+  labels?:
+    | T
+    | {
+        pinned?: T;
+        recent?: T;
+        readNote?: T;
+        openAll?: T;
+        enterNote?: T;
+        allNotes?: T;
+        backToNotes?: T;
+      };
+  images?:
+    | T
+    | {
+        fallbackCover?: T;
+        fallbackCoverAlt?: T;
+        decorativeImage?: T;
+        decorativeImageAlt?: T;
+        ogImage?: T;
       };
   updatedAt?: T;
   createdAt?: T;

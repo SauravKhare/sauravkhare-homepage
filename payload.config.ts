@@ -1,5 +1,5 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { BlocksFeature, CodeBlock, lexicalEditor } from "@payloadcms/richtext-lexical";
 import { TextColorFeature } from "@/fields/textColor/server";
 import { buildConfig, SharpDependency } from "payload";
 import { resendAdapter } from '@payloadcms/email-resend';
@@ -13,6 +13,7 @@ import { Technologies } from "@/collections/Technologies";
 import { Projects } from "@/collections/Projects";
 import { Documents } from "@/collections/Documents";
 import { Capabilities } from "@/collections/Capabilities";
+import { Posts } from "@/collections/Posts";
 
 import { Site } from "@/collections/globals/Site";
 import { Hero } from "@/collections/globals/Hero";
@@ -24,6 +25,7 @@ import { LastSeenConfig } from "@/collections/globals/LastSeen";
 import { Contact } from "@/collections/globals/Contact";
 import { FooterConfig } from "@/collections/globals/Footer";
 import { Archives } from "@/collections/globals/Archives";
+import { BlogConfig } from "@/collections/globals/BlogConfig";
 
 import { fileURLToPath } from "url";
 import path from "path";
@@ -39,12 +41,15 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  globals: [Site, Hero, Now, ExperienceConfig, ShowcaseConfig, CapabilitiesConfig, LastSeenConfig, Contact, FooterConfig, Archives],
-  collections: [Users, Media, Documents, Experiences, Technologies, Projects, Capabilities],
+  globals: [Site, Hero, Now, ExperienceConfig, ShowcaseConfig, CapabilitiesConfig, LastSeenConfig, Contact, FooterConfig, Archives, BlogConfig],
+  collections: [Users, Media, Documents, Experiences, Technologies, Projects, Capabilities, Posts],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,
       TextColorFeature(),
+      BlocksFeature({
+        blocks: [CodeBlock()],
+      }),
     ],
   }),
   secret: process.env.PAYLOAD_SECRET || "",

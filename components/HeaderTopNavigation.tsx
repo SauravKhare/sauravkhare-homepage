@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 import ThemeToggle from "@/components/ThemeToggle"
 import TimeMachine from './TimeMachine'
-import { MobileSideNav } from "./MobileSideNav"
 import { Archive, Site } from '@/payload-types'
 import SocialIcon from '@/components/SocialIcon'
 
@@ -14,6 +13,7 @@ interface HeaderTopNavigationProps {
   socials?: Site["socialPlatforms"];
   navLinks?: Site["headerNavLinks"];
   brandName?: string;
+  brandHref?: string;
   resumeUrl?: string | null;
 }
 
@@ -22,6 +22,7 @@ export default function HeaderTopNavigation({
   socials = [],
   navLinks = [],
   brandName,
+  brandHref = "/",
   resumeUrl,
 }: HeaderTopNavigationProps) {
   const [open, setOpen] = useState(false)
@@ -31,7 +32,7 @@ export default function HeaderTopNavigation({
   return (
     <header className="relative z-30">
       <div className="mx-auto flex max-w-330 items-center justify-between px-6 py-6 sm:px-10 lg:px-16">
-        <Link href="#top" className="group flex items-center gap-2 font-mono text-sm font-semibold tracking-tight" aria-label={`${brandName} home`}>
+        <Link href={brandHref} className="group flex items-center gap-2 font-mono text-sm font-semibold tracking-tight" aria-label={`${brandName} home`}>
           <span className="text-primary transition-transform group-hover:-translate-x-1">{brandName}</span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex" aria-label="Primary navigation">

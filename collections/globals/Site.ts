@@ -26,6 +26,15 @@ export const Site: GlobalConfig = {
       },
     },
     {
+      name: "brandLink",
+      type: "text",
+      defaultValue: "/",
+      label: "Brand / Home Link",
+      admin: {
+        description: "Where the header brand name points (e.g., / or #top). Defaults to home.",
+      },
+    },
+    {
       name: "email",
       type: "text",
       required: true,
@@ -143,6 +152,12 @@ export const Site: GlobalConfig = {
           name: "archives",
           type: "checkbox",
           label: "Archives",
+          defaultValue: true,
+        },
+        {
+          name: "notes",
+          type: "checkbox",
+          label: "Notes",
           defaultValue: true,
         },
       ],

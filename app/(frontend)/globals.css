@@ -704,3 +704,143 @@
     transition: none;
   }
 }
+
+/* --- Notes / blog --- */
+
+.blog-index-row {
+  transition: background .35s ease;
+}
+
+.blog-index-row:hover {
+  background: color-mix(in oklch, var(--primary) 4%, transparent);
+}
+
+.blog-preview-rule {
+  position: relative;
+}
+
+.blog-preview-rule::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--primary);
+  transform: scaleY(.35);
+  transform-origin: top;
+  transition: transform .45s cubic-bezier(.22, 1, .36, 1);
+}
+
+.blog-preview-rule:hover::before {
+  transform: scaleY(1);
+}
+
+@media (max-width: 640px) {
+  .blog-preview-rule {
+    padding-left: 1rem;
+  }
+}
+
+.blog-code {
+  min-height: 13rem;
+  background: color-mix(in oklch, var(--foreground) 6%, var(--background));
+  color: color-mix(in oklch, var(--foreground) 86%, transparent);
+  border: 1px solid color-mix(in oklch, var(--foreground) 12%, transparent);
+  box-shadow: 0 25px 60px -40px color-mix(in oklch, var(--foreground) 35%, transparent);
+}
+
+.dark .blog-code {
+  background: oklch(.095 .015 265);
+  border-color: oklch(1 0 0 / .08);
+  color: oklch(.92 .012 260);
+}
+
+.blog-code code {
+  color: inherit;
+}
+
+@media (max-width: 640px) {
+  .blog-code {
+    min-height: auto;
+  }
+}
+
+.prose-note h2 {
+  margin-bottom: 1.25rem;
+  font-family: var(--font-fraunces), serif;
+  font-size: 1.875rem;
+  line-height: 1;
+  letter-spacing: -.035em;
+  color: var(--foreground);
+}
+
+@media (min-width: 640px) {
+  .prose-note h2 {
+    font-size: 2.25rem;
+  }
+}
+
+.prose-note h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-fraunces), serif;
+  font-size: 1.5rem;
+  letter-spacing: -.03em;
+  color: var(--foreground);
+}
+
+.prose-note p {
+  margin-bottom: 1.25rem;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: color-mix(in oklch, var(--foreground) 78%, transparent);
+}
+
+.prose-note ul,
+.prose-note ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: color-mix(in oklch, var(--foreground) 78%, transparent);
+}
+
+.prose-note ul {
+  list-style: disc;
+}
+
+.prose-note ol {
+  list-style: decimal;
+}
+
+.prose-note li {
+  margin-bottom: .5rem;
+}
+
+.prose-note a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-note blockquote {
+  margin-block: 1.75rem;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--primary);
+  font-family: var(--font-fraunces), serif;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  letter-spacing: -.02em;
+  color: var(--foreground);
+}
+
+.prose-note code {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: .9em;
+}
+
+.prose-note hr {
+  margin-block: 2.5rem;
+  border-color: var(--border);
+}

@@ -13,6 +13,7 @@ import {
   Contact,
   Footerconfig,
   Archive,
+  Blog,
 } from "@/payload-types";
 
 function createGlobalFetcher<T>(
@@ -64,3 +65,6 @@ export const getFooterConfig =
 
 export const getArchivesConfig =
   createGlobalFetcher<Archive>("archives", [TAGS.archives]);
+
+export const getBlogConfig =
+  createGlobalFetcher<Blog>("blog", [TAGS.blog]);
